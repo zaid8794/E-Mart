@@ -121,7 +121,8 @@ Last Updated: Nov 25, 2019
 @import url(css/nice-select.css);
 @import url(css/jquery-ui.min.css);
 @import url(css/default-assets/themify-icons.css);
-@import url(css/typicons.min.css);
+/* @import url(css/typicons.min.css); */
+/* @import url(css/font-awesome-6/css/fontawesome.min.css); */
 @import url(css/font-awesome.min.css);
 @import url(css/pe-icon-7-stroke.min.css);
 @import url(css/style.css);

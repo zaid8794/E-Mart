@@ -11,6 +11,12 @@
     <!-- Favicon -->
     <link rel="icon" href="img/core-img/favicon.png">
 
+    <!-- These plugins only need for the run this page -->
+    <link rel="stylesheet" href="css/default-assets/datatables.bootstrap4.css">
+    <link rel="stylesheet" href="css/default-assets/responsive.bootstrap4.css">
+    <link rel="stylesheet" href="css/default-assets/buttons.bootstrap4.css">
+    <link rel="stylesheet" href="css/default-assets/select.bootstrap4.css">
+
     <!-- Master Stylesheet CSS -->
     <link rel="stylesheet" href="style.css">
 
@@ -18,12 +24,12 @@
 
 <body>
     <!-- Preloader -->
-    <div id="preloader-area">
+    <!-- <div id="preloader-area">
         <div class="lds-ripple">
             <div></div>
             <div></div>
         </div>
-    </div>
+    </div> -->
     <!-- Preloader -->
 
     <!-- ======================================
@@ -53,6 +59,7 @@
                         <ul class="sidebar-menu" data-widget="tree">
                             <li class="menu-header-title">Dashboard</li>
                             <li class="active"><a href="index.html"><i class='bx bx-home-heart'></i><span>Dashboard</span></a></li>
+                            <li><a href="category.php"><i class='fa fa-list'></i><span>Category</span></a></li>
                             <li class="treeview">
                                 <a href="javascript:void(0)"><i class='bx bxs-cart'></i><span>Shop</span> <i class="fa fa-angle-right"></i></a>
                                 <ul class="treeview-menu">
@@ -64,6 +71,7 @@
                                     <li><a href="invoice.html">Invoice</a></li>
                                 </ul>
                             </li>
+
                             <li class="menu-header-title">Apps</li>
                             <li><a href="calendar.html"><i class='bx bx-calendar'></i><span>Calendar</span></a></li>
                             <li><a href="chat-box.html"><i class='bx bx-message-rounded-dots'></i><span>Chat</span></a>
@@ -235,138 +243,6 @@
 
                     <!-- Top Bar Nav -->
                     <ul class="right-side-content d-flex align-items-center">
-
-                        <li class="nav-item dropdown">
-                            <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span><i class='bx bx-world'></i></span></button>
-                            <div class="dropdown-menu language-dropdown dropdown-menu-right">
-                                <div class="user-profile-area">
-                                    <a href="#" class="dropdown-item mb-15"><img src="img/core-img/f1.jpg" alt="Image">
-                                        <span>Ind</span></a>
-                                    <a href="#" class="dropdown-item mb-15"><img src="img/core-img/f2.jpg" alt="Image">
-                                        <span>German</span></a>
-                                    <a href="#" class="dropdown-item mb-15"><img src="img/core-img/f3.jpg" alt="Image">
-                                        <span>Italian</span></a>
-                                    <a href="#" class="dropdown-item"><img src="img/core-img/f4.jpg" alt="Image">
-                                        <span>Russian</span></a>
-                                </div>
-                            </div>
-                        </li>
-
-                        <li class="nav-item dropdown">
-                            <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class='bx bx-envelope'></i></button>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <!-- Message Area -->
-                                <div class="top-message-area">
-                                    <!-- Heading -->
-                                    <div class="message-heading">
-                                        <div class="heading-title">
-                                            <h6 class="mb-0">All Messages</h6>
-                                        </div>
-                                        <span>10</span>
-                                    </div>
-
-                                    <div class="message-box" id="messageBox">
-                                        <a href="#" class="dropdown-item">
-                                            <i class='bx bx-dollar-circle'></i>
-                                            <div>
-                                                <span>Did you know?</span>
-                                                <p class="mb-0 font-12">Adipisicing elit. Ipsa, porro!</p>
-                                            </div>
-                                        </a>
-
-                                        <a href="#" class="dropdown-item">
-                                            <i class='bx bx-shopping-bag'></i>
-                                            <div>
-                                                <span>Congratulations!
-                                                </span>
-                                                <p class="mb-0 font-12">Consectetur adipisicing elit.</p>
-                                            </div>
-                                        </a>
-
-                                        <a href="#" class="dropdown-item">
-                                            <i class='bx bx-wallet-alt'></i>
-                                            <div>
-                                                <span>Hello Obeta</span>
-                                                <p class="mb-0 font-12">Consectetur adipisicing elit.</p>
-                                            </div>
-                                        </a>
-
-                                        <a href="#" class="dropdown-item">
-                                            <i class='bx bx-border-all'></i>
-                                            <div>
-                                                <span>Your order is placed</span>
-                                                <p class="mb-0 font-12">Consectetur adipisicing elit.</p>
-                                            </div>
-                                        </a>
-                                        <a href="#" class="dropdown-item">
-                                            <i class='bx bx-wallet-alt'></i>
-                                            <div>
-                                                <span>Haslina Obeta</span>
-                                                <p class="mb-0 font-12">Consectetur adipisicing elit.</p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-
-                        <li class="nav-item dropdown">
-                            <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class='bx bx-bell bx-tada'></i> <span class="active-status"></span></button>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <!-- Top Notifications Area -->
-                                <div class="top-notifications-area">
-                                    <!-- Heading -->
-                                    <div class="notifications-heading">
-                                        <div class="heading-title">
-                                            <h6>Notifications</h6>
-                                        </div>
-                                        <span>11</span>
-                                    </div>
-
-                                    <div class="notifications-box" id="notificationsBox">
-                                        <a href="#" class="dropdown-item">
-                                            <i class='bx bx-shopping-bag'></i>
-                                            <div>
-                                                <span>Your order is placed</span>
-                                                <p class="mb-0 font-12">Consectetur adipisicing elit. Ipsa, porro!</p>
-                                            </div>
-                                        </a>
-
-                                        <a href="#" class="dropdown-item">
-                                            <i class='bx bx-wallet-alt'></i>
-                                            <div>
-                                                <span>Haslina Obeta</span>
-                                                <p class="mb-0 font-12">Consectetur adipisicing elit. Ipsa, porro!</p>
-                                            </div>
-                                        </a>
-
-                                        <a href="#" class="dropdown-item">
-                                            <i class='bx bx-dollar-circle'></i>
-                                            <div>
-                                                <span>Your order is Dollar</span>
-                                                <p class="mb-0 font-12">Consectetur adipisicing elit. Ipsa, porro!</p>
-                                            </div>
-                                        </a>
-
-                                        <a href="#" class="dropdown-item">
-                                            <i class='bx bx-border-all'></i>
-                                            <div>
-                                                <span>Your order is placed</span>
-                                                <p class="mb-0 font-12">Consectetur adipisicing elit. Ipsa, porro!</p>
-                                            </div>
-                                        </a>
-                                        <a href="#" class="dropdown-item">
-                                            <i class='bx bx-wallet-alt'></i>
-                                            <div>
-                                                <span>Haslina Obeta</span>
-                                                <p class="mb-0 font-12">Consectetur adipisicing elit. Ipsa, porro!</p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-
                         <li class="nav-item dropdown">
                             <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="img/bg-img/person_1.jpg" alt=""></button>
                             <div class="dropdown-menu profile dropdown-menu-right">

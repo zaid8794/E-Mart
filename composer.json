@@ -2,7 +2,7 @@
     "name": "lenovo/project",
     "autoload": {
         "psr-4": {
-            "Lenovo\\Project\\": "src/"
+            "App\\": "src/"
         }
     },
     "require": {}
