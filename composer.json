@@ -1,0 +1,10 @@
+{
+    "name": "sohil/project",
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    
+    "require": {}
+}
