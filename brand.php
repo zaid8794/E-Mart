@@ -15,15 +15,15 @@ $crud_obj = new Crud;
                 <div class="col-12 box-margin">
                     <div class="card">
                         <div class="card-body">
-                            <h2 class="card-title">Category</h2>
+                            <h2 class="card-title">Brand</h2>
                             <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-primary category-modal-button">
-                                Add New Category
+                            <button type="button" class="btn btn-primary brand-modal-button">
+                                Add New Brand
                             </button>
                             <!-- Modal -->
-                            <div class="modal fade" id="category_modal" tabindex="-1" role="dialog" aria-hidden="true">
+                            <div class="modal fade" id="brand_modal" tabindex="-1" role="dialog" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
-                                    <form action="" id="category_form" method="post">
+                                    <form action="" id="brand_form" method="post">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <h5 class="modal-title" id="exampleModalLabel"></h5>
@@ -33,13 +33,29 @@ $crud_obj = new Crud;
                                             </div>
                                             <div class="modal-body">
                                                 <div class="form-group">
-                                                    <label for="category_name">Category Name</label>
-                                                    <input type="text" name="category_name" id="category_name" class="form-control" placeholder="Category Name">
+                                                    <label for="brand_name">Category</label>
+
+                                                    <select name="category_id" id="category_id" class="form-control">
+
+                                                        <option value="" selected disabled>Select Category</option>
+                                                        <?php
+                                                        $query = $crud_obj->getData('category', '*');
+                                                        foreach ($query as $row) {
+                                                        ?>
+                                                            <option value="<?php echo $row['category_id']; ?>"><?php echo $row['category_name']; ?></option>
+                                                        <?php
+                                                        }
+                                                        ?>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="brand_name">Brand Name</label>
+                                                    <input type="text" name="brand_name" id="brand_name" class="form-control" placeholder="Brand Name">
                                                 </div>
                                                 <span class="text-danger" id="msg_error"></span>
                                             </div>
                                             <div class="modal-footer">
-                                                <input type="hidden" name="category_id" id="category_id">
+                                                <input type="hidden" name="brand_id" id="brand_id">
                                                 <input type="hidden" name="form_type" id="form_type">
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                                 <input type="submit" id="submit" class="btn btn-primary save">
@@ -56,28 +72,30 @@ $crud_obj = new Crud;
                 <div class="col-12 box-margin">
                     <div class="card">
                         <div class="card-body">
-                            <h2 class="card-title">Category List</h2>
+                            <h2 class="card-title">Brand List</h2>
                             <table id="datatable-buttons" class="table table-striped dt-responsive nowrap w-100">
                                 <thead>
                                     <tr>
                                         <th>No.</th>
-                                        <th>Category Name</th>
+                                        <th>Brand Name</th>
+                                        <th>Category Id</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
-                                    $row = $crud_obj->getData('category', '*');
+                                    $row = $crud_obj->getData('brand LEFT JOIN category ON (brand.category_id=category.category_id)', '*');
                                     $i = 1;
                                     if ($row) {
                                         foreach ($row as $value) {
                                     ?>
-                                            <tr id="category_<?= $value['category_id']; ?>">
+                                            <tr id="brand_<?= $value['brand_id']; ?>">
                                                 <td><?= $i ?></td>
+                                                <td><?= $value['brand_name'] ?></td>
                                                 <td><?= $value['category_name'] ?></td>
                                                 <td>
-                                                    <button class="btn btn-warning waves-effect btn-circle waves-light mb-2 edit" type="button" data-id="<?= $value['category_id'] ?>"><i class="fa fa-pencil-square-o"></i></button>
-                                                    <button class="btn btn-danger waves-effect btn-circle waves-light mb-2 delete" type="button" data-id="<?= $value['category_id'] ?>"><i class="fa fa-trash"></i></button>
+                                                    <button class="btn btn-warning waves-effect btn-circle waves-light mb-2 edit" type="button" data-id="<?= $value['brand_id'] ?>"><i class="fa fa-pencil-square-o"></i></button>
+                                                    <button class="btn btn-danger waves-effect btn-circle waves-light mb-2 delete" type="button" data-id="<?= $value['brand_id'] ?>"><i class="fa fa-trash"></i></button>
                                                 </td>
                                             </tr>
                                     <?php
@@ -99,18 +117,18 @@ require_once "includes/footer.php";
 ?>
 <script>
     $(document).ready(function() {
-        $('.category-modal-button').click(function() {
-            $('#category_modal').modal('show');
-            $('.modal-title').text('Add New Category');
+        $('.brand-modal-button').click(function() {
+            $('#brand_modal').modal('show');
+            $('.modal-title').text('Add New Brand');
             $('#submit').val('Save');
             $('#form_type').val('save');
         });
 
-        $('#category_form').on('submit', function(e) {
+        $('#brand_form').on('submit', function(e) {
             e.preventDefault();
             var fd = new FormData(this);
             $.ajax({
-                url: "src/Class/Category.php",
+                url: "src/Class/Brand.php",
                 type: 'POST',
                 dataType: 'json',
                 processData: false,
@@ -118,8 +136,8 @@ require_once "includes/footer.php";
                 data: fd,
                 success: function(res) {
                     if (res.status == 1) {
-                        $('#category_form')[0].reset();
-                        $("#category_modal").modal('hide');
+                        $('#brand_form')[0].reset();
+                        $("#brand_modal").modal('hide');
                         location.reload();
                     } else {
                         console.log(res);
@@ -130,40 +148,43 @@ require_once "includes/footer.php";
         });
 
         $(".edit").click(function() {
-            var cat_id = $(this).data("id");
-            $("#category_modal").modal('show');
-            $(".modal-title").text('Update Category');
+            var brand_id = $(this).data("id");
+            $("#brand_modal").modal('show');
+            $(".modal-title").text('Update Brand');
             $("#submit").removeClass("btn btn-primary save").addClass("btn btn-warning update").val('Update');
             $("#form_type").val("update");
             $.ajax({
-                url: "src/Class/Category.php",
+                url: "src/Class/Brand.php",
                 method: "POST",
                 data: {
-                    cat_id: cat_id,
+                    brand_id: brand_id,
                     form_type: "edit",
                 },
                 dataType: "json",
                 success: function(res) {
-                    
-                        var category_name = res[0].category_name;
-                        var category_id = res[0].category_id;
-                        $("#category_id").val(category_id);
-                        $("#category_name").val(category_name);
-                    
+            
+
+                    var category_id = res[0].category_id;
+                    var brand_id = res[0].brand_id;
+                    var brand_name = res[0].brand_name;
+                    $("#category_id").val(category_id);
+                    $("#brand_id").val(brand_id);
+                    $("#brand_name").val(brand_name);
+
                 }
             });
         });
 
         $(".delete").click(function() {
             $("#form_type").val('delete');
-            var cat_id = $(this).data("id");
-            var confirm = window.confirm("Are you sure you want to delete this category?");
+            var brand_id = $(this).data("id");
+            var confirm = window.confirm("Are you sure you want to delete this brand?");
             if (confirm) {
                 $.ajax({
-                    url: "src/Class/Category.php",
+                    url: "src/Class/Brand.php",
                     method: "POST",
                     data: {
-                        cat_id: cat_id,
+                        brand_id: brand_id,
                         form_type: "delete",
                     },
                     dataType: "json",

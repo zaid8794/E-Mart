@@ -9,7 +9,7 @@ class Db
     private $host = 'localhost';
     private $username = 'root';
     private $password = '';
-    private $database = 'mca_4_db';
+    private $database = 'project';
 
     protected function connect()
     {

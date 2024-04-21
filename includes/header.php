@@ -60,6 +60,7 @@
                             <li class="menu-header-title">Dashboard</li>
                             <li class="active"><a href="index.html"><i class='bx bx-home-heart'></i><span>Dashboard</span></a></li>
                             <li><a href="category.php"><i class='fa fa-list'></i><span>Category</span></a></li>
+                            <li><a href="brand.php"><i class='fa fa-bold'></i><span>Brands</span></a></li>
                             <li class="treeview">
                                 <a href="javascript:void(0)"><i class='bx bxs-cart'></i><span>Shop</span> <i class="fa fa-angle-right"></i></a>
                                 <ul class="treeview-menu">
