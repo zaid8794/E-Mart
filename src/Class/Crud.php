@@ -70,4 +70,11 @@ class Crud extends Db
             return false;
         }
     }
+
+    public function slugify($product_name)
+    {
+        $slug = preg_replace('/[^A-Za-z0-9-]+/', '-', $product_name);
+        $slug = strtolower($slug);
+        return $slug;
+    }
 }
