@@ -144,12 +144,12 @@ require_once "includes/footer.php";
                 },
                 dataType: "json",
                 success: function(res) {
-                    
-                        var category_name = res[0].category_name;
-                        var category_id = res[0].category_id;
-                        $("#category_id").val(category_id);
-                        $("#category_name").val(category_name);
-                    
+
+                    var category_name = res[0].category_name;
+                    var category_id = res[0].category_id;
+                    $("#category_id").val(category_id);
+                    $("#category_name").val(category_name);
+
                 }
             });
         });
@@ -157,23 +157,35 @@ require_once "includes/footer.php";
         $(".delete").click(function() {
             $("#form_type").val('delete');
             var cat_id = $(this).data("id");
-            var confirm = window.confirm("Are you sure you want to delete this category?");
-            if (confirm) {
-                $.ajax({
-                    url: "src/Class/Category.php",
-                    method: "POST",
-                    data: {
-                        cat_id: cat_id,
-                        form_type: "delete",
-                    },
-                    dataType: "json",
-                    success: function(res) {
-                        if (res.status == 1) {
-                            $("#" + res.remove).remove();
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                type: "warning",
+                showCancelButton: !0,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes",
+            }).then(function(isConfirm) {
+                if (isConfirm.value === true) {
+                    $.ajax({
+                        url: "src/Class/Category.php",
+                        method: "POST",
+                        data: {
+                            cat_id: cat_id,
+                            form_type: "delete",
+                        },
+                        dataType: "json",
+                        success: function(res) {
+                            if (res.status == 1) {
+                                $("#" + res.remove).remove();
+                                Swal.fire("Deleted!", "Your Category has been deleted.", "success");
+                            }
                         }
-                    }
-                });
-            }
+                    });
+                }
+
+                return false;
+            });
         });
     });
 </script>

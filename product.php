@@ -80,7 +80,9 @@ $crud_obj = new Crud;
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="product_image">Product Image</label>
-                                                    <input type="file" name="product_image" id="product_image" accept="image/*" class="form-control">
+                                                    <input type="file" name="product_image" id="product_image" accept="image/*" class="form-control" onchange="document.getElementById('product_image_preview').classList.remove('d-none');document.getElementById('product_image_preview').src = window.URL.createObjectURL(this.files[0])">
+                                                    <input type="hidden" name="old_product_image" id="old_product_image">
+                                                    <img alt="product_image" id="product_image_preview" class="img-thumbnail img-fluid my-3 ms-3" width="130px">
                                                 </div>
                                                 <span class="text-danger" id="msg_error"></span>
                                             </div>
@@ -103,48 +105,50 @@ $crud_obj = new Crud;
                     <div class="card">
                         <div class="card-body">
                             <h2 class="card-title">Product List</h2>
-                            <table id="datatable-buttons" class="table table-striped dt-responsive nowrap w-100">
-                                <thead>
-                                    <tr>
-                                        <th>No.</th>
-                                        <th>Product Image</th>
-                                        <th>Product Name</th>
-                                        <th>Product Price</th>
-                                        <th>Product Description</th>
-                                        <th>Brand Name</th>
-                                        <th>Category Name</th>
-                                        <th>Is Active</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
-                                    $row = $crud_obj->getData('product LEFT JOIN category ON (product.category_id=category.category_id)LEFT JOIN brand ON(product.brand_id=brand.brand_id)', '*');
-                                    $i = 1;
-                                    if ($row) {
-                                        foreach ($row as $value) {
-                                    ?>
-                                            <tr id="product_<?= $value['product_id']; ?>">
-                                                <td><?= $i ?></td>
-                                                <td><img src="uploads/products/<?= $value['product_image'];?>" height="" width="100"  alt=""></td>
-                                                <td><?= $value['product_name'] ?></td>
-                                                <td><?= $value['product_price'] ?></td>
-                                                <td><?= $value['product_description'] ?></td>
-                                                <td><?= $value['brand_name'] ?></td>
-                                                <td><?= $value['category_name'] ?></td>
-                                                <td><?= $value['is_active'] ?></td>
-                                                <td>
-                                                    <button class="btn btn-warning waves-effect btn-circle waves-light mb-2 edit" type="button" data-id="<?= $value['product_id'] ?>"><i class="fa fa-pencil-square-o"></i></button>
-                                                    <button class="btn btn-danger waves-effect btn-circle waves-light mb-2 delete" type="button" data-id="<?= $value['product_id'] ?>"><i class="fa fa-trash"></i></button>
-                                                </td>
-                                            </tr>
-                                    <?php
-                                            $i++;
+                            <div class="table-responsive">
+                                <table id="datatable-buttons" class="table table-striped nowrap w-100">
+                                    <thead>
+                                        <tr>
+                                            <th>No.</th>
+                                            <th>Product Image</th>
+                                            <th>Product Name</th>
+                                            <th>Product Price</th>
+                                            <th>Product Description</th>
+                                            <th>Brand Name</th>
+                                            <th>Category Name</th>
+                                            <th>Is Active</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        $row = $crud_obj->getData('product LEFT JOIN category ON (product.category_id=category.category_id)LEFT JOIN brand ON(product.brand_id=brand.brand_id)', '*');
+                                        $i = 1;
+                                        if ($row) {
+                                            foreach ($row as $value) {
+                                        ?>
+                                                <tr id="product_<?= $value['product_id']; ?>">
+                                                    <td><?= $i ?></td>
+                                                    <td><img src="uploads/products/<?= $value['product_image']; ?>" height="" width="100" alt=""></td>
+                                                    <td><?= $value['product_name'] ?></td>
+                                                    <td><?= $value['product_price'] ?></td>
+                                                    <td><?= $value['product_description'] ?></td>
+                                                    <td><?= $value['brand_name'] ?></td>
+                                                    <td><?= $value['category_name'] ?></td>
+                                                    <td><?= $value['is_active'] ?></td>
+                                                    <td>
+                                                        <button class="btn btn-warning waves-effect btn-circle waves-light mb-2 edit" type="button" data-id="<?= $value['product_id'] ?>"><i class="fa fa-pencil-square-o"></i></button>
+                                                        <button class="btn btn-danger waves-effect btn-circle waves-light mb-2 delete" type="button" data-id="<?= $value['product_id'] ?>"><i class="fa fa-trash"></i></button>
+                                                    </td>
+                                                </tr>
+                                        <?php
+                                                $i++;
+                                            }
                                         }
-                                    }
-                                    ?>
-                                </tbody>
-                            </table>
+                                        ?>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -162,6 +166,7 @@ require_once "includes/footer.php";
             $('.modal-title').text('Add New Product');
             $('#submit').val('Save');
             $('#form_type').val('save');
+            $('#product_image_preview').addClass('d-none');
         });
 
         $('#product_form').on('submit', function(e) {
@@ -188,29 +193,28 @@ require_once "includes/footer.php";
         });
 
         $(".edit").click(function() {
-            var brand_id = $(this).data("id");
-            $("#brand_modal").modal('show');
-            $(".modal-title").text('Update Brand');
+            var product_id = $(this).data("id");
+            $("#product_modal").modal('show');
+            $(".modal-title").text('Update Product');
             $("#submit").removeClass("btn btn-primary save").addClass("btn btn-warning update").val('Update');
             $("#form_type").val("update");
             $.ajax({
-                url: "src/Class/Brand.php",
+                url: "src/Class/Product.php",
                 method: "POST",
                 data: {
-                    brand_id: brand_id,
+                    product_id: product_id,
                     form_type: "edit",
                 },
                 dataType: "json",
                 success: function(res) {
-
-
-                    var category_id = res[0].category_id;
-                    var brand_id = res[0].brand_id;
-                    var brand_name = res[0].brand_name;
-                    $("#category_id").val(category_id);
-                    $("#brand_id").val(brand_id);
-                    $("#brand_name").val(brand_name);
-
+                    $("#category_id").val(res[0].category_id);
+                    $("#brand_id").val(res[0].brand_id);
+                    $("#product_id").val(res[0].product_id);
+                    $("#product_name").val(res[0].product_name);
+                    $("#product_price").val(res[0].product_price);
+                    $("#product_description").val(res[0].product_description);
+                    $("#product_image_preview").attr('src', 'uploads/products/' + res[0].product_image);
+                    $("#old_product_image").val(res[0].product_image);
                 }
             });
         });
@@ -218,23 +222,34 @@ require_once "includes/footer.php";
         $(".delete").click(function() {
             $("#form_type").val('delete');
             var product_id = $(this).data("id");
-            var confirm = window.confirm("Are you sure you want to delete this Product?");
-            if (confirm) {
-                $.ajax({
-                    url: "src/Class/Product.php",
-                    method: "POST",
-                    data: {
-                        product_id: product_id,
-                        form_type: "delete",
-                    },
-                    dataType: "json",
-                    success: function(res) {
-                        if (res.status == 1) {
-                            $("#" + res.remove).remove();
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                type: "warning",
+                showCancelButton: !0,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes",
+            }).then(function(isConfirm) {
+                if (isConfirm.value === true) {
+                    $.ajax({
+                        url: "src/Class/Product.php",
+                        method: "POST",
+                        data: {
+                            product_id: product_id,
+                            form_type: "delete",
+                        },
+                        dataType: "json",
+                        success: function(res) {
+                            if (res.status == 1) {
+                                $("#" + res.remove).remove();
+                                Swal.fire("Deleted!", "Your Product has been deleted.", "success");
+                            }
                         }
-                    }
-                });
-            }
+                    });
+                }
+                return false;
+            });
         });
     });
 </script>

@@ -58,7 +58,8 @@
 <script src="js/default-assets/datatables.keytable.min.js"></script>
 <script src="js/default-assets/datatables.select.min.js"></script>
 <script src="js/default-assets/demo.datatable-init.js"></script>
-
+<script src="js/default-assets/sweetalert2.min.js"></script>
+<script src="js/default-assets/sweetalert-init.js"></script>
 </body>
 
 </html>

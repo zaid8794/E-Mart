@@ -16,6 +16,8 @@
     <link rel="stylesheet" href="css/default-assets/responsive.bootstrap4.css">
     <link rel="stylesheet" href="css/default-assets/buttons.bootstrap4.css">
     <link rel="stylesheet" href="css/default-assets/select.bootstrap4.css">
+    <!-- These plugins only need for the run this page -->
+    <link rel="stylesheet" href="css/default-assets/new/sweetalert-2.min.css">
 
     <!-- Master Stylesheet CSS -->
     <link rel="stylesheet" href="style.css">

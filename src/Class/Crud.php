@@ -73,8 +73,33 @@ class Crud extends Db
 
     public function slugify($product_name)
     {
-        $slug = preg_replace('/[^A-Za-z0-9-]+/', '-', $product_name);
+        $slug = preg_replace('/[^a-z0-9]+/i', '-', $product_name);
         $slug = strtolower($slug);
         return $slug;
+    }
+
+    public function upload_image($product_image)
+    {
+        $allowed_types = ['jpg', 'png', 'bmp', 'jpeg'];
+        $max_file_size = 5 * 1024 * 1024;
+        if ($_FILES['product_image']['error'] == UPLOAD_ERR_OK) {
+            $file_name = $_FILES['product_image']['name'];
+            $tmp_file_name = $_FILES['product_image']['tmp_name'];
+            $file_etension_name = pathinfo($file_name, PATHINFO_EXTENSION);
+            $file_size = $_FILES['product_image']['size'];
+            if (!in_array($file_etension_name, $allowed_types)) {
+                $data['msg_error'] = "Image is Invalid";
+                $data['status'] = 0;
+            } elseif ($file_size > $max_file_size) {
+                $data['msg_error'] = "Invalid file size, max file size is 5MB";
+                $data['status'] = 0;
+            } else {
+                $new_file_name = date("Ymdhis") . '.' . $file_etension_name;
+                $target_dir = "../../uploads/products/";
+                $target_file = $target_dir . '/' . $new_file_name;
+                move_uploaded_file($tmp_file_name, $target_file);
+                return $new_file_name;
+            }
+        }
     }
 }
