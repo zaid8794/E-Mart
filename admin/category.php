@@ -1,6 +1,6 @@
 <?php
 require_once "includes/header.php";
-require_once "vendor/autoload.php";
+require_once "../vendor/autoload.php";
 
 use App\Class\Crud;
 
@@ -110,7 +110,7 @@ require_once "includes/footer.php";
             e.preventDefault();
             var fd = new FormData(this);
             $.ajax({
-                url: "src/Class/Category.php",
+                url: "../src/Class/Category.php",
                 type: 'POST',
                 dataType: 'json',
                 processData: false,
@@ -136,7 +136,7 @@ require_once "includes/footer.php";
             $("#submit").removeClass("btn btn-primary save").addClass("btn btn-warning update").val('Update');
             $("#form_type").val("update");
             $.ajax({
-                url: "src/Class/Category.php",
+                url: "../src/Class/Category.php",
                 method: "POST",
                 data: {
                     cat_id: cat_id,
@@ -168,7 +168,7 @@ require_once "includes/footer.php";
             }).then(function(isConfirm) {
                 if (isConfirm.value === true) {
                     $.ajax({
-                        url: "src/Class/Category.php",
+                        url: "../src/Class/Category.php",
                         method: "POST",
                         data: {
                             cat_id: cat_id,

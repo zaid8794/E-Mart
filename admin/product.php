@@ -1,6 +1,6 @@
 <?php
 require_once "includes/header.php";
-require_once "vendor/autoload.php";
+require_once "../vendor/autoload.php";
 
 use App\Class\Crud;
 
@@ -52,16 +52,7 @@ $crud_obj = new Crud;
                                                     <div class="form-group col-lg-6">
                                                         <label for="brand_id">Brand</label>
                                                         <select name="brand_id" id="brand_id" class="form-control">
-
-                                                            <option value="" selected disabled>Select Brand</option>
-                                                            <?php
-                                                            $query = $crud_obj->getData('brand', '*');
-                                                            foreach ($query as $row) {
-                                                            ?>
-                                                                <option value="<?php echo $row['brand_id']; ?>"><?php echo $row['brand_name']; ?></option>
-                                                            <?php
-                                                            }
-                                                            ?>
+                                                            <option value="0" selected disabled>First Select Category</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -169,11 +160,29 @@ require_once "includes/footer.php";
             $('#product_image_preview').addClass('d-none');
         });
 
+        $("#category_id").change(function() {
+            var cat_id = $(this).val();
+            $.ajax({
+                url: '../src/Class/Product.php',
+                type: 'POST',
+                data: {
+                    cat_id: cat_id,
+                    form_type: 'change_brand_by_category'
+                },
+                dataType: 'json',
+                success: function(res) {
+                    if (res.status == 1) {
+                        $('#brand_id').html(res.data);
+                    }
+                },
+            });
+        })
+
         $('#product_form').on('submit', function(e) {
             e.preventDefault();
             var fd = new FormData(this);
             $.ajax({
-                url: "src/Class/Product.php",
+                url: "../src/Class/Product.php",
                 type: 'POST',
                 dataType: 'json',
                 processData: false,
@@ -199,7 +208,7 @@ require_once "includes/footer.php";
             $("#submit").removeClass("btn btn-primary save").addClass("btn btn-warning update").val('Update');
             $("#form_type").val("update");
             $.ajax({
-                url: "src/Class/Product.php",
+                url: "../src/Class/Product.php",
                 method: "POST",
                 data: {
                     product_id: product_id,
@@ -233,7 +242,7 @@ require_once "includes/footer.php";
             }).then(function(isConfirm) {
                 if (isConfirm.value === true) {
                     $.ajax({
-                        url: "src/Class/Product.php",
+                        url: "../src/Class/Product.php",
                         method: "POST",
                         data: {
                             product_id: product_id,

@@ -34,6 +34,7 @@
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/bundle.js"></script>
+<script src="js/custom.js"></script>
 
 <!-- Active JS -->
 <script src="js/settings.js"></script>

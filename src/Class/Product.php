@@ -144,3 +144,17 @@ if ($_POST['form_type'] == 'delete') {
     }
     echo json_encode($data);
 }
+
+if ($_POST['form_type'] == 'change_brand_by_category') {
+    $cat_id = $_POST['cat_id'];
+    $exec = $crud_obj->getData('brand', '*', 'category_id = "' . $cat_id . '"');
+    if ($exec) {
+        $output = '<option value="0" selected disabled>Select Brand Name</option>';
+        foreach ($exec as $brand) {
+            $output .= '<option value="' . $brand['brand_id'] . '">' . $brand['brand_name'] . '</option>';
+        }
+        $data['status'] = 1;
+        $data['data'] = $output;
+    }
+    echo json_encode($data);
+}
