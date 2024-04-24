@@ -24,54 +24,33 @@ if ($_POST['form_type'] == 'save') {
         $data['msg_error'] = "Product Image is Required";
         $data['status'] = 0;
     } else {
-        $allowed_types = ['jpg', 'png', 'bmp', 'jpeg'];
-        $max_file_size = 5 * 1024 * 1024;
-        if ($_FILES['product_image']['error'] == UPLOAD_ERR_OK) {
-            $file_name = $_FILES['product_image']['name'];
-            $tmp_file_name = $_FILES['product_image']['tmp_name'];
-            $file_etension_name = pathinfo($file_name, PATHINFO_EXTENSION);
-            $file_size = $_FILES['product_image']['size'];
-            if (!in_array($file_etension_name, $allowed_types)) {
-                $data['msg_error'] = "Image is Invalid";
-                $data['status'] = 0;
-            } elseif ($file_size > $max_file_size) {
-                $data['msg_error'] = "Invalid file size, max file size is 5MB";
-                $data['status'] = 0;
+
+        $brand_id = $_POST['brand_id'];
+        $category_id = $_POST['category_id'];
+        $product_name = $_POST['product_name'];
+        $product_price = $_POST['product_price'];
+        $product_description = $_POST['product_description'];
+        $product_image = $_FILES['product_image'];
+
+        if ($crud_obj->getData('product', '*', 'product_name = "' . $product_name . '" AND category_id = "' . $category_id . '" AND brand_id = "' . $brand_id . '"')) {
+            $data['msg_error'] = "Product already exists";
+            $data['status'] = 0;
+        } else {
+            $data = [
+                'brand_id' => $brand_id,
+                'category_id' => $category_id,
+                'product_name' => $product_name,
+                'product_price' => $product_price,
+                'product_description' => $product_description,
+                'product_image' => $crud_obj->upload_image($product_image),
+                'is_active' => "Enable",
+                'product_slug' => $crud_obj->slugify($product_name),
+            ];
+            $exec =  $crud_obj->insert('product', $data);
+            if ($exec == 1) {
+                $data['status'] = 1;
             } else {
-                $new_file_name = date("Ymdhis") . '.' . $file_etension_name;
-                $target_dir = "../../uploads/products/";
-                $target_file = $target_dir . '/' . $new_file_name;
-                if (move_uploaded_file($tmp_file_name, $target_file)) {
-                    $brand_id = $_POST['brand_id'];
-                    $category_id = $_POST['category_id'];
-                    $product_name = $_POST['product_name'];
-                    $product_price = $_POST['product_price'];
-                    $product_description = $_POST['product_description'];
-                    $product_image = $new_file_name;
-
-                    if ($crud_obj->getData('product', '*', 'product_name = "' . $product_name . '" AND category_id = "' . $category_id . '" AND brand_id = "' . $brand_id . '"')) {
-                        $data['msg_error'] = "Product already exists";
-                        $data['status'] = 0;
-                    } else {
-                        $data = [
-                            'brand_id' => $brand_id,
-                            'category_id' => $category_id,
-                            'product_name' => $product_name,
-                            'product_price' => $product_price,
-                            'product_description' => $product_description,
-                            'product_image' => $product_image,
-                            'is_active' => "Enable",
-                            'product_slug' => $crud_obj->slugify($product_name),
-
-                        ];
-                        $exec =  $crud_obj->insert('product', $data);
-                        if ($exec == 1) {
-                            $data['status'] = 1;
-                        } else {
-                            $data['status'] = 0;
-                        }
-                    }
-                }
+                $data['status'] = 0;
             }
         }
     }
@@ -80,8 +59,15 @@ if ($_POST['form_type'] == 'save') {
 
 if ($_POST['form_type'] == 'edit') {
     $product_id = $_POST['product_id'];
-    $query = $crud_obj->getData('product', '*', 'product_id = "' . $product_id . '"');
-    echo json_encode($query);
+    $query = $crud_obj->getData('product', '*', 'product_id = "' . $product_id . '"', '', '', '1');
+    $exec_brand = $crud_obj->getData('brand', '*', 'brand_name != "' . $_POST['brand_name'] . '" AND category_id = "' . $_POST['category_id'] . '"');
+    $brand_name = '<option value="' . $_POST['brand_id'] . '" selected>' . $_POST['brand_name'] . '</option>';
+    foreach ($exec_brand as $brand) {
+        $brand_name .= '<option value="' . $brand['brand_id'] . '">' . $brand['brand_name'] . '</option>';
+    }
+    $data['data'] = $query;
+    $data['brand_id'] = $brand_name;
+    echo json_encode($data);
 }
 
 if ($_POST['form_type'] == 'update') {
@@ -123,7 +109,7 @@ if ($_POST['form_type'] == 'update') {
             'product_slug' => $crud_obj->slugify($product_name),
         ];
         $exec =  $crud_obj->update('product', $data, 'WHERE product_id = "' . $_POST['product_id'] . '"');
-        if ($exec == 1) {
+        if ($exec) {
             $data['status'] = 1;
         } else {
             $data['status'] = 0;

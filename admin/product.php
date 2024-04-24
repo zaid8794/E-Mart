@@ -36,7 +36,6 @@ $crud_obj = new Crud;
                                                     <div class="form-group col-lg-6">
                                                         <label for="category_id">Category</label>
                                                         <select name="category_id" id="category_id" class="form-control">
-
                                                             <option value="" selected disabled>Select Category</option>
                                                             <?php
                                                             $query = $crud_obj->getData('category', '*');
@@ -128,7 +127,7 @@ $crud_obj = new Crud;
                                                     <td><?= $value['category_name'] ?></td>
                                                     <td><?= $value['is_active'] ?></td>
                                                     <td>
-                                                        <button class="btn btn-warning waves-effect btn-circle waves-light mb-2 edit" type="button" data-id="<?= $value['product_id'] ?>"><i class="fa fa-pencil-square-o"></i></button>
+                                                        <button class="btn btn-warning waves-effect btn-circle waves-light mb-2 edit" type="button" data-id="<?= $value['product_id'] ?>" data-catid="<?= $value['category_id'] ?>" data-brandid="<?= $value['brand_id'] ?>" data-brandname="<?= $value['brand_name'] ?>"><i class="fa fa-pencil-square-o"></i></button>
                                                         <button class="btn btn-danger waves-effect btn-circle waves-light mb-2 delete" type="button" data-id="<?= $value['product_id'] ?>"><i class="fa fa-trash"></i></button>
                                                     </td>
                                                 </tr>
@@ -203,6 +202,9 @@ require_once "includes/footer.php";
 
         $(".edit").click(function() {
             var product_id = $(this).data("id");
+            var cat_id = $(this).data("catid");
+            var brand_id = $(this).data("brandid");
+            var brand_name = $(this).data("brandname");
             $("#product_modal").modal('show');
             $(".modal-title").text('Update Product');
             $("#submit").removeClass("btn btn-primary save").addClass("btn btn-warning update").val('Update');
@@ -212,18 +214,22 @@ require_once "includes/footer.php";
                 method: "POST",
                 data: {
                     product_id: product_id,
+                    category_id: cat_id,
+                    brand_id: brand_id,
+                    brand_name: brand_name,
                     form_type: "edit",
                 },
                 dataType: "json",
                 success: function(res) {
-                    $("#category_id").val(res[0].category_id);
-                    $("#brand_id").val(res[0].brand_id);
-                    $("#product_id").val(res[0].product_id);
-                    $("#product_name").val(res[0].product_name);
-                    $("#product_price").val(res[0].product_price);
-                    $("#product_description").val(res[0].product_description);
-                    $("#product_image_preview").attr('src', 'uploads/products/' + res[0].product_image);
-                    $("#old_product_image").val(res[0].product_image);
+
+                    $("#category_id").val(res.data[0].category_id);
+                    $("#brand_id").html(res.brand_id);
+                    $("#product_id").val(res.data[0].product_id);
+                    $("#product_name").val(res.data[0].product_name);
+                    $("#product_price").val(res.data[0].product_price);
+                    $("#product_description").val(res.data[0].product_description);
+                    $("#product_image_preview").attr('src', 'uploads/products/' + res.data[0].product_image);
+                    $("#old_product_image").val(res.data[0].product_image);
                 }
             });
         });

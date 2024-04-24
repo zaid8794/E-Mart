@@ -85,7 +85,7 @@ class Crud extends Db
         if ($_FILES['product_image']['error'] == UPLOAD_ERR_OK) {
             $file_name = $_FILES['product_image']['name'];
             $tmp_file_name = $_FILES['product_image']['tmp_name'];
-            $file_etension_name = pathinfo($file_name, PATHINFO_EXTENSION);
+            $file_etension_name = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
             $file_size = $_FILES['product_image']['size'];
             if (!in_array($file_etension_name, $allowed_types)) {
                 $data['msg_error'] = "Image is Invalid";
@@ -95,7 +95,7 @@ class Crud extends Db
                 $data['status'] = 0;
             } else {
                 $new_file_name = date("Ymdhis") . '.' . $file_etension_name;
-                $target_dir = "../../uploads/products/";
+                $target_dir = "../../admin/uploads/products/";
                 $target_file = $target_dir . '/' . $new_file_name;
                 move_uploaded_file($tmp_file_name, $target_file);
                 return $new_file_name;
