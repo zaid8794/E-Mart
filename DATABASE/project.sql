@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 22, 2024 at 09:38 PM
+-- Generation Time: Apr 25, 2024 at 10:08 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -39,8 +39,12 @@ CREATE TABLE `brand` (
 --
 
 INSERT INTO `brand` (`brand_id`, `brand_name`, `category_id`, `brand_created_on`) VALUES
-(3, 'Panasonic', 4, '2024-04-22 18:58:48'),
-(4, 'Whirlpool', 5, '2024-04-22 18:58:58');
+(6, 'Mi', 6, '2024-04-24 17:40:32'),
+(7, 'Realme', 6, '2024-04-24 17:40:39'),
+(8, 'Samsung', 6, '2024-04-24 17:40:48'),
+(9, 'Sony', 8, '2024-04-24 17:41:01'),
+(10, 'Panasonic', 8, '2024-04-24 17:41:17'),
+(11, 'Oneplus', 8, '2024-04-24 17:41:50');
 
 -- --------------------------------------------------------
 
@@ -59,13 +63,32 @@ CREATE TABLE `category` (
 --
 
 INSERT INTO `category` (`category_id`, `category_name`, `category_created_on`) VALUES
-(1, 'Laptop', '2024-04-21 17:20:06'),
-(2, 'Mobile', '2024-04-21 17:20:19'),
-(3, 'TV', '2024-04-21 17:20:40'),
-(4, 'Ac', '2024-04-21 17:20:48'),
-(5, 'Wasing Machine', '2024-04-21 17:20:57'),
-(6, 'Mobile Accessories', '2024-04-21 17:21:10'),
-(7, 'Bag', '2024-04-21 17:21:21');
+(6, 'Mobile', '2024-04-24 17:40:18'),
+(8, 'TV', '2024-04-24 17:19:26');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `contactus`
+--
+
+CREATE TABLE `contactus` (
+  `contact_id` int(11) NOT NULL,
+  `contact_name` varchar(255) NOT NULL,
+  `contact_email` varchar(255) NOT NULL,
+  `contact_mobile` varchar(12) NOT NULL,
+  `contact_subject` varchar(255) NOT NULL,
+  `contact_message` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `contactus`
+--
+
+INSERT INTO `contactus` (`contact_id`, `contact_name`, `contact_email`, `contact_mobile`, `contact_subject`, `contact_message`) VALUES
+(1, 'SOHIL', 'SOHILVORA2000@GMAIL.COM', '07383063130', 'asdasa', 'kjhsdkjhf'),
+(2, 'SOHIL', 'SOHILVORA2000@GMAIL.COM', '7383063130', 'I want some more Products', 'kdhkdfjghdfjkg'),
+(3, 'SOHIL', 'SOHILVORA2000@GMAIL.COM', '7383063130', 'I want some more Products', 'skdhfksjdhf');
 
 -- --------------------------------------------------------
 
@@ -91,7 +114,7 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`product_id`, `product_name`, `product_price`, `product_description`, `brand_id`, `category_id`, `product_image`, `product_slug`, `is_active`, `product_created_on`) VALUES
-(3, 'Panasonic ', 34000, 'kllk', 4, 2, '20240422093258.png', 'panasonic-', 'Enable', '2024-04-22 19:32:58');
+(12, 'Mi Mobile', 20000, 'kjhkhfkjdhjkhjk', 6, 6, '20240425083158.jpg', 'mi-mobile', 'Enable', '2024-04-25 18:31:58');
 
 --
 -- Indexes for dumped tables
@@ -110,6 +133,12 @@ ALTER TABLE `category`
   ADD PRIMARY KEY (`category_id`);
 
 --
+-- Indexes for table `contactus`
+--
+ALTER TABLE `contactus`
+  ADD PRIMARY KEY (`contact_id`);
+
+--
 -- Indexes for table `product`
 --
 ALTER TABLE `product`
@@ -123,19 +152,25 @@ ALTER TABLE `product`
 -- AUTO_INCREMENT for table `brand`
 --
 ALTER TABLE `brand`
-  MODIFY `brand_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `brand_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `contactus`
+--
+ALTER TABLE `contactus`
+  MODIFY `contact_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

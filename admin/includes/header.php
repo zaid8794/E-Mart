@@ -64,6 +64,7 @@
                             <li id="category"><a href="category.php"><i class='fa fa-list'></i><span>Category</span></a></li>
                             <li id="brand"><a href="brand.php"><i class='fa fa-bold'></i><span>Brands</span></a></li>
                             <li id="product"><a href="product.php"><i class='fa fa-th'></i><span>Products</span></a></li>
+                            <li id="contactus"><a href="contactus.php"><i class="fa fa-envelope"></i><span>Contact Us</span></a></li>
                         </ul>
                     </nav>
                 </div>

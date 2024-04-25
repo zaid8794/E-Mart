@@ -28,8 +28,8 @@ require_once "components/header.php";
                     <span class="icon"><img src="assets/img/icon/mail.svg" alt=""></span>
                     <div class="content">
                         <h3>Mail address</h3>
-                        <a href="mailto:radios.info@gmail.com">radios.info@gmail.com</a>
-                        <a href="tel:998757478492">+998757478492</a>
+                        <a href="mailto:zaidvora9@gmail.com">zaidvora9@gmail.com</a>
+                        <a href="mailto:sohilvora2000@gmail.com">sohilvora2000@gmail.com</a>
                     </div>
                 </div>
             </div>
@@ -38,7 +38,7 @@ require_once "components/header.php";
                     <span class="icon"><img src="assets/img/icon/location.svg" alt=""></span>
                     <div class="content">
                         <h3>Office Location</h3>
-                        <p>4517 Washington Ave. Manch <br> ester, Kentucky 39495</p>
+                        <p>Junagadh<br> Gujarat, India 362001</p>
                     </div>
                 </div>
             </div>
@@ -46,19 +46,19 @@ require_once "components/header.php";
                 <div class="contact-info__item d-flex">
                     <span class="icon"><img src="assets/img/icon/call-2.svg" alt=""></span>
                     <div class="content">
-                        <h3>Phone Number</h3>
-                        <a href="tel:404555012834">+405 - 555 - 0128 - 34</a>
-                        <a href="tel:404555012863">+405 - 555 - 0128 - 63</a>
+                        <h3>Mobile Number</h3>
+                        <a href="tel:9033594669">+91 90335 94669</a>
+                        <a href="tel:7383063130">+91 73830 63130</a>
                     </div>
                 </div>
             </div>
             <div class="col-xl-3 col-lg-4 col-md-6 mt-30">
                 <div class="contact-info__item d-flex">
-                    <span class="icon"><img src="assets/img/icon/c_us.svg" alt=""></span>
+                    <span class="icon"><img src="assets/img/icon/linkedin2.svg" alt=""></i></span>
                     <div class="content">
                         <h3>Connect Us</h3>
-                        <a href="mailto:radios.info@gmail.com">radios.info@gmail.com</a>
-                        <a href="mailto:radios.support@gmail.com">radios.support@gmail.com</a>
+                        <a href="https://www.linkedin.com/in/zaid-vora-5333b4233">www.linkedin.com/in/zaid-vora-5333b4233</a>
+                        <a href="https://www.linkedin.com/in/sohil-vora-4611a8233">www.linkedin.com/in/sohil-vora-4611a8233</a>
                     </div>
                 </div>
             </div>
@@ -78,39 +78,36 @@ require_once "components/header.php";
             </div>
             <div class="col-lg-7">
                 <div class="contact-from__wrap pl-55">
-                    <form class="contact-from" action="#">
+                    <form class="contact-from" id="contact_form" action="" method="POST">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="contact-from__field">
-                                    <input type="text" placeholder="Enter your name*">
+                                    <input type="text" name="name" placeholder="Enter your name*" required>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="contact-from__field">
-                                    <input type="email" placeholder="Enter your mail*">
+                                    <input type="email" name="email" placeholder="Enter your mail*" required>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="contact-from__field">
-                                    <input type="number" placeholder="Enter your number*">
+                                    <input type="tel" name="mobile" maxlength="10" placeholder="Enter your number*" required>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="contact-from__field">
-                                    <input type="text" placeholder="Weabsite Link*">
+                                    <input type="text" name="subject" placeholder="Subject*" required>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="contact-from__field">
-                                    <textarea name="message" id="message" cols="30" rows="10" placeholder="Enter your Massage*"></textarea>
+                                    <textarea name="message" id="message" cols="30" rows="10" placeholder="Enter your Massage*" required></textarea>
                                 </div>
                             </div>
-                            <div class="contact-from__chekbox">
-                                <input class="form-check-input" type="checkbox" name="checkbox" id="checkbox">
-                                <label for="checkbox">Save my name, email, and website in this browser for the next time I comment.</label>
-                            </div>
+
                             <div class="contact-from__btn mt-35">
-                                <button class="thm-btn thm-btn__2">
+                                <button type="submit" class="thm-btn thm-btn__2">
                                     <span class="btn-wrap">
                                         <span>Send Messege</span>
                                         <span>Send Messege</span>
@@ -201,3 +198,30 @@ require_once "components/header.php";
 <?php
 require_once "components/footer.php";
 ?>
+
+<script>
+    $(document).ready(function() {
+        
+        $('#contact_form').on('submit', function(e) {
+            e.preventDefault();
+            var fd = new FormData(this);
+            $.ajax({
+                url: "src/Class/Contact.php",
+                type: 'POST',
+                dataType: 'json',
+                processData: false,
+                contentType: false,
+                data: fd,
+                success: function(res) {
+                    if (res.status == 1) {
+                        alert("Thank You For Contacting Us");
+                        $('#contact_form')[0].reset();
+                    } else {
+                        console.log(res);
+                        $("#msg_error").text(res.msg_error);
+                    }
+                }
+            });
+        });
+    });
+</script>
