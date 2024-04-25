@@ -118,15 +118,75 @@
                 <div class="container mxw_1360">
                     <div class="header__main ul_li">
                         <div class="header__logo">
-                            <a href="index.html">
+                            <a href="index.php">
                                 <img src="assets/img/logo/logo.svg" alt="">
                             </a>
                         </div>
-                        <div class="header__category">
-                            <a class="header__category-nav" href="#!"><img class="bar" src="assets/img/icon/bar.svg" alt="">Browse Categories<i class="fas fa-chevron-down"></i></a>
-                        </div>
+                        <?php
+                        if (basename($_SERVER['REQUEST_URI']) == 'index.php') {
+                        ?>
+                            <div class="header__category">
+                                <a class="header__category-nav" href="#!">
+                                    <img class="bar" src="assets/img/icon/bar.svg" alt="">
+                                    Browse Categories
+                                    <i class="fas fa-chevron-down"></i>
+                                </a>
+                            </div>
+                        <?php
+                        } else {
+                        ?>
+                            <div class="header__category pos-rel">
+                                <div class="vertical-menu">
+                                    <button class="header__category-nav">
+                                        <img class="bar" src="assets/img/icon/bar.svg" alt="">
+                                        Browse Catetory
+                                        <i class="fas fa-chevron-down"></i>
+                                    </button>
+                                    <div class="vertical-menu-list category-nav">
+                                        <ul class="category-nav__list list-unstyled">
+                                            <li><a href="#"><img src="assets/img/icon/cat_01.svg" alt="">Bluetooth speaker</a></li>
+                                            <li class="menu-item-has-children">
+                                                <a href="#"><img src="assets/img/icon/cat_02.svg" alt="">Digital camera</a>
+                                                <ul>
+                                                    <li><a href="#">Electric razor</a></li>
+                                                    <li><a href="#">Digital camera</a></li>
+                                                    <li><a href="#">Electric frying pan</a></li>
+                                                    <li><a href="#">external hard drive</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="#"><img src="assets/img/icon/cat_03.svg" alt="">Laser printer</a></li>
+                                            <li class="menu-item-has-children">
+                                                <a href="#"><img src="assets/img/icon/cat_04.svg" alt="">Electric frying pan</a>
+                                                <ul>
+                                                    <li><a href="#">Electric razor</a></li>
+                                                    <li><a href="#">Digital camera</a></li>
+                                                    <li><a href="#">Electric frying pan</a></li>
+                                                    <li><a href="#">external hard drive</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="#"><img src="assets/img/icon/cat_05.svg" alt="">Robotics vacuum</a></li>
+                                            <li class="menu-item-has-children">
+                                                <a href="#"><img src="assets/img/icon/cat_06.svg" alt="">external hard drive</a>
+                                                <ul>
+                                                    <li><a href="#">Electric razor</a></li>
+                                                    <li><a href="#">Digital camera</a></li>
+                                                    <li><a href="#">Electric frying pan</a></li>
+                                                    <li><a href="#">external hard drive</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="#"><img src="assets/img/icon/cat_07.svg" alt="">Electric razor</a></li>
+                                            <li><a href="#"><img src="assets/img/icon/cat_08.svg" alt="">Washing machine</a></li>
+                                            <li><a href="#"><img src="assets/img/icon/cat_09.svg" alt="">Rice cooker</a></li>
+                                            <li><a href="#"><img src="assets/img/icon/cat_10.svg" alt="">Telivsion & Monitor</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php
+                        }
+                        ?>
                         <div class="hamburger_menu d-lg-none">
-                            <a href="javascript:void(0);" class="active">
+                            <a href="javascript:void(0);" class="">
                                 <div class="icon bar">
                                     <span><i class="fal fa-bars"></i></span>
                                 </div>
