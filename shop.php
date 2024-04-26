@@ -32,9 +32,22 @@ $crud_obj = new Crud;
                 <div class="shop-area shop-left-sidebar clearfix">
                     <div class="woocommerce-content-wrap">
                         <div class="woocommerce-toolbar-top">
-                            <p class="woocommerce-result-count">Showing 1–12 of 70 results</p>
+                            <!-- <p class="woocommerce-result-count">Showing 1–12 of 70 results</p> -->
+                            <?php
+                            if (isset($_GET['category'])) {
+                                $category_select = $crud_obj->getData('category', 'category_name', 'category_id = "' . $_GET['category'] . '"', '', '', '1');
+                                if ($category_select) {
+                                    foreach ($category_select as $category) {
+                            ?>
+                                        <p id="your_category_selected" class="fw-bold">Selected Category : <?= $category['category_name'] ?></p>&nbsp;&nbsp;&nbsp;|
+                            <?php
+                                    }
+                                }
+                            }
+                            ?>
+                            &nbsp;&nbsp;&nbsp;<p id="your_search_text" class="fw-bold"></p>
                             <div class="products-sizes">
-                                <a href="#!" class="grid-4">
+                                <a href="#!" class="grid-4 active">
                                     <div class="grid-draw">
                                         <span></span>
                                         <span></span>
@@ -49,23 +62,6 @@ $crud_obj = new Crud;
                                     </div>
                                     <div class="grid-draw">
                                         <span></span>
-                                        <span></span>
-                                        <span></span>
-                                        <span></span>
-                                    </div>
-                                </a>
-                                <a href="#!" class="grid-3 active">
-                                    <div class="grid-draw">
-                                        <span></span>
-                                        <span></span>
-                                        <span></span>
-                                    </div>
-                                    <div class="grid-draw">
-                                        <span></span>
-                                        <span></span>
-                                        <span></span>
-                                    </div>
-                                    <div class="grid-draw">
                                         <span></span>
                                         <span></span>
                                         <span></span>
@@ -86,25 +82,14 @@ $crud_obj = new Crud;
                                     </div>
                                 </a>
                             </div>
-                            <form class="woocommerce-ordering" method="get">
-                                <select name="orderby" class="orderby">
-                                    <option value="menu_order" selected='selected'>Default sorting</option>
-                                    <option value="popularity">Sort by popularity</option>
-                                    <option value="rating">Sort by average rating</option>
-                                    <option value="date">Sort by newness</option>
-                                    <option value="price">Sort by price: low to high</option>
-                                    <option value="price-desc">Sort by price: high to low</option>
-                                </select>
-                                <input type="hidden" name="post_type" value="product" />
-                            </form>
                         </div>
                         <div class="woocommerce-content-inner">
-                            <ul class="products three-column clearfix" id="product_fetch">
+                            <ul class="products  default-column clearfix" id="product_fetch">
                                 <?php
-                                if (isset($_GET['category'])) {
-                                    $row = $crud_obj->getData('product', '*', 'category_id="' . $_GET['category'] . '"');
+                                if (isset($_GET['category']) && $_GET['category'] != '') {
+                                    $row = $crud_obj->getData('product', '*', 'category_id="' . $_GET['category'] . '"', 'RAND()');
                                 } else {
-                                    $row = $crud_obj->getData('product', '*');
+                                    $row = $crud_obj->getData('product', '*', '', 'RAND()');
                                 }
                                 if ($row) {
                                     foreach ($row as $value) {
@@ -122,11 +107,6 @@ $crud_obj = new Crud;
                                             <div class="product-info mt-4">
 
                                                 <h2 class="product__title"><a href="shop-single.html"><?= $value['product_name']; ?></a></h2>
-                                                <span class="product__available">Available: <span>334</span></span>
-                                                <div class="product__progress progress color-primary">
-                                                    <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
-                                                    </div>
-                                                </div>
                                                 <h4 class="product__price"><span class="new">₹<?= $value['product_price'] ?></span><span class="old">₹<?= $value['product_price'] + 1000; ?></span></h4>
                                                 <p class="product-description"><?= $value['product_description'] ?></p>
                                             </div>
@@ -135,9 +115,6 @@ $crud_obj = new Crud;
                                     }
                                 }
                                 ?>
-
-
-
                             </ul>
                         </div>
                         <div class="pagination_wrap pt-20">
@@ -155,9 +132,8 @@ $crud_obj = new Crud;
                             <h2 class="widget__title">
                                 <span>Search</span>
                             </h2>
-                            <form class="widget__search" action="#" method="POST" id="product_search">
-                                <input type="hidden" name="form_type" value="product_search">
-                                <input type="text" name="search" placeholder="Search...">
+                            <form class="widget__search" id="product_search">
+                                <input type="text" name="search" id="search" placeholder="Search..." onkeypress="return event.keyCode != 13;">
                                 <button type="submit"><i class="far fa-search"></i></button>
                             </form>
                         </div>
@@ -169,11 +145,9 @@ $crud_obj = new Crud;
                                 <form>
                                     <div id="slider-range"></div>
                                     <p>Price : <input type="text" id="amount"></p>
-                                    <button>filter</button>
                                 </form>
                             </div>
                         </div>
-
                         <div class="widget">
                             <h2 class="widget__title">
                                 <span>Category</span>
@@ -188,44 +162,32 @@ $crud_obj = new Crud;
                                 <?php } ?>
                             </ul>
                         </div>
-
-                        <div class="widget">
-                            <h2 class="widget__title">
-                                <span>Brands</span>
-                            </h2>
-                            <div class="checkbox">
-                                <div class="checkbox__item ul_li">
-                                    <input class="form-check-input" type="checkbox" name="checkbox" id="b1" />
-                                    <label for="b1">Samsung</label>
-                                </div>
-                                <div class="checkbox__item ul_li">
-                                    <input class="form-check-input" type="checkbox" name="checkbox" id="b2" />
-                                    <label for="b2">Oppo</label>
-                                </div>
-                                <div class="checkbox__item ul_li">
-                                    <input class="form-check-input" type="checkbox" name="checkbox" id="b3" />
-                                    <label for="b3">hewaui Galaxy</label>
-                                </div>
-                                <div class="checkbox__item ul_li">
-                                    <input class="form-check-input" type="checkbox" name="checkbox" id="b4" />
-                                    <label for="b4">Ryzen 3600</label>
-                                </div>
-                                <div class="checkbox__item ul_li">
-                                    <input class="form-check-input" type="checkbox" name="checkbox" id="b5" />
-                                    <label for="b5">intel</label>
-                                </div>
-                                <div class="checkbox__item ul_li">
-                                    <input class="form-check-input" type="checkbox" name="checkbox" id="b6" />
-                                    <label for="b6">Mobile Handset</label>
-                                </div>
-                                <div class="checkbox__item ul_li">
-                                    <input class="form-check-input" type="checkbox" name="checkbox" id="b7" />
-                                    <label for="b7">Mobile Handset</label>
+                        <?php
+                        if (isset($_GET['category']) && $_GET['category'] != '') {
+                        ?>
+                            <div class="widget">
+                                <h2 class="widget__title">
+                                    <span>Brands</span>
+                                </h2>
+                                <div class="checkbox">
+                                    <?php
+                                    $brand_fetch = $crud_obj->getData('brand', '*', 'category_id = "' . $_GET['category'] . '"');
+                                    if ($brand_fetch) {
+                                        foreach ($brand_fetch as $brand) {
+                                    ?>
+                                            <div class="checkbox__item ul_li">
+                                                <input class="form-check-input" type="checkbox" name="brand_checkbox" class="brand_checkbox" id="brand_checkbox" value="<?= $brand['brand_id'] ?>" />
+                                                <label for="b1"><?= $brand['brand_name'] ?></label>
+                                            </div>
+                                    <?php
+                                        }
+                                    }
+                                    ?>
                                 </div>
                             </div>
-
-                        </div>
-
+                        <?php
+                        }
+                        ?>
                     </div>
                 </div>
             </div>
@@ -239,25 +201,94 @@ require_once "components/footer.php";
 
 <script>
     $(document).ready(function() {
+        /*----------------------------
+	= SHOP PRICE SLIDER
+    ------------------------------ */
+        if ($("#slider-range").length) {
+            $("#slider-range").slider({
+                range: true,
+                min: 500,
+                max: 100000,
+                values: [500, 500],
+                slide: function(event, ui) {
+                    $("#amount").val("₹" + ui.values[0] + " - ₹" + ui.values[1]);
+                    $.ajax({
+                        url: "src/Class/Product.php",
+                        type: "POST",
+                        data: {
+                            category_id: '<?= isset($_GET['category']) && $_GET['category'] != '' ? $_GET['category'] : '' ?>',
+                            min_price: ui.values[0],
+                            max_price: ui.values[1],
+                            form_type: 'product_price_range',
+                        },
+                        dataType: 'json',
+                        success: function(res) {
+                            if (res.status == 1) {
+                                $('#product_fetch').html(res.data);
+                            } else {
+                                $("#product_fetch").html(res.msg_error);
+                            }
+                        }
+                    });
+                },
+            });
 
-        $('#product_search').on('submit', function(e) {
+            $("#amount").val(
+                "₹" +
+                $("#slider-range").slider("values", 0) +
+                " - ₹" +
+                $("#slider-range").slider("values", 1)
+            );
+        }
+
+        $('input[name="search"]').keyup(function(e) {
             e.preventDefault();
-            var fd = new FormData(this);
+            var search = $(this).val().trim();
+            if (search == "") {
+                $('#your_search_text').text('');
+            }
             $.ajax({
                 url: "src/Class/Product.php",
                 type: 'POST',
                 dataType: 'json',
-                processData: false,
-                contentType: false,
-                data:fd,
+                data: {
+                    category_id: '<?= isset($_GET['category']) && $_GET['category'] != '' ? $_GET['category'] : '' ?>',
+                    search: search,
+                    form_type: "product_search",
+                },
                 success: function(res) {
-                    // if (res.status == 1) {
-                    //     $('#product_fetch').html(res);
-                    // } else {
-                    //     console.log(res);
-                    //     $("#msg_error").text(res.msg_error);
-                    // }
-                    $('#product_fetch').html(res.data);
+                    if (res.status == 1) {
+                        $('#product_fetch').html(res.data);
+                        $('#your_search_text').text(res.search_text);
+                    } else {
+                        $("#product_fetch").html(res.msg_error);
+                    }
+                }
+            });
+        });
+
+        $('input[id="brand_checkbox"]').change(function() {
+            var selectedBrands = [];
+            
+            $('input[name="brand_checkbox"]:checked').each(function() {
+                selectedBrands.push($(this).val());
+            });
+            $.ajax({
+                url: 'src/Class/Product.php',
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    category_id: '<?= isset($_GET['category']) && $_GET['category'] != '' ? $_GET['category'] : '' ?>',
+                    brand_checked: selectedBrands,
+                    form_type: "product_fetch_by_brand",
+                },
+                success: function(res) {
+                    if (res.status == 1) {
+                        $('#product_fetch').html(res.data);
+                        $('#your_search_text').text(res.search_text);
+                    } else {
+                        $("#product_fetch").html(res.msg_error);
+                    }
                 }
             });
         });

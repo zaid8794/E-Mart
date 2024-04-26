@@ -17,7 +17,7 @@ class Crud extends Db
         }
         if ($limit != '') {
             $sql .= " LIMIT $limit";
-        }   
+        }
         $result = $this->connect()->query($sql);
         if ($result->num_rows > 0) {
             $arr = array();

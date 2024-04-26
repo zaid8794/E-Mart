@@ -130,7 +130,7 @@ $crud_obj = new Crud;
                             </a>
                         </div>
                         <?php
-                        if (basename($_SERVER['REQUEST_URI']) == 'index.php') {
+                        if (basename($_SERVER['REQUEST_URI']) == 'index.php' || basename($_SERVER['REQUEST_URI']) == '') {
                         ?>
                             <div class="header__category">
                                 <a class="header__category-nav" href="#!">
