@@ -99,15 +99,19 @@ $crud_obj = new Crud;
                             </form>
                         </div>
                         <div class="woocommerce-content-inner">
-                            <ul class="products three-column clearfix">
-                                <?php $row = $crud_obj->getData('product', '*');
-
+                            <ul class="products three-column clearfix" id="product_fetch">
+                                <?php
+                                if (isset($_GET['category'])) {
+                                    $row = $crud_obj->getData('product', '*', 'category_id="' . $_GET['category'] . '"');
+                                } else {
+                                    $row = $crud_obj->getData('product', '*');
+                                }
                                 if ($row) {
                                     foreach ($row as $value) {
                                 ?>
                                         <li class="product">
                                             <div class="product-holder">
-                                                <a href="shop-single.html"><img src="admin/uploads/products/<?=$value['product_image'];?>" style="max-width : 150px ; " width="" alt=""></a>
+                                                <a href="shop-single.html"><img src="admin/uploads/products/<?= $value['product_image']; ?>" style="max-width : 150px ; " width="" alt=""></a>
 
                                                 <ul class="product__action">
                                                     <li><a href="#!"><i class="far fa-compress-alt"></i></a></li>
@@ -123,18 +127,17 @@ $crud_obj = new Crud;
                                                     <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
                                                     </div>
                                                 </div>
-                                                <h4 class="product__price"><span class="new">₹<?= $value['product_price']?></span><span class="old">₹<?= $value['product_price']+1000;?></span></h4>
-                                                <p class="product-description"><?= $value['product_description']?></p>
+                                                <h4 class="product__price"><span class="new">₹<?= $value['product_price'] ?></span><span class="old">₹<?= $value['product_price'] + 1000; ?></span></h4>
+                                                <p class="product-description"><?= $value['product_description'] ?></p>
                                             </div>
                                         </li>
                                 <?php
-
                                     }
                                 }
                                 ?>
-                                
-                               
-                                
+
+
+
                             </ul>
                         </div>
                         <div class="pagination_wrap pt-20">
@@ -152,9 +155,10 @@ $crud_obj = new Crud;
                             <h2 class="widget__title">
                                 <span>Search</span>
                             </h2>
-                            <form class="widget__search" action="#">
-                                <input type="text" placeholder="Search...">
-                                <button><i class="far fa-search"></i></button>
+                            <form class="widget__search" action="#" method="POST" id="product_search">
+                                <input type="hidden" name="form_type" value="product_search">
+                                <input type="text" name="search" placeholder="Search...">
+                                <button type="submit"><i class="far fa-search"></i></button>
                             </form>
                         </div>
                         <div class="widget widget_price_filter">
@@ -169,55 +173,22 @@ $crud_obj = new Crud;
                                 </form>
                             </div>
                         </div>
-                        <div class="widget">
-                            <h2 class="widget__title">
-                                <span>Color</span>
-                            </h2>
-                            <div class="widget__color ul_li">
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                            </div>
-                        </div>
+
                         <div class="widget">
                             <h2 class="widget__title">
                                 <span>Category</span>
                             </h2>
                             <ul class="widget__category">
-                                <li><a href="#!">Motorbike parts<i class="far fa-chevron-right"></i></a>
-                                </li>
-                                <li><a href="#!">Car parts Name<i class="far fa-chevron-right"></i></a></li>
-                                <li><a href="#!">Bicycle Parts<i class="far fa-chevron-right"></i></a></li>
-                                <li><a href="#!">Taxi bike parts<i class="far fa-chevron-right"></i></a>
-                                </li>
-                                <li><a href="#!">Double decker bus<i class="far fa-chevron-right"></i></a>
-                                </li>
-                                <li><a href="#!">Tractor parts<i class="far fa-chevron-right"></i></a></li>
-                                <li><a href="#!">Bull Dozer<i class="far fa-chevron-right"></i></a></li>
+                                <?php
+                                $row = $crud_obj->getData('category', '*');
+                                foreach ($row as $value) { ?>
+
+                                    <li><a href="shop.php?category=<?= $value['category_id'] ?>"><?= $value['category_name'] ?><i class="far fa-chevron-right"></i></a>
+                                    </li>
+                                <?php } ?>
                             </ul>
                         </div>
-                        <div class="widget">
-                            <div class="widget__add">
-                                <div class="content">
-                                    <span>Trending</span>
-                                    <h3>2021 <span>Laptop</span> <br> Collection</h3>
-                                    <a class="thm-btn no-icon" href="#!">
-                                        <span class="btn-wrap">
-                                            <span>Buy Now</span>
-                                            <span>Buy Now</span>
-                                        </span>
-                                    </a>
-                                </div>
-                                <div class="image">
-                                    <img class="add_img" src="assets/img/product/img_177.png" alt="">
-                                    <img class="add_shape" src="assets/img/shape/add_shape.png" alt="">
-                                </div>
-                            </div>
-                        </div>
+
                         <div class="widget">
                             <h2 class="widget__title">
                                 <span>Brands</span>
@@ -254,23 +225,7 @@ $crud_obj = new Crud;
                             </div>
 
                         </div>
-                        <div class="widget">
-                            <h2 class="widget__title">
-                                <span>Tags</span>
-                            </h2>
-                            <div class="tagcloud">
-                                <a href="#!">symphony</a>
-                                <a href="#!">nokia</a>
-                                <a href="#!">nokia</a>
-                                <a href="#!">landing page</a>
-                                <a href="#!">Alcatel</a>
-                                <a href="#!">Samsung</a>
-                                <a href="#!">Oppos</a>
-                                <a href="#!">Oppos</a>
-                                <a href="#!">I phone Pro 12</a>
-                                <a href="#!">poco X3</a>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
             </div>
@@ -281,3 +236,30 @@ $crud_obj = new Crud;
 <?php
 require_once "components/footer.php";
 ?>
+
+<script>
+    $(document).ready(function() {
+
+        $('#product_search').on('submit', function(e) {
+            e.preventDefault();
+            var fd = new FormData(this);
+            $.ajax({
+                url: "src/Class/Product.php",
+                type: 'POST',
+                dataType: 'json',
+                processData: false,
+                contentType: false,
+                data:fd,
+                success: function(res) {
+                    // if (res.status == 1) {
+                    //     $('#product_fetch').html(res);
+                    // } else {
+                    //     console.log(res);
+                    //     $("#msg_error").text(res.msg_error);
+                    // }
+                    $('#product_fetch').html(res.data);
+                }
+            });
+        });
+    });
+</script>

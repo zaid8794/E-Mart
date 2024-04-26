@@ -130,7 +130,39 @@ if ($_POST['form_type'] == 'delete') {
     }
     echo json_encode($data);
 }
+if ($_POST['form_type'] == 'product_search') {
+    $product_search = $_POST['search'];
+    $exec = $crud_obj->getData('product', '*', 'product_name LIKE "%' . $product_search . '%"');
+    foreach ($exec as $value) {
+        
 
+    $html = '    <li class="product">';
+    $html .= '        <div class="product-holder">';
+    $html .= '            <a href="shop-single.html"><img src="admin/uploads/products/'.$value['product_image'].'" style="max-width : 150px ; " width="" alt=""></a>';
+
+    $html .= '            <ul class="product__action">';
+    $html .= '                <li><a href="#!"><i class="far fa-compress-alt"></i></a></li>';
+    $html .= '                <li><a href="#!"><i class="far fa-shopping-basket"></i></a></li>';
+    $html .= '                <li><a href="#!"><i class="far fa-heart"></i></a></li>';
+    $html .= '            </ul>';
+    $html .= '        </div>';
+    $html .= '        <div class="product-info mt-4">';
+
+    $html .= '            <h2 class="product__title"><a href="shop-single.html">'.$value['product_name'].'</a></h2>';
+    $html .= '            <span class="product__available">Available: <span>334</span></span>';
+    $html .= '            <div class="product__progress progress color-primary">';
+    $html .= '                <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">';
+    $html .= '                </div>';
+    $html .= '            </div>';
+    $html .= '            <h4 class="product__price"><span class="new">₹ '.$value['product_price'].' </span><span class="old">₹ '.($value['product_price']+1000).'</span></h4>';
+    $html .= '            <p class="product-description">'.$value['product_description'].'</p>';
+    $html .= '        </div>';
+    $html .= '    </li>';
+
+    }
+    $data['data'] = $html;
+    echo json_encode($data);
+}
 if ($_POST['form_type'] == 'change_brand_by_category') {
     $cat_id = $_POST['cat_id'];
     $exec = $crud_obj->getData('brand', '*', 'category_id = "' . $cat_id . '"');
