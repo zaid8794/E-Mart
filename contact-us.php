@@ -72,9 +72,7 @@ require_once "components/header.php";
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-5">
-                <div class="contact-img pos-rel">
-                    <img src="assets/img/contact/img_01.jpg" alt="">
-                </div>
+                <img src="assets/img/contact/contactus.jpg" alt="">
             </div>
             <div class="col-lg-7">
                 <div class="contact-from__wrap pl-55">
@@ -128,70 +126,10 @@ require_once "components/header.php";
 <section class="contact-info-area pt-50 pb-80">
     <div class="container">
         <div class="row mt-none-30">
-            <div class="col-lg-5 mt-30">
-                <div class="contact__video pos-rel">
-                    <img src="assets/img/contact/img_02.jpg" alt="">
-                    <a class="popup-video" href="https://www.youtube.com/watch?v=cRXm1p-CNyk"><i class="fas fa-play"></i></a>
-                </div>
-            </div>
-            <div class="col-lg-7 mt-30">
-                <div class="contact__img pos-rel">
-                    <img src="assets/img/contact/img_03.jpg" alt="">
-                </div>
+            <div class="col-lg-12 mt-30 text-center">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d59382.66501234002!2d70.39641006680559!3d21.530561193057714!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3958018c6a277f53%3A0x13b52f8520a86e48!2sJunagadh%2C%20Gujarat!5e0!3m2!1sen!2sin!4v1714246934682!5m2!1sen!2sin" width="90%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
         </div>
-        <div class="row mt-20">
-            <div class="col-xl-8 col-lg-7 mt-30">
-                <div class="contact-info__content">
-                    <h3>Let our investment management team</h3>
-                    <p>We have covered many special events such as fireworks, fairs, parades, races, walks, awards ceremonies, experience the healing warmth of the ever-present sunshine,” says Ian Kerr, managing director. The white- beaches and tropical foliage in the heart of Negril is designed to provide a truly serene, intimate, and fashion shows, sport events, and even a memorial service.</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vulputate vestibulum Phasellus rho cus, eget viverra pretium, dolor tellus aliquet nunc, vitae ultricies erat elit eu lacus. Vestibulum</p>
-                </div>
-            </div>
-            <div class="col-xl-4 col-lg-5 mt-30">
-                <div class="faq_wrap">
-                    <ul class="accordion_box clearfix">
-                        <li class="accordion block">
-                            <div class="acc-btn">
-                                01.What made you look up this word?
-                            </div>
-                            <div class="acc_body">
-                                <div class="content">
-                                    <p>events such as fireworks, fairs, parades, races, walks
-                                        awards ceremonies, tsto experience s, parades
-                                        races, walks, awards ceremonies, tsto ex</p>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="accordion block">
-                            <div class="acc-btn">
-                                02.What made you look up this word?
-                            </div>
-                            <div class="acc_body current active-block">
-                                <div class="content">
-                                    <p>events such as fireworks, fairs, parades, races, walks
-                                        awards ceremonies, tsto experience s, parades
-                                        races, walks, awards ceremonies, tsto ex</p>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="accordion block">
-                            <div class="acc-btn active">
-                                03.What made you look up this word?
-                            </div>
-                            <div class="acc_body">
-                                <div class="content">
-                                    <p>events such as fireworks, fairs, parades, races, walks
-                                        awards ceremonies, tsto experience s, parades
-                                        races, walks, awards ceremonies, tsto ex</p>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
     </div>
 </section>
 <!-- contact info end -->
@@ -201,7 +139,7 @@ require_once "components/footer.php";
 
 <script>
     $(document).ready(function() {
-        
+
         $('#contact_form').on('submit', function(e) {
             e.preventDefault();
             var fd = new FormData(this);
