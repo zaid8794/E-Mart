@@ -39,13 +39,14 @@ $crud_obj = new Crud;
                                 if ($category_select) {
                                     foreach ($category_select as $category) {
                             ?>
-                                        <p id="your_category_selected" class="fw-bold">Selected Category : <?= $category['category_name'] ?></p>&nbsp;&nbsp;&nbsp;|
+                                        <p id="your_category_selected" class="fw-bold">Selected Category : <?= $category['category_name'] ?><span class="mx-3">|</span></p>
                             <?php
                                     }
                                 }
                             }
                             ?>
-                            &nbsp;&nbsp;&nbsp;<p id="your_search_text" class="fw-bold"></p>
+                            <p id="your_search_text" class="fw-bold"></p>
+                            <p id="your_selected_brand" class="fw-bold"></p>
                             <div class="products-sizes">
                                 <a href="#!" class="grid-4 active">
                                     <div class="grid-draw">
@@ -96,7 +97,7 @@ $crud_obj = new Crud;
                                 ?>
                                         <li class="product">
                                             <div class="product-holder">
-                                                <a href="product_detail.php?product_id=<?= $value['product_id']?>"><img src="admin/uploads/products/<?= $value['product_image']; ?>" style="max-width : 150px ; " width="" alt=""></a>
+                                                <a href="product_detail.php?product_id=<?= $value['product_id'] ?>"><img src="admin/uploads/products/<?= $value['product_image']; ?>" style="max-width : 150px ; " width="" alt=""></a>
 
                                                 <ul class="product__action">
                                                     <li><a href="#!"><i class="far fa-compress-alt"></i></a></li>
@@ -106,7 +107,7 @@ $crud_obj = new Crud;
                                             </div>
                                             <div class="product-info mt-4">
 
-                                                <h2 class="product__title"><a href="product_detail.php?product_id=<?= $value['product_id']?>"><?= $value['product_name']; ?></a></h2>
+                                                <h2 class="product__title"><a href="product_detail.php?product_id=<?= $value['product_id'] ?>"><?= $value['product_name']; ?></a></h2>
                                                 <h4 class="product__price"><span class="new">₹<?= $value['product_price'] ?></span><span class="old">₹<?= $value['product_price'] + 1000; ?></span></h4>
                                                 <p class="product-description"><?= $value['product_description'] ?></p>
                                             </div>
@@ -209,9 +210,13 @@ require_once "components/footer.php";
                 range: true,
                 min: 500,
                 max: 100000,
-                values: [500, 500],
+                values: [500, 100000],
                 slide: function(event, ui) {
                     $("#amount").val("₹" + ui.values[0] + " - ₹" + ui.values[1]);
+                    var selectedBrands = [];
+                    $('input[name="brand_checkbox"]:checked').each(function() {
+                        selectedBrands.push($(this).val());
+                    });
                     $.ajax({
                         url: "src/Class/Product.php",
                         type: "POST",
@@ -219,6 +224,7 @@ require_once "components/footer.php";
                             category_id: '<?= isset($_GET['category']) && $_GET['category'] != '' ? $_GET['category'] : '' ?>',
                             min_price: ui.values[0],
                             max_price: ui.values[1],
+                            brand_checked: selectedBrands,
                             form_type: 'product_price_range',
                         },
                         dataType: 'json',
@@ -243,6 +249,10 @@ require_once "components/footer.php";
 
         $('input[name="search"]').keyup(function(e) {
             e.preventDefault();
+            var selectedBrands = [];
+            $('input[name="brand_checkbox"]:checked').each(function() {
+                selectedBrands.push($(this).val());
+            });
             var search = $(this).val().trim();
             if (search == "") {
                 $('#your_search_text').text('');
@@ -254,14 +264,20 @@ require_once "components/footer.php";
                 data: {
                     category_id: '<?= isset($_GET['category']) && $_GET['category'] != '' ? $_GET['category'] : '' ?>',
                     search: search,
+                    brand_checked: selectedBrands,
                     form_type: "product_search",
                 },
                 success: function(res) {
                     if (res.status == 1) {
                         $('#product_fetch').html(res.data);
-                        $('#your_search_text').text(res.search_text);
+                        if (res.search_text != '') {
+                            $('#your_search_text').html(res.search_text + "<span class='mx-3'>|</span>");
+                        } else {
+                            $('#your_search_text').html('');
+                        }
                     } else {
                         $("#product_fetch").html(res.msg_error);
+                        $('#your_search_text').html(res.search_text + "<span class='mx-3'>|</span>");
                     }
                 }
             });
@@ -269,7 +285,7 @@ require_once "components/footer.php";
 
         $('input[id="brand_checkbox"]').change(function() {
             var selectedBrands = [];
-            
+
             $('input[name="brand_checkbox"]:checked').each(function() {
                 selectedBrands.push($(this).val());
             });
@@ -285,7 +301,11 @@ require_once "components/footer.php";
                 success: function(res) {
                     if (res.status == 1) {
                         $('#product_fetch').html(res.data);
-                        $('#your_search_text').text(res.search_text);
+                        if (res.your_selected_brand != '') {
+                            $('#your_selected_brand').html("Your selected brand : " + res.your_selected_brand + "<span class='mx-3'>|</span>");
+                        } else {
+                            $('#your_selected_brand').html("");
+                        }
                     } else {
                         $("#product_fetch").html(res.msg_error);
                     }
