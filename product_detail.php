@@ -1,6 +1,16 @@
 <?php
-$title = "Product Namw";
+require_once "vendor/autoload.php";
+
+use App\Class\Crud;
+
+$crud_obj = new Crud;
+if (isset($_GET['product_id'])) {
+    $product_detail = $crud_obj->getData('product LEFT JOIN category ON (product.category_id=category.category_id)', '*', 'product_id = "' . $_GET['product_id'] . '"', '', '', '1');
+
+}
+$title = $product_detail[0]['product_name'];
 require_once "components/header.php";
+
 ?>
 <!-- breadcrumb start -->
 <section class="breadcrumb-area">
@@ -29,7 +39,7 @@ require_once "components/header.php";
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                                 <div class="pl_thumb">
-                                    <img src="assets/img/product/img_178.png" alt="">
+                                    <img src="admin/uploads/products/<?=$product_detail[0]['product_image'] ?>" alt="">
                                 </div>
                             </div>
                             <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab">
@@ -70,43 +80,19 @@ require_once "components/header.php";
 
             <div class="col-md-6 product-details-col">
                 <div class="product-details">
-                    <h2>Lenovo – Tab P11 Plus – Tablet</h2>
-                    <div class="rating">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <span>(2 Customer review)</span>
-                    </div>
+                    <h2><?= $product_detail[0]['product_name'] ?></h2>
                     <div class="price">
-                        <span class="current">$45.00</span>
-                        <span class="old">$55.00</span>
+                        <span class="current">₹<?= $product_detail[0]['product_price'] ?></span>
+                        <span class="old">₹<?= $product_detail[0]['product_price']+1000 ?></span>
                     </div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp <br> incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,</p>
+                    <p><?= $product_detail[0]['product_description'] ?></p>
 
-                    <div class="model-option-wrap ul_li mt-25">
-                        <span>Model : </span>
-                        <ul class="model-option ul_li">
-                            <li class="active">tyk</li>
-                            <li>ffd2</li>
-                            <li>23tt</li>
-                            <li>r454</li>
-                            <li>45hy</li>
-                        </ul>
-                    </div>
+                    
 
                     <div class="thb-product-meta-before mt-20">
                         <div class="product_meta">
-                            <span class="posted_in">Categories: <a href="#!">Samsung</a>, <a href="#!">Apple</a>, <a href="#!">Huawei</a></span>
-                            <span class="tagged_as">Tags: <a href="#!">Button</a>, <a href="#!">Red</a>, <a href="#!">Tshirt</a></span>
-
-                            <span class="product-share-wrap ul_li">Share:
-                                <a href="#!"><i class="fab fa-facebook-f"></i></a>
-                                <a href="#!"><i class="fab fa-instagram"></i></a>
-                                <a href="#!"><i class="fab fa-twitter"></i></a>
-                                <a href="#!"><i class="fab fa-linkedin "></i></a>
-                            </span>
+                            
+                            <span class="posted_in">Categories: <a><?= $product_detail[0]['category_name'] ?></a></span>
                         </div>
                     </div>
 

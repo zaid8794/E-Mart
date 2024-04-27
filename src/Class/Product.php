@@ -157,7 +157,7 @@ if ($_POST['form_type'] == 'product_search') {
         foreach ($exec as $value) {
             $html .= '    <li class="product">';
             $html .= '        <div class="product-holder">';
-            $html .= '            <a href="shop-single.html"><img src="admin/uploads/products/' . $value['product_image'] . '" style="max-width : 150px ; " width="" alt=""></a>';
+            $html .= '            <a href="product_detail.php?product_id='. $value['product_id'].'"><img src="admin/uploads/products/' . $value['product_image'] . '" style="max-width : 150px ; " width="" alt=""></a>';
             $html .= '            <ul class="product__action">';
             $html .= '                <li><a href="#!"><i class="far fa-compress-alt"></i></a></li>';
             $html .= '                <li><a href="#!"><i class="far fa-shopping-basket"></i></a></li>';
@@ -165,7 +165,7 @@ if ($_POST['form_type'] == 'product_search') {
             $html .= '            </ul>';
             $html .= '        </div>';
             $html .= '        <div class="product-info mt-4">';
-            $html .= '            <h2 class="product__title"><a href="shop-single.html">' . $value['product_name'] . '</a></h2>';
+            $html .= '            <h2 class="product__title"><a href="product_detail.php?product_id='. $value['product_id'].'">' . $value['product_name'] . '</a></h2>';
             $html .= '            <h4 class="product__price"><span class="new">₹ ' . $value['product_price'] . ' </span><span class="old">₹ ' . ($value['product_price'] + 1000) . '</span></h4>';
             $html .= '            <p class="product-description">' . $value['product_description'] . '</p>';
             $html .= '        </div>';
@@ -194,7 +194,7 @@ if ($_POST['form_type'] == 'product_price_range') {
         foreach ($exec as $value) {
             $html .= '    <li class="product">';
             $html .= '        <div class="product-holder">';
-            $html .= '            <a href="shop-single.html"><img src="admin/uploads/products/' . $value['product_image'] . '" style="max-width : 150px ; " width="" alt=""></a>';
+            $html .= '            <a href="product_detail.php?product_id='. $value['product_id'].'"><img src="admin/uploads/products/' . $value['product_image'] . '" style="max-width : 150px ; " width="" alt=""></a>';
             $html .= '            <ul class="product__action">';
             $html .= '                <li><a href="#!"><i class="far fa-compress-alt"></i></a></li>';
             $html .= '                <li><a href="#!"><i class="far fa-shopping-basket"></i></a></li>';
@@ -202,7 +202,7 @@ if ($_POST['form_type'] == 'product_price_range') {
             $html .= '            </ul>';
             $html .= '        </div>';
             $html .= '        <div class="product-info mt-4">';
-            $html .= '            <h2 class="product__title"><a href="shop-single.html">' . $value['product_name'] . '</a></h2>';
+            $html .= '            <h2 class="product__title"><a href="product_detail.php?product_id='. $value['product_id'].'">' . $value['product_name'] . '</a></h2>';
             $html .= '            <h4 class="product__price"><span class="new">₹ ' . $value['product_price'] . ' </span><span class="old">₹ ' . ($value['product_price'] + 1000) . '</span></h4>';
             $html .= '            <p class="product-description">' . $value['product_description'] . '</p>';
             $html .= '        </div>';
@@ -233,7 +233,7 @@ if ($_POST['form_type'] == 'product_fetch_by_brand') {
         foreach ($exec as $value) {
             $html .= '    <li class="product">';
             $html .= '        <div class="product-holder">';
-            $html .= '            <a href="shop-single.html"><img src="admin/uploads/products/' . $value['product_image'] . '" style="max-width : 150px ; " width="" alt=""></a>';
+            $html .= '            <a href="product_detail.php?product_id='. $value['product_id'].'"><img src="admin/uploads/products/' . $value['product_image'] . '" style="max-width : 150px ; " width="" alt=""></a>';
             $html .= '            <ul class="product__action">';
             $html .= '                <li><a href="#!"><i class="far fa-compress-alt"></i></a></li>';
             $html .= '                <li><a href="#!"><i class="far fa-shopping-basket"></i></a></li>';
@@ -241,7 +241,7 @@ if ($_POST['form_type'] == 'product_fetch_by_brand') {
             $html .= '            </ul>';
             $html .= '        </div>';
             $html .= '        <div class="product-info mt-4">';
-            $html .= '            <h2 class="product__title"><a href="shop-single.html">' . $value['product_name'] . '</a></h2>';
+            $html .= '            <h2 class="product__title"><a href="product_detail.php?product_id='. $value['product_id'].'">' . $value['product_name'] . '</a></h2>';
             $html .= '            <h4 class="product__price"><span class="new">₹ ' . $value['product_price'] . ' </span><span class="old">₹ ' . ($value['product_price'] + 1000) . '</span></h4>';
             $html .= '            <p class="product-description">' . $value['product_description'] . '</p>';
             $html .= '        </div>';

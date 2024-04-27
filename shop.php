@@ -96,7 +96,7 @@ $crud_obj = new Crud;
                                 ?>
                                         <li class="product">
                                             <div class="product-holder">
-                                                <a href="shop-single.html"><img src="admin/uploads/products/<?= $value['product_image']; ?>" style="max-width : 150px ; " width="" alt=""></a>
+                                                <a href="product_detail.php?product_id=<?= $value['product_id']?>"><img src="admin/uploads/products/<?= $value['product_image']; ?>" style="max-width : 150px ; " width="" alt=""></a>
 
                                                 <ul class="product__action">
                                                     <li><a href="#!"><i class="far fa-compress-alt"></i></a></li>
@@ -106,7 +106,7 @@ $crud_obj = new Crud;
                                             </div>
                                             <div class="product-info mt-4">
 
-                                                <h2 class="product__title"><a href="shop-single.html"><?= $value['product_name']; ?></a></h2>
+                                                <h2 class="product__title"><a href="product_detail.php?product_id=<?= $value['product_id']?>"><?= $value['product_name']; ?></a></h2>
                                                 <h4 class="product__price"><span class="new">₹<?= $value['product_price'] ?></span><span class="old">₹<?= $value['product_price'] + 1000; ?></span></h4>
                                                 <p class="product-description"><?= $value['product_description'] ?></p>
                                             </div>
