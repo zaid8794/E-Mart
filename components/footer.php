@@ -8,7 +8,7 @@
                 </div>
                 <div class="content">
                     <h3>Free Shipping</h3>
-                    <p>Free shipping over $100</p>
+                    <p>Free shipping over ₹500</p>
                 </div>
             </div>
             <div class="feature__item ul_li">

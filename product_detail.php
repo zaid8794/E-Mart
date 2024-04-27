@@ -2,11 +2,10 @@
 require_once "vendor/autoload.php";
 
 use App\Class\Crud;
-
+$product_detail = '';
 $crud_obj = new Crud;
 if (isset($_GET['product_id'])) {
     $product_detail = $crud_obj->getData('product LEFT JOIN category ON (product.category_id=category.category_id)', '*', 'product_id = "' . $_GET['product_id'] . '"', '', '', '1');
-
 }
 $title = $product_detail[0]['product_name'];
 require_once "components/header.php";
@@ -39,7 +38,7 @@ require_once "components/header.php";
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                                 <div class="pl_thumb">
-                                    <img src="admin/uploads/products/<?=$product_detail[0]['product_image'] ?>" alt="">
+                                    <img src="admin/uploads/products/<?= $product_detail[0]['product_image'] ?>" alt="">
                                 </div>
                             </div>
                             <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab">
@@ -83,15 +82,15 @@ require_once "components/header.php";
                     <h2><?= $product_detail[0]['product_name'] ?></h2>
                     <div class="price">
                         <span class="current">₹<?= $product_detail[0]['product_price'] ?></span>
-                        <span class="old">₹<?= $product_detail[0]['product_price']+1000 ?></span>
+                        <span class="old">₹<?= $product_detail[0]['product_price'] + 1000 ?></span>
                     </div>
                     <p><?= $product_detail[0]['product_description'] ?></p>
 
-                    
+
 
                     <div class="thb-product-meta-before mt-20">
                         <div class="product_meta">
-                            
+
                             <span class="posted_in">Categories: <a><?= $product_detail[0]['category_name'] ?></a></span>
                         </div>
                     </div>
@@ -285,119 +284,30 @@ require_once "components/header.php";
                     <h3>Related product</h3>
                     <div class="shop-area">
                         <ul class="products clearfix">
-                            <li class="product">
-                                <div class="product-holder">
-                                    <a href="shop-single.html"><img src="assets/img/product/img_165.png" alt></a>
-                                    <ul class="product__action">
-                                        <li><a href="#!"><i class="far fa-compress-alt"></i></a></li>
-                                        <li><a href="#!"><i class="far fa-shopping-basket"></i></a></li>
-                                        <li><a href="#!"><i class="far fa-heart"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product-info">
-                                    <div class="product__review ul_li">
-                                        <ul class="rating-star ul_li mr-10">
-                                            <li><i class="fas fa-star"></i></li>
-                                            <li><i class="fas fa-star"></i></li>
-                                            <li><i class="fas fa-star"></i></li>
-                                            <li><i class="far fa-star"></i></li>
-                                            <li><i class="far fa-star"></i></li>
-                                        </ul>
-                                        <span>(126) Review</span>
-                                    </div>
-                                    <h2 class="product__title"><a href="shop-single.html">Rokinon Xeen CF 16mm T2.6 Pro Cinema Wide</a></h2>
-                                    <span class="product__available">Available: <span>334</span></span>
-                                    <div class="product__progress progress color-primary">
-                                        <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <h4 class="product__price"><span class="new">$30.52</span><span class="old">$28.52</span></h4>
-                                </div>
-                            </li>
-                            <li class="product">
-                                <div class="product-holder">
-                                    <a href="shop-single.html"><img src="assets/img/product/img_166.png" alt></a>
-                                    <ul class="product__action">
-                                        <li><a href="#!"><i class="far fa-compress-alt"></i></a></li>
-                                        <li><a href="#!"><i class="far fa-shopping-basket"></i></a></li>
-                                        <li><a href="#!"><i class="far fa-heart"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product-info">
-                                    <div class="product__review ul_li">
-                                        <ul class="rating-star ul_li mr-10">
-                                            <li><i class="fas fa-star"></i></li>
-                                            <li><i class="fas fa-star"></i></li>
-                                            <li><i class="fas fa-star"></i></li>
-                                            <li><i class="far fa-star"></i></li>
-                                            <li><i class="far fa-star"></i></li>
-                                        </ul>
-                                        <span>(126) Review</span>
-                                    </div>
-                                    <h2 class="product__title"><a href="shop-single.html">Tab M10 Plus, FHD Android Tablet, Processor</a></h2>
-                                    <span class="product__available">Available: <span>334</span></span>
-                                    <div class="product__progress progress color-primary">
-                                        <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <h4 class="product__price"><span class="new">$30.52</span><span class="old">$28.52</span></h4>
-                                </div>
-                                <span class="product__badge color-2"><span>New</span></span>
-                            </li>
-                            <li class="product">
-                                <div class="product-holder">
-                                    <a href="shop-single.html"><img src="assets/img/product/img_167.png" alt></a>
-                                    <ul class="product__action">
-                                        <li><a href="#!"><i class="far fa-compress-alt"></i></a></li>
-                                        <li><a href="#!"><i class="far fa-shopping-basket"></i></a></li>
-                                        <li><a href="#!"><i class="far fa-heart"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product-info">
-                                    <div class="product__review ul_li">
-                                        <ul class="rating-star ul_li mr-10">
-                                            <li><i class="fas fa-star"></i></li>
-                                            <li><i class="fas fa-star"></i></li>
-                                            <li><i class="fas fa-star"></i></li>
-                                            <li><i class="far fa-star"></i></li>
-                                            <li><i class="far fa-star"></i></li>
-                                        </ul>
-                                        <span>(126) Review</span>
-                                    </div>
-                                    <h2 class="product__title"><a href="shop-single.html">Portable 2TB External Hard Drive Portable HDD USB</a></h2>
-                                    <span class="product__available">Available: <span>334</span></span>
-                                    <div class="product__progress progress color-primary">
-                                        <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <h4 class="product__price"><span class="new">$30.52</span><span class="old">$28.52</span></h4>
-                                </div>
-                            </li>
-                            <li class="product">
-                                <div class="product-holder">
-                                    <a href="shop-single.html"><img src="assets/img/product/img_168.png" alt></a>
-                                    <ul class="product__action">
-                                        <li><a href="#!"><i class="far fa-compress-alt"></i></a></li>
-                                        <li><a href="#!"><i class="far fa-shopping-basket"></i></a></li>
-                                        <li><a href="#!"><i class="far fa-heart"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product-info">
-                                    <div class="product__review ul_li">
-                                        <ul class="rating-star ul_li mr-10">
-                                            <li><i class="fas fa-star"></i></li>
-                                            <li><i class="fas fa-star"></i></li>
-                                            <li><i class="fas fa-star"></i></li>
-                                            <li><i class="far fa-star"></i></li>
-                                            <li><i class="far fa-star"></i></li>
-                                        </ul>
-                                        <span>(126) Review</span>
-                                    </div>
-                                    <h2 class="product__title"><a href="shop-single.html">Skullcandy Dime True In-Ear Earbuds – Golden</a></h2>
-                                    <span class="product__available">Available: <span>334</span></span>
-                                    <div class="product__progress progress color-primary">
-                                        <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <h4 class="product__price"><span class="new">$30.52</span><span class="old">$28.52</span></h4>
-                                </div>
-                            </li>
+                            <?php
+                            $category_product = $crud_obj->getData('product', '*', 'category_id = "' . $product_detail[0]['category_id'] . '"', 'RAND()');
+                            if ($category_product) {
+                                foreach ($category_product as $row) {
+                            ?>
+                                    <li class="product">
+                                        <div class="product-holder">
+                                            <a href="product_detail.php?product_id=<?= $row['product_id'] ?>"><img src="admin/uploads/products/<?= $row['product_image']?>" style="max-width : 180px ; " alt></a>
+                                            <ul class="product__action">
+                                                <li><a href="#!"><i class="far fa-compress-alt"></i></a></li>
+                                                <li><a href="#!"><i class="far fa-shopping-basket"></i></a></li>
+                                                <li><a href="#!"><i class="far fa-heart"></i></a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="product-info">
+                                            <h2 class="product__title"><a href="product_detail.php?product_id=<?= $row['product_id'] ?>"><?= $row['product_name']; ?></a></h2>
+                                            <h4 class="product__price"><span class="new">₹<?= $row['product_price']?></span><span class="old">₹<?= $row['product_price']+1000;?></span></h4>
+                                        </div>
+                                    </li>
+                            <?php
+                                }
+                            }
+                            ?>
+
                         </ul>
                     </div>
                 </div>

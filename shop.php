@@ -45,8 +45,8 @@ $crud_obj = new Crud;
                                 }
                             }
                             ?>
-                            <p id="your_search_text" class="fw-bold"></p>
                             <p id="your_selected_brand" class="fw-bold"></p>
+                            <p id="your_search_text" class="fw-bold"></p>
                             <div class="products-sizes">
                                 <a href="#!" class="grid-4 active">
                                     <div class="grid-draw">
