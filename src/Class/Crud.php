@@ -30,6 +30,18 @@ class Crud extends Db
         }
     }
 
+    public function pagination($table, $field = '', $condition = '', $no_of_records_per_page)
+    {
+        $sql = "SELECT $field FROM $table";
+        if ($condition != '') {
+            $sql .= " WHERE $condition";
+        }
+        $result = $this->connect()->query($sql);
+        $total_records = $result->fetch_column();
+        $total_pages = ceil($total_records / $no_of_records_per_page);
+        return $total_pages;
+    }
+
     public function insert($table, $data)
     {
         $columns = implode(", ", array_keys($data));

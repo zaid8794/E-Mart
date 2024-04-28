@@ -6,6 +6,18 @@ require_once "vendor/autoload.php";
 use App\Class\Crud;
 
 $crud_obj = new Crud;
+$no_of_records_per_page = 1;
+if (isset($_GET['category'])) {
+    $category_id = $_GET['category'];
+} else {
+    $category_id = 'All';
+}
+if (isset($_GET['pageno'])) {
+    $pageno = $_GET['pageno'];
+} else {
+    $pageno = 1;
+}
+$offset = ($pageno - 1) * $no_of_records_per_page;
 ?>
 <!-- breadcrumb start -->
 <section class="breadcrumb-area">
@@ -88,9 +100,9 @@ $crud_obj = new Crud;
                             <ul class="products  default-column clearfix" id="product_fetch">
                                 <?php
                                 if (isset($_GET['category']) && $_GET['category'] != '') {
-                                    $row = $crud_obj->getData('product', '*', 'category_id="' . $_GET['category'] . '"', 'RAND()');
+                                    $row = $crud_obj->getData('product', '*', 'category_id="' . $category_id . '"', '', '', "$offset, $no_of_records_per_page");
                                 } else {
-                                    $row = $crud_obj->getData('product', '*', '', 'RAND()');
+                                    $row = $crud_obj->getData('product', '*', '', '', '', "$offset,$no_of_records_per_page");
                                 }
                                 if ($row) {
                                     foreach ($row as $value) {
@@ -120,13 +132,24 @@ $crud_obj = new Crud;
                         </div>
                         <div class="pagination_wrap pt-20">
                             <ul>
-                                <li><a href="#!"><i class="far fa-angle-double-left"></i></a></li>
-                                <li><a class="current_page" href="#!">1</a></li>
-                                <li><a href="#!">2</a></li>
-                                <li><a href="#!">3</a></li>
-                                <li><a href="#!"><i class="far fa-angle-double-right"></i></a></li>
+                                <li class="<?= $pageno <= 1 ? 'disabled' : '' ?>"><a href="<?= $pageno <= 1 ? '#' : "?category=" . $category_id . "&pageno=" . ($pageno - 1) ?>"><i class="far fa-angle-double-left"></i></a></li>
+                                <?php
+                                if (isset($_GET['category']) && $_GET['category'] != '') {
+                                    $total_pages = $crud_obj->pagination('product', 'COUNT(*)', "category_id={$category_id}", $no_of_records_per_page);
+                                } else {
+                                    $total_pages = $crud_obj->pagination('product', 'COUNT(*)', '', $no_of_records_per_page);
+                                }
+                                for ($i = 1; $i <= $total_pages; $i++) {
+                                ?>
+                                    <li><a class="<?= $pageno == $i ? 'current_page' : '' ?>" href="?category=<?= $category_id ?>&pageno=<?= $i ?>"><?= $i ?></a></li>
+                                <?php
+                                }
+                                ?>
+                                <li class="<?= $pageno >= $total_pages ? 'disabled' : '' ?>"><a href="<?= $pageno >= $total_pages ? '#' : "?category=" . $category_id . "&pageno=" . ($pageno + 1) ?>"><i class="far fa-angle-double-right"></i></a></li>
                             </ul>
                         </div>
+
+
                     </div>
                     <div class="shop-sidebar">
                         <div class="widget">
@@ -209,7 +232,7 @@ require_once "components/footer.php";
             $("#slider-range").slider({
                 range: true,
                 min: 500,
-                max: 100000,
+                max: 200000,
                 values: [500, 100000],
                 slide: function(event, ui) {
                     $("#amount").val("₹" + ui.values[0] + " - ₹" + ui.values[1]);
@@ -231,8 +254,10 @@ require_once "components/footer.php";
                         success: function(res) {
                             if (res.status == 1) {
                                 $('#product_fetch').html(res.data);
+                                $('.pagination_wrap').addClass('d-none');
                             } else {
                                 $("#product_fetch").html(res.msg_error);
+                                $('.pagination_wrap').addClass('d-none');
                             }
                         }
                     });
@@ -272,12 +297,19 @@ require_once "components/footer.php";
                         $('#product_fetch').html(res.data);
                         if (res.search_text != '') {
                             $('#your_search_text').html(res.search_text + "<span class='mx-3'>|</span>");
+                            $('.pagination_wrap').addClass('d-none');
                         } else {
                             $('#your_search_text').html('');
+                            $('.pagination_wrap').removeClass('d-none');
                         }
                     } else {
                         $("#product_fetch").html(res.msg_error);
-                        $('#your_search_text').html(res.search_text + "<span class='mx-3'>|</span>");
+                        if (res.search_text != '') {
+                            $('#your_search_text').html(res.search_text + "<span class='mx-3'>|</span>");
+                            $('.pagination_wrap').addClass('d-none');
+                        } else {
+                            $('.pagination_wrap').removeClass('d-none');
+                        }
                     }
                 }
             });
@@ -303,11 +335,18 @@ require_once "components/footer.php";
                         $('#product_fetch').html(res.data);
                         if (res.your_selected_brand != '') {
                             $('#your_selected_brand').html("Your selected brand : " + res.your_selected_brand + "<span class='mx-3'>|</span>");
+                            $('.pagination_wrap').addClass('d-none');
                         } else {
                             $('#your_selected_brand').html("");
+                            $('.pagination_wrap').removeClass('d-none');
                         }
                     } else {
                         $("#product_fetch").html(res.msg_error);
+                        if (res.your_selected_brand != '') {
+                            $('.pagination_wrap').addClass('d-none');
+                        } else {
+                            $('.pagination_wrap').removeClass('d-none');
+                        }
                     }
                 }
             });
