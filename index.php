@@ -8,42 +8,18 @@ require_once "components/header.php";
     <div class="container mxw_1360">
         <div class="banner__wrapper d-flex">
             <div class="category-nav">
-                <ul class="category-nav__list list-unstyled">
-                    <li><a href="#"><img src="assets/img/icon/cat_01.svg" alt="">Bluetooth speaker</a></li>
-                    <li class="menu-item-has-children">
-                        <a href="#"><img src="assets/img/icon/cat_02.svg" alt="">Digital camera</a>
-                        <ul>
-                            <li><a href="#">Electric razor</a></li>
-                            <li><a href="#">Digital camera</a></li>
-                            <li><a href="#">Electric frying pan</a></li>
-                            <li><a href="#">external hard drive</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#"><img src="assets/img/icon/cat_03.svg" alt="">Laser printer</a></li>
-                    <li class="menu-item-has-children">
-                        <a href="#"><img src="assets/img/icon/cat_04.svg" alt="">Electric frying pan</a>
-                        <ul>
-                            <li><a href="#">Electric razor</a></li>
-                            <li><a href="#">Digital camera</a></li>
-                            <li><a href="#">Electric frying pan</a></li>
-                            <li><a href="#">external hard drive</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#"><img src="assets/img/icon/cat_05.svg" alt="">Robotics vacuum</a></li>
-                    <li class="menu-item-has-children">
-                        <a href="#"><img src="assets/img/icon/cat_06.svg" alt="">external hard drive</a>
-                        <ul>
-                            <li><a href="#">Electric razor</a></li>
-                            <li><a href="#">Digital camera</a></li>
-                            <li><a href="#">Electric frying pan</a></li>
-                            <li><a href="#">external hard drive</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#"><img src="assets/img/icon/cat_07.svg" alt="">Electric razor</a></li>
-                    <li><a href="#"><img src="assets/img/icon/cat_08.svg" alt="">Washing machine</a></li>
-                    <li><a href="#"><img src="assets/img/icon/cat_09.svg" alt="">Rice cooker</a></li>
-                    <li><a href="#"><img src="assets/img/icon/cat_10.svg" alt="">Telivsion & Monitor</a>
-                    </li>
+                <ul class="category-nav__list list-unstyled" style="height: 100%;">
+                    <li><a href="shop.php"><img src="#" class="fas fa-arrow-right" alt="">All Products</a></li>
+                    <?php
+                    $row = $crud_obj->getData('category', '*');
+                    if ($row) {
+                        foreach ($row as $value) {
+                    ?>
+                            <li><a href="shop.php?category=<?= $value['category_id'] ?>"><img src="#" class="fas fa-arrow-right" alt=""><?= $value['category_name'] ?></a></li>
+                    <?php
+                        }
+                    }
+                    ?>
                 </ul>
             </div>
             <div class="banner__main banner__height ul_li bg_img" data-background="assets/img/bg/bg_19.jpg">

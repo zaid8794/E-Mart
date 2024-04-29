@@ -3,6 +3,7 @@ require_once "vendor/autoload.php";
 use App\Class\Crud;
 
 $crud_obj = new Crud;
+date_default_timezone_set('Asia/Calcutta');
 ?>
 <!doctype html>
 <html lang="en">
@@ -62,7 +63,7 @@ $crud_obj = new Crud;
                         </ul>
                         <div class="header__top-right ul_li mt-10">
                             <div class="date">
-                                <i class="fal fa-calendar-alt"></i> Friday, July 27, 2020
+                                <i class="fal fa-calendar-alt"></i> <?= date('l, F d, Y H:i') ?>
                             </div>
                             <div class="header__social ml-25">
                                 <a href="#!"><i class="fab fa-facebook-f"></i></a>

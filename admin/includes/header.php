@@ -70,6 +70,7 @@ if (!isset($_SESSION['admin'])) {
                             <li id="category"><a href="category.php"><i class='fa fa-list'></i><span>Category</span></a></li>
                             <li id="brand"><a href="brand.php"><i class='fa fa-bold'></i><span>Brands</span></a></li>
                             <li id="product"><a href="product.php"><i class='fa fa-th'></i><span>Products</span></a></li>
+                            <li id="user"><a href="user.php"><i class='fa fa-users'></i><span>Users</span></a></li>
                             <li id="contactus"><a href="contactus.php"><i class="fa fa-envelope"></i><span>Messages</span></a></li>
                         </ul>
                     </nav>

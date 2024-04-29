@@ -1,5 +1,8 @@
 <?php
 $title = "Cart";
+if (!isset($_SESSION['user'])) {
+    header("location:register.php");
+}
 require_once "components/header.php";
 ?>
 <!-- breadcrumb start -->

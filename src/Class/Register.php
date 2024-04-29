@@ -64,11 +64,8 @@ if ($_POST['form_type'] == "register") {
 }
 
 if ($_POST['form_type'] == 'login') {
-    // echo "<pre>";
-    // print_r($_POST);
     $email = $_POST['login_email'];
     $password = $_POST['login_password'];
-    // die();
     if (empty($email)) {
         $data['msg_error'] = "Email is required";
         $data['status'] = 0;
