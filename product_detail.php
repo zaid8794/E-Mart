@@ -20,7 +20,7 @@ require_once "components/header.php";
                     <a href="index.php"><span>Home</span></a>
                 </li>
                 <li class="radiosbcrumb-item radiosbcrumb-end">
-                    <span>Shop Single</span>
+                    <span><?= $title ?></span>
                 </li>
             </ul>
         </div>
@@ -61,16 +61,24 @@ require_once "components/header.php";
                     <div class="shop_thumb_tab">
                         <ul class="nav" id="myTab2" role="tablist">
                             <li class="nav-item">
-                                <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true"><img src="assets/img/product/img_178.png" alt=""> </button>
+                                <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">
+                                    <img src="assets/img/product/img_178.png" alt="">
+                                </button>
                             </li>
                             <li class="nav-item">
-                                <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false"><img src="assets/img/product/img_179.png" alt=""></button>
+                                <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">
+                                    <img src="assets/img/product/img_179.png" alt="">
+                                </button>
                             </li>
                             <li class="nav-item">
-                                <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false"><img src="assets/img/product/img_180.png" alt=""></button>
+                                <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">
+                                    <img src="assets/img/product/img_180.png" alt="">
+                                </button>
                             </li>
                             <li class="nav-item">
-                                <button class="nav-link" id="profile-tab3" data-bs-toggle="tab" data-bs-target="#profile2" type="button" role="tab" aria-controls="profile2" aria-selected="false"><img src="assets/img/product/img_181.png" alt=""></button>
+                                <button class="nav-link" id="profile-tab3" data-bs-toggle="tab" data-bs-target="#profile2" type="button" role="tab" aria-controls="profile2" aria-selected="false">
+                                    <img src="assets/img/product/img_181.png" alt="">
+                                </button>
                             </li>
                         </ul>
                     </div>

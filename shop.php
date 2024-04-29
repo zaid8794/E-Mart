@@ -263,7 +263,6 @@ require_once "components/footer.php";
                     });
                 },
             });
-
             $("#amount").val(
                 "₹" +
                 $("#slider-range").slider("values", 0) +
@@ -317,7 +316,6 @@ require_once "components/footer.php";
 
         $('input[id="brand_checkbox"]').change(function() {
             var selectedBrands = [];
-
             $('input[name="brand_checkbox"]:checked').each(function() {
                 selectedBrands.push($(this).val());
             });

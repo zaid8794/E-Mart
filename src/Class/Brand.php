@@ -15,7 +15,7 @@ if ($_POST['form_type'] == 'save') {
     } else {
 
         $category_id = $_POST['category_id'];
-        $brand_name = $_POST['brand_name'];
+        $brand_name = trim($_POST['brand_name']);
         if ($crud_obj->getData('brand', '*', 'category_id = "' . $category_id . '" AND brand_name = "' . $brand_name . '"')) {
             $data['msg_error'] = "Brand name already exists";
             $data['status'] = 0;
@@ -38,7 +38,6 @@ if ($_POST['form_type'] == 'save') {
 if ($_POST['form_type'] == 'edit') {
     $brand_id = $_POST['brand_id'];
     $query = $crud_obj->getData('brand', '*', 'brand_id = "' . $brand_id . '"');
-
     echo json_encode($query);
 }
 
@@ -52,7 +51,7 @@ if ($_POST['form_type'] == 'update') {
     } else {
         $category_id = $_POST['category_id'];
         $brand_id = $_POST['brand_id'];
-        $brand_name = $_POST['brand_name'];
+        $brand_name = trim($_POST['brand_name']);
 
         $data = [
             'category_id' => $category_id,

@@ -10,13 +10,13 @@ if ($_POST['form_type'] == 'save') {
         $data['status'] = 0;
     } else {
 
-        $category_name = $_POST['category_name'];
+        $category_name = trim($_POST['category_name']);
         if ($crud_obj->getData('category', '*', 'category_name = "' . $category_name . '"')) {
             $data['msg_error'] = "Category name already exists";
             $data['status'] = 0;
         } else {
             $data = [
-                'category_name' => $_POST['category_name'],
+                'category_name' => $category_name,
             ];
             $exec =  $crud_obj->insert('category', $data);
             if ($exec == 1) {
@@ -40,10 +40,10 @@ if ($_POST['form_type'] == 'update') {
         $data['msg_error'] = "Category name is required";
         $data['status'] = 0;
     } else {
-        $category_name = $_POST['category_name'];
+        $category_name = trim($_POST['category_name']);
 
         $data = [
-            'category_name' => $_POST['category_name'],
+            'category_name' => $category_name,
         ];
         $exec =  $crud_obj->update('category', $data, 'WHERE `category_id` = "' . $_POST['category_id'] . '"');
         if ($exec == 1) {

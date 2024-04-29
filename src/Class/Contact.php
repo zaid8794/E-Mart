@@ -6,11 +6,11 @@ use App\Class\Crud;
 $crud_obj = new Crud;
 
 
-$name = $_POST['name'];
-$email = $_POST['email'];
-$mobile = $_POST['mobile'];
-$subject = $_POST['subject'];
-$message = $_POST['message'];
+$name = trim($_POST['name']);
+$email = trim($_POST['email']);
+$mobile = trim($_POST['mobile']);
+$subject = trim($_POST['subject']);
+$message = trim($_POST['message']);
 
     $data = [
         'contact_name' => $name,

@@ -25,11 +25,11 @@ if ($_POST['form_type'] == 'save') {
         $data['status'] = 0;
     } else {
 
-        $brand_id = $_POST['brand_id'];
-        $category_id = $_POST['category_id'];
-        $product_name = $_POST['product_name'];
-        $product_price = $_POST['product_price'];
-        $product_description = $_POST['product_description'];
+        $brand_id = trim($_POST['brand_id']);
+        $category_id = trim($_POST['category_id']);
+        $product_name = trim($_POST['product_name']);
+        $product_price = trim($_POST['product_price']);
+        $product_description = trim($_POST['product_description']);
         $product_image = $_FILES['product_image'];
 
         if ($crud_obj->getData('product', '*', 'product_name = "' . $product_name . '" AND category_id = "' . $category_id . '" AND brand_id = "' . $brand_id . '"')) {
@@ -58,10 +58,10 @@ if ($_POST['form_type'] == 'save') {
 }
 
 if ($_POST['form_type'] == 'edit') {
-    $product_id = $_POST['product_id'];
+    $product_id = trim($_POST['product_id']);
     $query = $crud_obj->getData('product', '*', 'product_id = "' . $product_id . '"', '', '', '1');
-    $exec_brand = $crud_obj->getData('brand', '*', 'brand_name != "' . $_POST['brand_name'] . '" AND category_id = "' . $_POST['category_id'] . '"');
-    $brand_name = '<option value="' . $_POST['brand_id'] . '" selected>' . $_POST['brand_name'] . '</option>';
+    $exec_brand = $crud_obj->getData('brand', '*', 'brand_name != "' . trim($_POST['brand_name']) . '" AND category_id = "' . trim($_POST['category_id']) . '"');
+    $brand_name = '<option value="' . trim($_POST['brand_id']) . '" selected>' . trim($_POST['brand_name']) . '</option>';
     foreach ($exec_brand as $brand) {
         $brand_name .= '<option value="' . $brand['brand_id'] . '">' . $brand['brand_name'] . '</option>';
     }
@@ -92,11 +92,11 @@ if ($_POST['form_type'] == 'update') {
         } else {
             $productimage = $_POST['old_product_image'];
         }
-        $brand_id = $_POST['brand_id'];
-        $category_id = $_POST['category_id'];
-        $product_name = $_POST['product_name'];
-        $product_price = $_POST['product_price'];
-        $product_description = $_POST['product_description'];
+        $brand_id = trim($_POST['brand_id']);
+        $category_id = trim($_POST['category_id']);
+        $product_name = trim($_POST['product_name']);
+        $product_price = trim($_POST['product_price']);
+        $product_description = trim($_POST['product_description']);
         $product_image = $productimage;
         $data = [
             'brand_id' => $brand_id,
@@ -108,7 +108,7 @@ if ($_POST['form_type'] == 'update') {
             'is_active' => "Enable",
             'product_slug' => $crud_obj->slugify($product_name),
         ];
-        $exec =  $crud_obj->update('product', $data, 'WHERE product_id = "' . $_POST['product_id'] . '"');
+        $exec =  $crud_obj->update('product', $data, 'WHERE product_id = "' . trim($_POST['product_id']) . '"');
         if ($exec) {
             $data['status'] = 1;
         } else {
@@ -132,7 +132,7 @@ if ($_POST['form_type'] == 'delete') {
 }
 
 if ($_POST['form_type'] == 'change_brand_by_category') {
-    $cat_id = $_POST['cat_id'];
+    $cat_id = trim($_POST['cat_id']);
     $exec = $crud_obj->getData('brand', '*', 'category_id = "' . $cat_id . '"');
     if ($exec) {
         $output = '<option value="0" selected disabled>Select Brand Name</option>';
@@ -146,7 +146,7 @@ if ($_POST['form_type'] == 'change_brand_by_category') {
 }
 
 if ($_POST['form_type'] == 'product_search') {
-    $product_search = $_POST['search'];
+    $product_search = trim($_POST['search']);
     $html = '';
     if ($_POST['category_id'] == '') {
         $exec = $crud_obj->getData('product', '*', 'product_name LIKE "%' . $product_search . '%"');
@@ -176,12 +176,12 @@ if ($_POST['form_type'] == 'product_search') {
             $html .= '        </div>';
             $html .= '    </li>';
         }
-        $data['search_text'] = isset($_POST['search']) && $_POST['search'] != '' ? 'You search for : "' . $_POST['search'] . '"' : '';
+        $data['search_text'] = isset($_POST['search']) && $_POST['search'] != '' ? 'You search for : "' . $product_search . '"' : '';
         $data['data'] = $html;
         $data['status'] = 1;
     } else {
         $data['status'] = 0;
-        $data['search_text'] = isset($_POST['search']) && $_POST['search'] != '' ? 'You search for : "' . $_POST['search'] . '"' : '';
+        $data['search_text'] = isset($_POST['search']) && $_POST['search'] != '' ? 'You search for : "' . $product_search . '"' : '';
         $data['msg_error'] = "<h3 class='text-center'>Product not found</h3>";
     }
     echo json_encode($data);
@@ -229,9 +229,6 @@ if ($_POST['form_type'] == 'product_price_range') {
 }
 
 if ($_POST['form_type'] == 'product_fetch_by_brand') {
-    // echo "<pre>";
-    // print_r($_POST);
-    // die();
     if (isset($_POST['brand_checked'])) {
         $brands = "'" . implode("', '", array_values($_POST['brand_checked'])) . "'";
         $exec = $crud_obj->getData('product', '*', "brand_id IN ($brands) AND category_id = '" . $_POST['category_id'] . "'");
@@ -239,7 +236,6 @@ if ($_POST['form_type'] == 'product_fetch_by_brand') {
         if (!isset($_POST['brand_checked'])) {
             $exec = $crud_obj->getData('product', '*', "category_id = '" . $_POST['category_id'] . "'");
         }
-        // $exec = $crud_obj->getData('product', '*', "category_id = '" . $_POST['category_id'] . "'");
     }
     if ($exec) {
         $html = '';
