@@ -1,9 +1,9 @@
 <?php
-
+session_start();
 require_once "vendor/autoload.php";
-
-// use App\Class\Crud;
-
+if (isset($_SESSION['user'])) {
+    header("location: index.php");
+}
 $title = "Login / Sign Up";
 require_once "components/header.php";
 ?>
@@ -145,9 +145,14 @@ require_once "components/footer.php";
                 data: fd,
                 success: function(res) {
                     if (res.status == 1) {
+                        console.log(res.user);
                         $("#login_form")[0].reset();
                         $("#login_error_msg").text('');
-                        window.location.href = 'index.php';
+                        if (res.user == 'User') {
+                            window.location.href = 'index.php';
+                        } else {
+                            window.location.href = 'admin/index.php';
+                        }
                     } else {
                         $("#login_error_msg").text(res.msg_error);
                     }

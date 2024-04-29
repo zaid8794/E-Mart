@@ -1,7 +1,5 @@
 <?php
-session_start();
 require_once "vendor/autoload.php";
-
 use App\Class\Crud;
 
 $crud_obj = new Crud;
@@ -105,21 +103,27 @@ $crud_obj = new Crud;
                         <input type="text" name="search" id="search" placeholder="Search For Products" required />
                         <button type="submit"><i class="far fa-search"></i></button>
                     </form>
-                    <div class="header__icons ul_li">
-                        <div class="icon">
-                            <a href="#!"><img src="assets/img/icon/user.svg" alt=""></a>
-                        </div>
-                        <div class="icon wishlist-icon">
-                            <a href="#!">
-                                <img src="assets/img/icon/heart.svg" alt="">
+                    <?php
+                    if (isset($_SESSION['user'])) {
+                    ?>
+                        <div class="header__icons ul_li">
+                            <div class="icon">
+                                <a href="#!"><img src="assets/img/icon/user.svg" alt=""></a>
+                            </div>
+                            <div class="icon wishlist-icon">
+                                <a href="#!">
+                                    <img src="assets/img/icon/heart.svg" alt="">
+                                    <span class="count">0</span>
+                                </a>
+                            </div>
+                            <div class="cart_btn icon">
+                                <img src="assets/img/icon/shopping_bag.svg" alt="">
                                 <span class="count">0</span>
-                            </a>
+                            </div>
                         </div>
-                        <div class="cart_btn icon">
-                            <img src="assets/img/icon/shopping_bag.svg" alt="">
-                            <span class="count">0</span>
-                        </div>
-                    </div>
+                    <?php
+                    }
+                    ?>
                 </div>
             </div>
             <div class="header__wrap" data-uk-sticky="top: 250; animation: uk-animation-slide-top;">
@@ -183,7 +187,7 @@ $crud_obj = new Crud;
                                     <li class="active"><a href="index.php">Home</a></li>
                                     <li><a href="shop.php">Shop</a></li>
                                     <li><a href="about-us.php">About Us</a></li>
-                                    <li><a href="contact-us.php">Contact</a></li>
+                                    <li><a href="contact-us.php">Contact Us</a></li>
                                 </ul>
                             </nav>
                         </div>
@@ -244,7 +248,6 @@ $crud_obj = new Crud;
             <div class="close-mobile-menu">
                 <a href="javascript:void(0);"><i class="fal fa-times"></i></a>
             </div>
-
             <!-- sidebar-info start -->
             <div class="cart_sidebar">
                 <button type="button" class="cart_close_btn"><i class="fal fa-times"></i></button>

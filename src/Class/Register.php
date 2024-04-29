@@ -87,8 +87,15 @@ if ($_POST['form_type'] == 'login') {
                     'email' => $user_select[0]['email'],
                     'mobile' => $user_select[0]['mobile'],
                 ];
-                $_SESSION['user'] = $user;
-                $data['status'] = 1;
+                if ($user_select[0]['u_type'] == 'user') {
+                    $_SESSION['user'] = $user;
+                    $data['status'] = 1;
+                    $data['user'] = 'User';
+                } else {
+                    $_SESSION['admin'] = $user;
+                    $data['status'] = 1;
+                    $data['user'] = 'Admin';
+                }
             } else {
                 $data['msg_error'] = "Password is incorrect";
                 $data['status'] = 0;

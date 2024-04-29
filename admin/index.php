@@ -1,4 +1,8 @@
 <?php
+session_start();
+if (!isset($_SESSION['admin'])) {
+    header("location:../../../register.php");
+}
 require_once "includes/header.php";
 ?>
 <!-- Body Content -->
