@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once "vendor/autoload.php";
 
 use App\Class\Crud;
@@ -133,7 +134,7 @@ $crud_obj = new Crud;
                         if (basename($_SERVER['REQUEST_URI']) == 'index.php' || basename($_SERVER['REQUEST_URI']) == '') {
                         ?>
                             <div class="header__category">
-                                <a class="header__category-nav" href="#!">
+                                <a class="header__category-nav" style="cursor: pointer;">
                                     <img class="bar" src="assets/img/icon/bar.svg" alt="">
                                     Browse Categories
                                     <i class="fas fa-chevron-down"></i>
@@ -151,18 +152,17 @@ $crud_obj = new Crud;
                                     </button>
                                     <div class="vertical-menu-list category-nav">
                                         <ul class="category-nav__list list-unstyled">
-                                        <li><a href="shop.php"><img src="#" class="fas fa-arrow-right" alt="">All Products</a></li>
+                                            <li><a href="shop.php"><img src="#" class="fas fa-arrow-right" alt="">All Products</a></li>
                                             <?php
                                             $row = $crud_obj->getData('category', '*');
                                             if ($row) {
                                                 foreach ($row as $value) {
                                             ?>
-
                                                     <li><a href="shop.php?category=<?= $value['category_id'] ?>"><img src="#" class="fas fa-arrow-right" alt=""><?= $value['category_name'] ?></a></li>
-                                            <?php }
-                                            } ?>
-                                            
-                                            
+                                            <?php
+                                                }
+                                            }
+                                            ?>
                                         </ul>
                                     </div>
                                 </div>
@@ -210,12 +210,27 @@ $crud_obj = new Crud;
                                 </div>
                             </div> -->
                             <div class="login-sign-btn">
-                                <a class="thm-btn thm-btn__2 text-black" href="register.php">
-                                    <span class="btn-wrap">
-                                        <span>Login / Sign Up</span>
-                                        <span>Login / Sign Up</span>
-                                    </span>
-                                </a>
+                                <?php
+                                if (isset($_SESSION['user'])) {
+                                ?>
+                                    <a class="thm-btn thm-btn__2 text-black" href="src/Class/Logout.php">
+                                        <span class="btn-wrap">
+                                            <span>Logout</span>
+                                            <span>Logout</span>
+                                        </span>
+                                    </a>
+                                <?php
+                                } else {
+                                ?>
+                                    <a class="thm-btn thm-btn__2 text-black" href="register.php">
+                                        <span class="btn-wrap">
+                                            <span>Login / Sign Up</span>
+                                            <span>Login / Sign Up</span>
+                                        </span>
+                                    </a>
+                                <?php
+                                }
+                                ?>
                             </div>
                         </div>
                     </div>

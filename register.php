@@ -4,7 +4,7 @@ require_once "vendor/autoload.php";
 
 // use App\Class\Crud;
 
-$title = "Register";
+$title = "Login / Sign Up";
 require_once "components/header.php";
 ?>
 <!-- breadcrumb start -->
@@ -36,29 +36,32 @@ require_once "components/header.php";
                             <label for="name">Your Name</label>
                             <input id="name" name="name" type="text" placeholder="Enter your name*">
                         </div>
-                        <div class="account__input-field">
-                            <label for="email">Email Address</label>
-                            <input id="email" name="email" type="email" placeholder="Enter Email Address">
+                        <div class="row">
+                            <div class="account__input-field col-lg-6">
+                                <label for="email">Email Address</label>
+                                <input id="email" name="email" type="email" placeholder="Enter Email Address*">
+                            </div>
+                            <div class="account__input-field col-lg-6">
+                                <label for="email">Mobile</label>
+                                <input id="mobile" name="mobile" maxlength="10" type="tel" placeholder="Enter Mobile Number*">
+                            </div>
                         </div>
                         <div class="account__input-field">
-                            <label for="email">Mobile</label>
-                            <input id="mobile" name="mobile" maxlength="10" type="tel" placeholder="Enter Mobile Number">
-                        </div>
-                        <div class="account__input-field">
-                            <label for="gender">Gender</label>
+                            <label for="gender">Gender :</label>
                             <input id="male" name="gender" type="radio" value="male">Male
                             <input id="female" name="gender" type="radio" value="female">Female
                         </div>
                         <div class="row">
-                        <div class="account__input-field col-lg-6">
-                            <label for="password">New Password</label>
-                            <input id="password" type="text" name="password" placeholder="Create Password">
+                            <div class="account__input-field col-lg-6">
+                                <label for="password">Create Password</label>
+                                <input id="password" type="password" name="password" placeholder="Create Password*">
+                            </div>
+                            <div class="account__input-field col-lg-6">
+                                <label for="cpassword">Confirm Password</label>
+                                <input id="cpassword" type="password" name="cpassword" placeholder="Confirm Password*">
+                            </div>
                         </div>
-                        <div class="account__input-field col-lg-6">
-                            <label for="cpassword">Confirm Password</label>
-                            <input id="cpassword" type="text" name="cpassword" placeholder="Confirm Password">
-                        </div>
-                        </div>
+                        <span class="text-danger" id="error_msg"></span>
                         <input type="hidden" name="form_type" value="register">
                         <div class="account__btn">
                             <button type="submit" class="thm-btn thm-btn__2">
@@ -73,27 +76,28 @@ require_once "components/header.php";
             </div>
             <div class="col-lg-6 mt-30">
                 <div class="account__wrap pl-60">
-                    <h2 class="account__title">Login here</h2>
-                    <form action="#">
+                    <h2 class="account__title">Login</h2>
+                    <form id="login_form">
                         <div class="account__input-field">
                             <label for="lemail">Email Address</label>
-                            <input id="lemail" type="email" placeholder="Enter Email Address ">
+                            <input id="lemail" name="login_email" type="email" placeholder="Enter Email Address ">
                         </div>
                         <div class="account__input-field">
                             <label for="lpassword">Password</label>
-                            <input id="lpassword" type="password" placeholder="password">
+                            <input id="lpassword" name="login_password" type="password" placeholder="password">
+                            <input type="hidden" name="form_type" value="login">
                         </div>
+                        <span class="text-danger" id="login_error_msg"></span>
                         <div class="account__input-field">
-                            <input class="form-check-input" id="lcheckbox" type="checkbox" checked>
-                            <label class="form-check-label" for="lcheckbox">Remember Me?</label>
+                            <a href="" class="form-check-label">Forgot password?</a>
                         </div>
                         <div class="account__btn">
-                            <a class="thm-btn thm-btn__2" href="#!">
+                            <button type="submit" class="thm-btn thm-btn__2">
                                 <span class="btn-wrap">
-                                    <span class=" fa fa-sign-in"> Login here</span>
-                                    <span class=" fa fa-sign-in"> Login here</span>
+                                    <span>Login</span>
+                                    <span>Login</span>
                                 </span>
-                            </a>
+                            </button>
                         </div>
                     </form>
                 </div>
@@ -117,8 +121,36 @@ require_once "components/footer.php";
                 processData: false,
                 contentType: false,
                 data: fd,
-                success: function(data) {
-                    alert("Thanks for Register");
+                success: function(res) {
+                    if (res.status == 1) {
+                        $("#error_msg").text('');
+                        $("#register_form")[0].reset();
+                        alert("Thanks for Register");
+                    } else {
+                        $("#error_msg").text(res.msg_error);
+                    }
+                },
+            });
+        });
+
+        $("#login_form").on('submit', function(e) {
+            e.preventDefault();
+            var fd = new FormData(this);
+            $.ajax({
+                url: 'src/Class/Register.php',
+                type: 'POST',
+                dataType: 'json',
+                processData: false,
+                contentType: false,
+                data: fd,
+                success: function(res) {
+                    if (res.status == 1) {
+                        $("#login_form")[0].reset();
+                        $("#login_error_msg").text('');
+                        window.location.href = 'index.php';
+                    } else {
+                        $("#login_error_msg").text(res.msg_error);
+                    }
                 },
             });
         });

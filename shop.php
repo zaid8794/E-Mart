@@ -6,11 +6,9 @@ require_once "vendor/autoload.php";
 use App\Class\Crud;
 
 $crud_obj = new Crud;
-$no_of_records_per_page = 1;
+$no_of_records_per_page = 12;
 if (isset($_GET['category'])) {
     $category_id = $_GET['category'];
-} else {
-    $category_id = 'All';
 }
 if (isset($_GET['pageno'])) {
     $pageno = $_GET['pageno'];
@@ -177,13 +175,15 @@ $offset = ($pageno - 1) * $no_of_records_per_page;
                                 <span>Category</span>
                             </h2>
                             <ul class="widget__category">
+                                <li><a href="shop.php">All Category<i class="far fa-chevron-right"></i></a></li>
                                 <?php
                                 $row = $crud_obj->getData('category', '*');
-                                foreach ($row as $value) { ?>
-
-                                    <li><a href="shop.php?category=<?= $value['category_id'] ?>"><?= $value['category_name'] ?><i class="far fa-chevron-right"></i></a>
-                                    </li>
-                                <?php } ?>
+                                foreach ($row as $value) {
+                                ?>
+                                    <li><a href="shop.php?category=<?= $value['category_id'] ?>"><?= $value['category_name'] ?><i class="far fa-chevron-right"></i></a></li>
+                                <?php
+                                }
+                                ?>
                             </ul>
                         </div>
                         <?php
