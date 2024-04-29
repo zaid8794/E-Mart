@@ -11,12 +11,9 @@ if (!isset($_SESSION['admin'])) {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Required meta tags -->
-
     <title>Admin</title>
-
     <!-- Favicon -->
     <link rel="icon" href="img/core-img/favicon.png">
-
     <!-- These plugins only need for the run this page -->
     <link rel="stylesheet" href="css/default-assets/datatables.bootstrap4.css">
     <link rel="stylesheet" href="css/default-assets/responsive.bootstrap4.css">
@@ -24,10 +21,8 @@ if (!isset($_SESSION['admin'])) {
     <link rel="stylesheet" href="css/default-assets/select.bootstrap4.css">
     <!-- These plugins only need for the run this page -->
     <link rel="stylesheet" href="css/default-assets/new/sweetalert-2.min.css">
-
     <!-- Master Stylesheet CSS -->
     <link rel="stylesheet" href="style.css">
-
 </head>
 
 <body>
@@ -57,7 +52,6 @@ if (!isset($_SESSION['admin'])) {
             <div class="flapt-logo">
                 <a href="index.html"><img class="desktop-logo" src="img/core-img/logo.png" alt="Desktop Logo"> <img class="small-logo" src="img/core-img/small-logo.png" alt="Mobile Logo"></a>
             </div>
-
             <!-- Side Nav -->
             <div class="flapt-sidenav" id="flaptSideNav">
                 <!-- Side Menu Area -->
@@ -77,7 +71,6 @@ if (!isset($_SESSION['admin'])) {
                 </div>
             </div>
         </div>
-
         <!-- Page Content -->
         <div class="flapt-page-content">
             <!-- Top Header Area -->
@@ -87,7 +80,6 @@ if (!isset($_SESSION['admin'])) {
                     <div class="mobile-logo">
                         <a href="index.html"><img src="img/core-img/small-logo.png" alt="Mobile Logo"></a>
                     </div>
-
                     <!-- Triggers -->
                     <div class="flapt-triggers">
                         <div class="menu-collasped" id="menuCollasped">
@@ -97,7 +89,6 @@ if (!isset($_SESSION['admin'])) {
                             <i class='bx bx-grid-alt'></i>
                         </div>
                     </div>
-
                     <!-- Left Side Nav -->
                     <ul class="left-side-navbar d-flex align-items-center">
                         <li class="hide-phone app-search">
@@ -106,13 +97,11 @@ if (!isset($_SESSION['admin'])) {
                         </li>
                     </ul>
                 </div>
-
                 <div class="right-side-navbar d-flex align-items-center justify-content-end">
                     <!-- Mobile Trigger -->
                     <div class="right-side-trigger" id="rightSideTrigger">
                         <i class='bx bx-menu-alt-right'></i>
                     </div>
-
                     <!-- Top Bar Nav -->
                     <ul class="right-side-content d-flex align-items-center">
                         <li class="nav-item dropdown">
