@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 27, 2024 at 09:18 PM
+-- Generation Time: Apr 29, 2024 at 01:17 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -130,6 +130,31 @@ INSERT INTO `product` (`product_id`, `product_name`, `product_price`, `product_d
 (23, 'Whirlpool 308 L 3 Star', 31990, 'The star rating changes are as per BEE guidelines on 1st Jan 2023\r\nFrost Free Double Door Refrigerator - Intellisense Inverter Technology\r\nCapacity: 308 liters suitable for medium to large sized family\r\nEnergy Rating : 3 Star with Toughened Glass\r\nMicroblock Technology : Prevention of up to 99% bacterial growth with Microblock Technology\r\nSpecial Features: Touch UI Inside Refrigerator, Get Ice In Up 85 Minutes, 40% Faster Bottle Cooling, Anti-Odour Action, Coldest Freezer As -24C, 99.9% Bacterial Growth Prevention', 14, 9, '20240427085158.jpg', 'whirlpool-308-l-3-star', 'Enable', '2024-04-27 18:52:53'),
 (24, 'Godrej 244 L 3 Star', 23990, 'Frost Free Refrigerator : Auto defrost function to prevent ice-build up\r\nCapacity 244 L : Suitable for families of 2 to 3 members\r\nEnergy Efficiency: 3 star : Energy Efficiency (Please refer energy label on product page or contact brand for more details)\r\nManufacturer Warranty: 10 Years Compressor Warranty, 1 Year Comprehensive Warranty\r\nEnergy Efficient Inverter Compressor: The energy efficient inverter compressor, which is not only quieter but is also a variable speed compressor, as it adjusts the cooling as per the refrigerator operation.\r\nStorage Description : Fresh food capacity : 194 L | Freezer capacity : 50 L | shelves : 2 | Shelf type : Toughened Glass | Vegetable Storage Space : 27 L', 15, 9, '20240427085416.jpg', 'godrej-244-l-3-star', 'Enable', '2024-04-27 18:54:16');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `register`
+--
+
+CREATE TABLE `register` (
+  `id` int(11) NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `mobile` varchar(12) NOT NULL,
+  `gender` varchar(7) NOT NULL,
+  `u_type` varchar(6) NOT NULL,
+  `registered_on` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `register`
+--
+
+INSERT INTO `register` (`id`, `username`, `email`, `password`, `mobile`, `gender`, `u_type`, `registered_on`) VALUES
+(1, '', '', '', '', '', 'user', '2024-04-29 10:51:48'),
+(2, 'SOHIL', 'SOHILVORA2000@GMAIL.COM', '123', '7383063130', 'male', 'user', '2024-04-29 11:10:28');
+
 --
 -- Indexes for dumped tables
 --
@@ -159,6 +184,12 @@ ALTER TABLE `product`
   ADD PRIMARY KEY (`product_id`);
 
 --
+-- Indexes for table `register`
+--
+ALTER TABLE `register`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -185,6 +216,12 @@ ALTER TABLE `contactus`
 --
 ALTER TABLE `product`
   MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+
+--
+-- AUTO_INCREMENT for table `register`
+--
+ALTER TABLE `register`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
