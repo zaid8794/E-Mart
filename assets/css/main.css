@@ -13599,7 +13599,7 @@ blockquote span::before {
 #add_payment_method table.cart img,
 .woocommerce-cart table.cart img,
 .woocommerce-checkout table.cart img {
-  width: 70px;
+  width: 100px;
   object-fit: cover;
 }
 

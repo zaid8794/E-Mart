@@ -1,11 +1,12 @@
 <?php
-session_start();
-require_once "vendor/autoload.php";
-if (isset($_SESSION['user'])) {
-    header("location: index.php");
-}
 $title = "Login / Sign Up";
 require_once "components/header.php";
+require_once "vendor/autoload.php";
+
+if (isset($_SESSION['user'])) {
+    echo "<script>window.location='index.php';</script>";
+}
+
 ?>
 <!-- breadcrumb start -->
 <section class="breadcrumb-area">

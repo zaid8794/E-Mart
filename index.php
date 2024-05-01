@@ -1,6 +1,5 @@
 <?php
 $title = "Home";
-session_start();
 require_once "components/header.php";
 ?>
 <!-- banner start -->

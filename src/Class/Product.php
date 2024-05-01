@@ -108,7 +108,7 @@ if ($_POST['form_type'] == 'update') {
             'is_active' => "Enable",
             'product_slug' => $crud_obj->slugify($product_name),
         ];
-        $exec =  $crud_obj->update('product', $data, 'WHERE product_id = "' . trim($_POST['product_id']) . '"');
+        $exec =  $crud_obj->update('product', $data, 'product_id = "' . trim($_POST['product_id']) . '"');
         if ($exec) {
             $data['status'] = 1;
         } else {
@@ -121,7 +121,7 @@ if ($_POST['form_type'] == 'update') {
 
 if ($_POST['form_type'] == 'delete') {
     $product_id = $_POST['product_id'];
-    $exec = $crud_obj->delete('product', "WHERE `product_id` = '$product_id'");
+    $exec = $crud_obj->delete('product', "`product_id` = '$product_id'");
     if ($exec == 1) {
         $data['status'] = 1;
         $data['remove'] =  'product_' . $product_id;
@@ -158,14 +158,14 @@ if ($_POST['form_type'] == 'product_search') {
             $exec = $crud_obj->getData('product', '*', 'product_name LIKE "%' . $product_search . '%" AND category_id = "' . $_POST['category_id'] . '"');
         }
     }
+
     if ($exec) {
         foreach ($exec as $value) {
             $html .= '    <li class="product">';
             $html .= '        <div class="product-holder">';
             $html .= '            <a href="product_detail.php?product_id=' . $value['product_id'] . '"><img src="admin/uploads/products/' . $value['product_image'] . '" style="max-width : 150px ; " width="" alt=""></a>';
             $html .= '            <ul class="product__action">';
-            $html .= '                <li><a href="#!"><i class="far fa-compress-alt"></i></a></li>';
-            $html .= '                <li><a href="#!"><i class="far fa-shopping-basket"></i></a></li>';
+            $html .= '                <li><a class="add_to_cart" data-productid=' . $value['product_id'] . ' onmouseover=this.style.color="#fff" onmouseout=this.style.color="#5F5D5D"><i class="far fa-shopping-basket"></i></a></li>';
             $html .= '                <li><a href="#!"><i class="far fa-heart"></i></a></li>';
             $html .= '            </ul>';
             $html .= '        </div>';
@@ -176,6 +176,10 @@ if ($_POST['form_type'] == 'product_search') {
             $html .= '        </div>';
             $html .= '    </li>';
         }
+        $html .= '<script>$(".add_to_cart").click(function() {
+            var product_id = $(this).data("productid");
+            alert(product_id);
+        });</script>';
         $data['search_text'] = isset($_POST['search']) && $_POST['search'] != '' ? 'You search for : "' . $product_search . '"' : '';
         $data['data'] = $html;
         $data['status'] = 1;
@@ -207,8 +211,7 @@ if ($_POST['form_type'] == 'product_price_range') {
             $html .= '        <div class="product-holder">';
             $html .= '            <a href="product_detail.php?product_id=' . $value['product_id'] . '"><img src="admin/uploads/products/' . $value['product_image'] . '" style="max-width : 150px ; " width="" alt=""></a>';
             $html .= '            <ul class="product__action">';
-            $html .= '                <li><a href="#!"><i class="far fa-compress-alt"></i></a></li>';
-            $html .= '                <li><a href="#!"><i class="far fa-shopping-basket"></i></a></li>';
+            $html .= '                <li><a class="add_to_cart" data-productid=' . $value['product_id'] . ' onmouseover=this.style.color="#fff" onmouseout=this.style.color="#5F5D5D"><i class="far fa-shopping-basket"></i></a></li>';
             $html .= '                <li><a href="#!"><i class="far fa-heart"></i></a></li>';
             $html .= '            </ul>';
             $html .= '        </div>';
@@ -219,6 +222,11 @@ if ($_POST['form_type'] == 'product_price_range') {
             $html .= '        </div>';
             $html .= '    </li>';
         }
+        $html .= '<script>
+                    $(".add_to_cart").click(function() {
+                        var product_id = $(this).data("productid");
+                    });
+                </script>';
         $data['data'] = $html;
         $data['status'] = 1;
     } else {
@@ -244,8 +252,7 @@ if ($_POST['form_type'] == 'product_fetch_by_brand') {
             $html .= '        <div class="product-holder">';
             $html .= '            <a href="product_detail.php?product_id=' . $value['product_id'] . '"><img src="admin/uploads/products/' . $value['product_image'] . '" style="max-width : 150px ; " width="" alt=""></a>';
             $html .= '            <ul class="product__action">';
-            $html .= '                <li><a href="#!"><i class="far fa-compress-alt"></i></a></li>';
-            $html .= '                <li><a href="#!"><i class="far fa-shopping-basket"></i></a></li>';
+            $html .= '                <li><a class="add_to_cart" data-productid="' . $value['product_id'] . '" onmouseover=this.style.color="#fff" onmouseout=this.style.color="#5F5D5D"><i class="far fa-shopping-basket"></i></a></li>';
             $html .= '                <li><a href="#!"><i class="far fa-heart"></i></a></li>';
             $html .= '            </ul>';
             $html .= '        </div>';
@@ -256,6 +263,10 @@ if ($_POST['form_type'] == 'product_fetch_by_brand') {
             $html .= '        </div>';
             $html .= '    </li>';
         }
+        $html .= '<script>$(".add_to_cart").click(function() {
+            var product_id = $(this).data("productid");
+            alert(product_id);
+        });</script>';
         if (isset($brands)) {
             $selected_brand = array();
             $brand_select = $crud_obj->getData('brand', 'distinct(brand_name)', "brand_id IN ($brands)");

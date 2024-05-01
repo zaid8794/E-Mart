@@ -108,15 +108,12 @@ $offset = ($pageno - 1) * $no_of_records_per_page;
                                         <li class="product">
                                             <div class="product-holder">
                                                 <a href="product_detail.php?product_id=<?= $value['product_id'] ?>"><img src="admin/uploads/products/<?= $value['product_image']; ?>" style="max-width : 150px ; " width="" alt=""></a>
-
                                                 <ul class="product__action">
-                                                    <li><a href="#!"><i class="far fa-compress-alt"></i></a></li>
-                                                    <li><a href="#!"><i class="far fa-shopping-basket"></i></a></li>
+                                                    <li><a class="add_to_cart" data-productid="<?= $value['product_id'] ?>" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#5F5D5D'"><i class="far fa-shopping-basket"></i></a></li>
                                                     <li><a href="#!"><i class="far fa-heart"></i></a></li>
                                                 </ul>
                                             </div>
                                             <div class="product-info mt-4">
-
                                                 <h2 class="product__title"><a href="product_detail.php?product_id=<?= $value['product_id'] ?>"><?= $value['product_name']; ?></a></h2>
                                                 <h4 class="product__price"><span class="new">₹<?= $value['product_price'] ?></span><span class="old">₹<?= $value['product_price'] + 1000; ?></span></h4>
                                                 <p class="product-description"><?= $value['product_description'] ?></p>
@@ -216,6 +213,7 @@ $offset = ($pageno - 1) * $no_of_records_per_page;
                 </div>
             </div>
         </div>
+
     </div> <!-- end container -->
 </section>
 <!-- end shop-section -->
@@ -225,6 +223,13 @@ require_once "components/footer.php";
 
 <script>
     $(document).ready(function() {
+        function myFunction() {
+            var x = document.getElementById("snackbar");
+            x.className = "show";
+            setTimeout(function() {
+                x.className = x.className.replace("show", "");
+            }, 3000);
+        }
         /*----------------------------
 	= SHOP PRICE SLIDER
     ------------------------------ */
@@ -349,5 +354,31 @@ require_once "components/footer.php";
                 }
             });
         });
+
+        $(".add_to_cart").click(function(e) {
+            e.preventDefault();
+            var product_id = $(this).data('productid');
+            $.ajax({
+                url: "src/Class/Cart.php",
+                type: "POST",
+                data: {
+                    product_id: product_id,
+                    form_type: 'add_to_cart',
+                },
+                dataType: 'json',
+                success: function(res) {
+                    if (res.msg_error == 'login_not_set') {
+                        window.location.href = 'register.php';
+                    } else if (res.status == 1) {
+                        $("#snackbar").text(res.success_msg).addClass('show');
+                        setTimeout(function() {
+                            $("#snackbar").removeClass('show');
+                        }, 3000);
+                    } else {
+
+                    }
+                }
+            })
+        }); 
     });
 </script>

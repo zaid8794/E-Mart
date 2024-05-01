@@ -45,7 +45,7 @@ if ($_POST['form_type'] == 'update') {
         $data = [
             'category_name' => $category_name,
         ];
-        $exec =  $crud_obj->update('category', $data, 'WHERE `category_id` = "' . $_POST['category_id'] . '"');
+        $exec =  $crud_obj->update('category', $data, '`category_id` = "' . $_POST['category_id'] . '"');
         if ($exec == 1) {
             $data['status'] = 1;
         } else {
@@ -57,7 +57,7 @@ if ($_POST['form_type'] == 'update') {
 
 if ($_POST['form_type'] == 'delete') {
     $category_id = $_POST['cat_id'];
-    $exec = $crud_obj->delete('category', "WHERE `category_id` = '$category_id'");
+    $exec = $crud_obj->delete('category', "`category_id` = '$category_id'");
     if ($exec == 1) {
         $data['status'] = 1;
         $data['remove'] =  'category_' . $category_id;

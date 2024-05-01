@@ -57,7 +57,7 @@ if ($_POST['form_type'] == 'update') {
             'category_id' => $category_id,
             'brand_name' => $brand_name,
         ];
-        $exec =  $crud_obj->update('brand', $data, 'WHERE `brand_id` = "' . $_POST['brand_id'] . '"');
+        $exec =  $crud_obj->update('brand', $data, '`brand_id` = "' . $_POST['brand_id'] . '"');
         if ($exec == 1) {
             $data['status'] = 1;
         } else {
@@ -69,7 +69,7 @@ if ($_POST['form_type'] == 'update') {
 
 if ($_POST['form_type'] == 'delete') {
     $brand_id = $_POST['brand_id'];
-    $exec = $crud_obj->delete('brand', "WHERE `brand_id` = '$brand_id'");
+    $exec = $crud_obj->delete('brand', "`brand_id` = '$brand_id'");
     if ($exec == 1) {
         $data['status'] = 1;
         $data['remove'] =  'brand_' . $brand_id;

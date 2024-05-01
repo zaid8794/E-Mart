@@ -63,7 +63,7 @@ class Crud extends Db
         }
         $set = rtrim($set, ", ");
 
-        $sql = "UPDATE $table SET $set $condition";
+        $sql = "UPDATE $table SET $set WHERE $condition";
         if ($this->connect()->query($sql)) {
             return true;
         } else {
@@ -74,7 +74,7 @@ class Crud extends Db
 
     public function delete($table, $condition)
     {
-        $sql = "DELETE FROM $table $condition";
+        $sql = "DELETE FROM $table WHERE $condition";
         if ($this->connect()->query($sql) === TRUE) {
             return true;
         } else {

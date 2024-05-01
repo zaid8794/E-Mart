@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 29, 2024 at 01:17 PM
+-- Generation Time: May 02, 2024 at 01:35 AM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.0.30
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -49,6 +49,28 @@ INSERT INTO `brand` (`brand_id`, `brand_name`, `category_id`, `brand_created_on`
 (13, 'LG', 9, '2024-04-27 18:46:14'),
 (14, 'Whilpool', 9, '2024-04-27 18:46:26'),
 (15, 'Godrej', 9, '2024-04-27 18:53:14');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cart`
+--
+
+CREATE TABLE `cart` (
+  `cart_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `qty` int(11) NOT NULL,
+  `created_on` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `cart`
+--
+
+INSERT INTO `cart` (`cart_id`, `user_id`, `product_id`, `qty`, `created_on`) VALUES
+(16, 2, 15, 1, '2024-05-01 19:49:13'),
+(17, 2, 16, 1, '2024-05-01 20:02:13');
 
 -- --------------------------------------------------------
 
@@ -119,7 +141,7 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`product_id`, `product_name`, `product_price`, `product_description`, `brand_id`, `category_id`, `product_image`, `product_slug`, `is_active`, `product_created_on`) VALUES
-(15, 'Samsung Galaxy A54 5G', 35499, '50MP(OIS)+12MP+5MP Triple camera setup - 50MP (F1.8) Main Camera with OIS + 12MP (F2.2) Ultra wide camera + 5MP (F2.4) depth camera | 32MP (F2.2) front camera\r\n16.31 centimeters (6.4-inch) FHD+ Super AMOLED display, FHD+ resolution with 1080 x 2340 pixels , 401 PPI with 16M colours\r\nAndroid 13, v13.0 operating system with Exynos1380 2.4GHz,2GHz Octa-Core processor\r\nA54 5G has an IP67 certification and Gorilla Glass 5 (front & back) for carefree usage\r\n5000 mAh battery (Non-removable) with Super Fast Charging', 8, 6, '20240427083010.jpg', 'samsung-galaxy-a54-5g', 'Enable', '2024-04-27 18:30:10'),
+(15, 'Samsung Galaxy A54 5G', 499, '50MP(OIS)+12MP+5MP Triple camera setup - 50MP (F1.8) Main Camera with OIS + 12MP (F2.2) Ultra wide camera + 5MP (F2.4) depth camera | 32MP (F2.2) front camera\r\n16.31 centimeters (6.4-inch) FHD+ Super AMOLED display, FHD+ resolution with 1080 x 2340 pixels , 401 PPI with 16M colours\r\nAndroid 13, v13.0 operating system with Exynos1380 2.4GHz,2GHz Octa-Core processor\r\nA54 5G has an IP67 certification and Gorilla Glass 5 (front & back) for carefree usage\r\n5000 mAh battery (Non-removable) with Super Fast Charging', 8, 6, '20240427083010.jpg', 'samsung-galaxy-a54-5g', 'Enable', '2024-05-01 19:59:34'),
 (16, 'Samsung Galaxy A55 5G', 45999, 'DISPLAY - 16.83 Centimeters (6.6\"Inch) Super AMOLED Display with 19.5:9 Aspect Ratio, FHD+ Resolution with 2340 x 1080 Pixels , 389 PPI with 16M Colors and 120Hz Refresh Rate, Corning Gorilla Glass Victus+\r\nCAMERA - Nightography | Super HDR Video | 50MP (F1.8) Main Wide Angle Camera + 12MP (F2.2) Ultra Wide Camera + 5MP (F2.4) Macro Camera | 32MP (F2.2) Front Camera | Video Maximum Resolution of Ultra HD 4K (3840 x 2160) @30fps\r\nINTERFACE & PROCESSOR - Latest Android 14 Operating System having One UI 6.1 platform with Samsung Exynos 1480 Processor | 2.75GHz, 2GHz 4nm Octa-Core Processor\r\nBATTERY - Get a massive 5000mAh Lithium-ion Battery (Non-Removable) with C-Type Super Fast Charging (25W Charging Support)\r\nOS UPDATES & SECURITY - Get upto 4 Generations of AndroidOS Upgrades & 5 Years of Security Updates with Samsung Galaxy A55. Includes 1 Year Manufacturer Warranty for Device and 6 Months for In-Box Accessories.', 8, 6, '20240427083211.jpg', 'samsung-galaxy-a55-5g', 'Enable', '2024-04-27 18:32:11'),
 (17, 'Samsung Galaxy S24 Ultra 5G', 139999, 'Samsung Galaxy S24 Ultra 5G\r\n', 8, 6, '20240427083929.jpg', 'samsung-galaxy-s24-ultra-5g', 'Enable', '2024-04-27 18:39:30'),
 (18, 'Sony Bravia 164 cm (65 inches)', 77990, 'Resolution: 4K Ultra HD (3840 x 2160) | Refresh Rate: 60 Hertz | 178 Degree wide viewing angle\r\nConnectivity: 3 HDMI ports to connect set top box, Blu Ray players, gaming console | 2 USB ports to connect hard drives and other USB devices\r\nSound : 20 Watts Output | Open Baffle Speaker| Dolby Audio | Clear Phase | eARC Input\r\nSmart TV Features: Google TV, Watchlist, Voice Search, Google Play, Chromecast Built-In, Netflix, Amazon Prime Video, Additional Features: Apple Airplay, Apple Homekit, Alexa | Supported Apps: Netflix, Amazon Prime Video, Disney+ Hotstar, Sony Liv, Zee5, Voot, Jio Cinema & many More\r\nDisplay: X1 4K Processor | 4K HDR | Live Colour| 4K X Reality Pro | Motion Flow XR100', 9, 8, '20240427084131.jpg', 'sony-bravia-164-cm-65-inches-', 'Enable', '2024-04-27 18:41:31'),
@@ -137,7 +159,7 @@ INSERT INTO `product` (`product_id`, `product_name`, `product_price`, `product_d
 --
 
 CREATE TABLE `register` (
-  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
   `username` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
@@ -151,9 +173,9 @@ CREATE TABLE `register` (
 -- Dumping data for table `register`
 --
 
-INSERT INTO `register` (`id`, `username`, `email`, `password`, `mobile`, `gender`, `u_type`, `registered_on`) VALUES
-(1, '', '', '', '', '', 'user', '2024-04-29 10:51:48'),
-(2, 'SOHIL', 'SOHILVORA2000@GMAIL.COM', '123', '7383063130', 'male', 'user', '2024-04-29 11:10:28');
+INSERT INTO `register` (`user_id`, `username`, `email`, `password`, `mobile`, `gender`, `u_type`, `registered_on`) VALUES
+(1, 'admin', 'admin@gmail.com', 'admin123', '9033594669', 'male', 'admin', '2024-04-29 16:43:14'),
+(2, 'Zaid', 'zaidvora9@gmail.com', '123', '9033594669', 'male', 'user', '2024-04-29 16:46:26');
 
 --
 -- Indexes for dumped tables
@@ -164,6 +186,12 @@ INSERT INTO `register` (`id`, `username`, `email`, `password`, `mobile`, `gender
 --
 ALTER TABLE `brand`
   ADD PRIMARY KEY (`brand_id`);
+
+--
+-- Indexes for table `cart`
+--
+ALTER TABLE `cart`
+  ADD PRIMARY KEY (`cart_id`);
 
 --
 -- Indexes for table `category`
@@ -187,7 +215,7 @@ ALTER TABLE `product`
 -- Indexes for table `register`
 --
 ALTER TABLE `register`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`user_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -198,6 +226,12 @@ ALTER TABLE `register`
 --
 ALTER TABLE `brand`
   MODIFY `brand_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT for table `cart`
+--
+ALTER TABLE `cart`
+  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `category`
@@ -221,7 +255,7 @@ ALTER TABLE `product`
 -- AUTO_INCREMENT for table `register`
 --
 ALTER TABLE `register`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

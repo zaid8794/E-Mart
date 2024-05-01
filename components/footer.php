@@ -191,6 +191,29 @@
 <script src="assets/js/jquery.magnific-popup.min.js"></script>
 <script src="assets/js/metisMenu.min.js"></script>
 <script src="assets/js/main.js"></script>
+<script>
+    $(document).ready(function() {
+        $(".remove_sidebar_cart_btn").on("click", function() {
+            var cart_id = $(this).data("cartid");
+            $.ajax({
+                url: 'src/Class/Cart.php',
+                type: "POST",
+                dataType: "JSON",
+                data: {
+                    cart_id: cart_id,
+                    form_type: "remove_sidebar_cart",
+                },
+                success: function(res) {
+                    if (res.status == 1) {
+                        window.location.reload();
+                    } else {
+
+                    }
+                }
+            });
+        });
+    });
+</script>
 </body>
 
 </html>

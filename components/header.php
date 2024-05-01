@@ -1,9 +1,11 @@
 <?php
 require_once "vendor/autoload.php";
+
 use App\Class\Crud;
 
 $crud_obj = new Crud;
 date_default_timezone_set('Asia/Calcutta');
+session_start();
 ?>
 <!doctype html>
 <html lang="en">
@@ -30,6 +32,77 @@ date_default_timezone_set('Asia/Calcutta');
     <link rel="stylesheet" href="assets/css/slick.css">
     <link rel="stylesheet" href="assets/css/magnific-popup.css">
     <link rel="stylesheet" href="assets/css/main.css">
+    <style>
+        #snackbar {
+            visibility: hidden;
+            min-width: 250px;
+            margin-left: -125px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 2px;
+            padding: 16px;
+            position: fixed;
+            z-index: 1;
+            left: 50%;
+            bottom: 30px;
+            font-size: 17px;
+        }
+
+        #snackbar.show {
+            visibility: visible;
+            -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+            animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        }
+
+        @-webkit-keyframes fadein {
+            from {
+                bottom: 0;
+                opacity: 0;
+            }
+
+            to {
+                bottom: 30px;
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadein {
+            from {
+                bottom: 0;
+                opacity: 0;
+            }
+
+            to {
+                bottom: 30px;
+                opacity: 1;
+            }
+        }
+
+        @-webkit-keyframes fadeout {
+            from {
+                bottom: 30px;
+                opacity: 1;
+            }
+
+            to {
+                bottom: 0;
+                opacity: 0;
+            }
+        }
+
+        @keyframes fadeout {
+            from {
+                bottom: 30px;
+                opacity: 1;
+            }
+
+            to {
+                bottom: 0;
+                opacity: 0;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -106,6 +179,7 @@ date_default_timezone_set('Asia/Calcutta');
                     </form>
                     <?php
                     if (isset($_SESSION['user'])) {
+                        $cart_count = $crud_obj->getData('cart', '*', "user_id = '" . $_SESSION['user']['id'] . "'")
                     ?>
                         <div class="header__icons ul_li">
                             <div class="icon">
@@ -119,7 +193,7 @@ date_default_timezone_set('Asia/Calcutta');
                             </div>
                             <div class="cart_btn icon">
                                 <img src="assets/img/icon/shopping_bag.svg" alt="">
-                                <span class="count">0</span>
+                                <span class="count"><?= $cart_count > 0 ? count($cart_count) : '0' ?></span>
                             </div>
                         </div>
                     <?php
@@ -251,80 +325,70 @@ date_default_timezone_set('Asia/Calcutta');
             </div>
             <!-- sidebar-info start -->
             <div class="cart_sidebar">
+                <?php
+                $cart_fetch = $crud_obj->getData('cart LEFT JOIN product ON (cart.product_id = product.product_id)', '*', 'user_id="' . $_SESSION['user']['id'] . '"');
+                ?>
                 <button type="button" class="cart_close_btn"><i class="fal fa-times"></i></button>
-                <h2 class="heading_title text-uppercase">Cart Items - <span>4</span></h2>
-                <div class="cart_items_list">
-                    <div class="cart_item">
-                        <div class="item_image">
-                            <img src="assets/img/product/img_01.png" alt="image_not_found">
-                        </div>
-                        <div class="item_content">
-                            <h4 class="item_title">
-                                Rorem ipsum dolor sit amet.
-                            </h4>
-                            <span class="item_price">$19.00</span>
-                            <button type="button" class="remove_btn"><i class="fal fa-times"></i></button>
+                <?php
+                if ($cart_fetch > 0) {
+                ?>
+                    <h2 class="heading_title text-uppercase">Cart Items - <span><?= count($cart_fetch) ?></span></h2>
+                    <div class="cart_items_list">
+                        <?php
+                        $subtotal = 0;
+                        foreach ($cart_fetch as $cart) {
+                            $subtotal += ($cart['product_price'] * $cart['qty']);
+                        ?>
+                            <div class="cart_item">
+                                <div class="item_image">
+                                    <img src="../admin/uploads/products/<?= $cart['product_image'] ?>" alt="image_not_found">
+                                </div>
+                                <div class="item_content">
+                                    <h4 class="item_title">
+                                        <?= $cart['product_name'] ?>
+                                    </h4>
+                                    <span class="item_price">₹&nbsp;<?= $cart['product_price'] ?> x <?= $cart['qty'] ?></span>
+                                    <button type="button" class="remove_sidebar_cart_btn remove_btn" data-cartid="<?= $cart['cart_id'] ?>"><i class="fal fa-times"></i></button>
+                                </div>
+                            </div>
+                        <?php
+                        }
+                        ?>
+                    </div>
+                    <div class="total_price text-uppercase">
+                        <span>Sub Total:</span>
+                        <span>₹&nbsp;<?= $subtotal ?></span>
+                    </div>
+                    <ul class="btns_group ul_li">
+                        <li>
+                            <a href="cart.php" class="thm-btn">
+                                <span class="btn-wrap">
+                                    <span>View Cart</span>
+                                    <span>View Cart</span>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="checkout.php" class="thm-btn thm-btn__black">
+                                <span class="btn-wrap">
+                                    <span>Checkout</span>
+                                    <span>Checkout</span>
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                <?php
+                } else {
+                ?>
+                    <h2 class="heading_title text-uppercase">Cart Items - <span>0</span></h2>
+                    <div class="cart_items_list">
+                        <div class="cart_item">
+                            No items added to cart
                         </div>
                     </div>
-                    <div class="cart_item">
-                        <div class="item_image">
-                            <img src="assets/img/product/img_02.png" alt="image_not_found">
-                        </div>
-                        <div class="item_content">
-                            <h4 class="item_title">
-                                Rorem ipsum dolor sit amet.
-                            </h4>
-                            <span class="item_price">$22.00</span>
-                            <button type="button" class="remove_btn"><i class="fal fa-times"></i></button>
-                        </div>
-                    </div>
-                    <div class="cart_item">
-                        <div class="item_image">
-                            <img src="assets/img/product/img_03.png" alt="image_not_found">
-                        </div>
-                        <div class="item_content">
-                            <h4 class="item_title">
-                                Rorem ipsum dolor sit amet.
-                            </h4>
-                            <span class="item_price">$43.00</span>
-                            <button type="button" class="remove_btn"><i class="fal fa-times"></i></button>
-                        </div>
-                    </div>
-                    <div class="cart_item">
-                        <div class="item_image">
-                            <img src="assets/img/product/img_04.png" alt="image_not_found">
-                        </div>
-                        <div class="item_content">
-                            <h4 class="item_title">
-                                Rorem ipsum dolor sit amet.
-                            </h4>
-                            <span class="item_price">$14.00</span>
-                            <button type="button" class="remove_btn"><i class="fal fa-times"></i></button>
-                        </div>
-                    </div>
-                </div>
-                <div class="total_price text-uppercase">
-                    <span>Sub Total:</span>
-                    <span>$87.00</span>
-                </div>
-                <ul class="btns_group ul_li">
-                    <li>
-                        <a href="cart.html" class="thm-btn">
-                            <span class="btn-wrap">
-                                <span>View Cart</span>
-                                <span>View Cart</span>
-                            </span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="checkout.html" class="thm-btn thm-btn__black">
-                            <span class="btn-wrap">
-                                <span>Checkout</span>
-                                <span>Checkout</span>
-                            </span>
-                        </a>
-                    </li>
-                </ul>
+                <?php
+                }
+                ?>
             </div>
             <!-- sidebar-info end -->
 
@@ -337,41 +401,11 @@ date_default_timezone_set('Asia/Calcutta');
                     </form>
                 </div>
                 <ul id="mobile-menu-active">
-                    <li class="dropdown"><a href="index.html">Home</a>
-                        <ul class="sub-menu">
-                            <li><a href="index.html">Home One</a></li>
-                            <li><a href="home-2.html">Home Two</a></li>
-                            <li><a href="home-3.html">Home Three</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#">Shop</a>
-                        <ul class="sub-menu">
-                            <li><a href="shop.html">Shop Default</a></li>
-                            <li><a href="shop-left-sidebar.html">Shop Left Sidebar</a></li>
-                            <li><a href="shop-single.html">Shop Single</a></li>
-                            <li><a href="cart.html">Shop Cart</a></li>
-                            <li><a href="checkout.html">Shop Checkout</a></li>
-                            <li><a href="account.html">Account</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="shop.html">Accesories</a></li>
-                    <li class="dropdown">
-                        <a href="#!">Blog</a>
-                        <ul class="sub-menu">
-                            <li><a href="news.html">Blog</a></li>
-                            <li><a href="news-single.html">Blog Details</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#!">Pages</a>
-                        <ul class="submenu">
-                            <li><a href="about.html">About Us</a></li>
-                            <li><a href="about.html">Account</a></li>
-                            <li><a href="404.html">404</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="index.php">Home</a></li>
+                    <li><a href="shop.php">Shop</a></li>
+                    <li><a href="cart.php">Cart</a></li>
+                    <li><a href="about-us.php">About Us</a></li>
+                    <li><a href="contact-us.php">Contact Us</a></li>
                 </ul>
             </nav>
             <!-- side-mobile-menu end -->
@@ -381,3 +415,4 @@ date_default_timezone_set('Asia/Calcutta');
 
         <!-- main part start -->
         <main>
+            <div id="snackbar"></div>
