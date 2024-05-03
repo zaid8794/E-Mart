@@ -3,6 +3,7 @@ var category = document.getElementById("category");
 var brand = document.getElementById("brand");
 var product = document.getElementById("product");
 var user = document.getElementById("user");
+var order = document.getElementById("order");
 var contactus = document.getElementById("contactus");
 var url = window.location.pathname;
 var filename = url.substring(url.lastIndexOf("/") + 1);
@@ -16,6 +17,8 @@ if (filename == "index.php") {
   product.classList.add("active");
 } else if (filename == "user.php") {
   user.classList.add("active");
+} else if (filename == "orders.php") {
+  order.classList.add("active");
 } else if (filename == "contactus.php") {
   contactus.classList.add("active");
 }

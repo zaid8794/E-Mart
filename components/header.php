@@ -209,8 +209,8 @@ session_start();
                                 <img src="assets/img/logo/logo.svg" alt="">
                             </a>
                         </div>
-                        <?php
-                        if (basename($_SERVER['REQUEST_URI']) == 'index.php' || basename($_SERVER['REQUEST_URI']) == '') {
+                        <!-- <?php
+                        // if (basename($_SERVER['REQUEST_URI']) == 'index.php' || basename($_SERVER['REQUEST_URI']) == '') {
                         ?>
                             <div class="header__category">
                                 <a class="header__category-nav" style="cursor: pointer;">
@@ -220,8 +220,8 @@ session_start();
                                 </a>
                             </div>
                         <?php
-                        } else {
-                        ?>
+                        // } else {
+                        ?> -->
                             <div class="header__category pos-rel">
                                 <div class="vertical-menu">
                                     <button class="header__category-nav">
@@ -231,7 +231,7 @@ session_start();
                                     </button>
                                     <div class="vertical-menu-list category-nav">
                                         <ul class="category-nav__list list-unstyled">
-                                            <li><a href="shop.php"><img src="#" class="fas fa-arrow-right" alt="">All Products</a></li>
+                                            <!-- <li><a href="shop.php"><img src="#" class="fas fa-arrow-right" alt="">All Products</a></li> -->
                                             <?php
                                             $row = $crud_obj->getData('category', '*');
                                             if ($row) {
@@ -247,7 +247,7 @@ session_start();
                                 </div>
                             </div>
                         <?php
-                        }
+                        // }
                         ?>
                         <div class="hamburger_menu d-lg-none">
                             <a href="javascript:void(0);" class="">
@@ -263,6 +263,13 @@ session_start();
                                     <li><a href="shop.php">Shop</a></li>
                                     <li><a href="about-us.php">About Us</a></li>
                                     <li><a href="contact-us.php">Contact Us</a></li>
+                                    <?php
+                                    if (isset($_SESSION['user'])) {
+                                    ?>
+                                        <li><a href="my-orders.php">Orders</a></li>
+                                    <?php
+                                    }
+                                    ?>
                                 </ul>
                             </nav>
                         </div>

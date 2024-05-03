@@ -4,9 +4,7 @@ require_once "../../vendor/autoload.php";
 use App\Class\Crud;
 
 $crud_obj = new Crud;
-// echo "<pre>";
-// print_r($user_select);
-// die();
+
 if ($_POST['form_type'] == "register") {
     $name = trim($_POST['name']);
     $email = trim($_POST['email']);

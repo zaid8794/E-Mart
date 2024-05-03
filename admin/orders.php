@@ -11,130 +11,11 @@ $crud_obj = new Crud;
     <div class="content-wrapper">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-12 col-sm-6 col-xl">
-                    <!-- Card -->
-                    <div class="card box-margin">
-                        <div class="card-body">
-                            <div class="row align-items-center">
-                                <div class="col">
-                                    <!-- Title -->
-                                    <h6 class="text-uppercase font-14">
-                                        Budget
-                                    </h6>
-
-                                    <!-- Heading -->
-                                    <span class="font-24 text-dark mb-0">
-                                        $2500
-                                    </span>
-                                </div>
-                                <div class="col-auto">
-                                    <!-- Icon -->
-                                    <div class="icon">
-                                        <img src="img/bg-img/icon-8.png" alt="">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-12 col-sm-6 col-xl">
-                    <!-- Card -->
-                    <div class="card box-margin">
-                        <div class="card-body">
-                            <div class="row align-items-center">
-                                <div class="col">
-                                    <!-- Title -->
-                                    <h6 class="font-14 text-uppercase">
-                                        Total Hours
-                                    </h6>
-                                    <!-- Heading -->
-                                    <span class="font-24 text-dark mb-0">
-                                        663.5
-                                    </span>
-                                </div>
-                                <div class="col-auto">
-                                    <!-- Icon -->
-                                    <div class="icon">
-                                        <img src="img/bg-img/icon-9.png" alt="">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-12 col-sm-6 col-xl">
-                    <!-- Card -->
-                    <div class="card box-margin">
-                        <div class="card-body">
-                            <div class="row align-items-center">
-                                <div class="col">
-                                    <!-- Title -->
-                                    <h6 class="font-14 text-uppercase">
-                                        Progress
-                                    </h6>
-                                    <div class="row align-items-center no-gutters">
-                                        <div class="col-auto">
-                                            <!-- Heading -->
-                                            <span class="font-24 text-dark mr-2">
-                                                84.5%
-                                            </span>
-                                        </div>
-                                        <div class="col">
-                                            <!-- Progress -->
-                                            <div class="progress h-5">
-                                                <div class="progress-bar bg-primary" role="progressbar" style="width: 85%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-auto">
-                                    <!-- Icon -->
-                                    <div class="icon">
-                                        <img src="img/bg-img/icon-10.png" alt="">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-12 col-sm-6 col-xl">
-                    <!-- Card -->
-                    <div class="card box-margin">
-                        <div class="card-body">
-                            <div class="row align-items-center">
-                                <div class="col">
-                                    <!-- Title -->
-                                    <h6 class="font-14 text-uppercase">
-                                        Cost/Unit
-                                    </h6>
-                                    <!-- Heading -->
-                                    <span class="font-24 text-dark">
-                                        $7.50
-                                    </span>
-                                </div>
-                                <div class="col-auto">
-                                    <!-- Icon -->
-                                    <div class="icon">
-                                        <img src="img/bg-img/icon-11.png" alt="">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- / .row -->
-
-            <div class="row">
                 <!-- Order Summary Area -->
                 <div class="col-12 box-margin">
                     <div class="card">
                         <div class="card-body">
-                            <h6 class="card-title">Today Order Summary</h6>
+                            <h6 class="card-title">Order Summary</h6>
                             <!-- Table -->
                             <div class="table-responsive">
                                 <table class="table table-nowrap">
@@ -150,10 +31,8 @@ $crud_obj = new Crud;
                                     </thead>
                                     <tbody>
                                         <?php
-                                        date_default_timezone_set('Asia/Calcutta');
-                                        $today = date('d-m-Y');
-                                        $row = $crud_obj->getData('order_master LEFT JOIN register ON (order_master.user_id = register.user_id)', '*', "created_on LIKE '%" . $today . "%' GROUP BY order_number", 'order_number', 'desc');
-                                        if ($row > 0) {
+                                        $row = $crud_obj->getData('order_master LEFT JOIN register ON (order_master.user_id = register.user_id) GROUP BY order_number', '*', '', 'order_number', 'desc');
+                                        if ($row) {
                                             foreach ($row as $value) {
                                         ?>
                                                 <tr>
@@ -242,16 +121,8 @@ $crud_obj = new Crud;
                                                         </button>
                                                     </td>
                                                 </tr>
-                                            <?php
-                                            }
-                                        } else {
-                                            ?>
-                                            <tr colspan="7">
-                                                <th scope="row">
-                                                    No orders today
-                                                </th>
-                                            </tr>
                                         <?php
+                                            }
                                         }
                                         ?>
                                     </tbody>

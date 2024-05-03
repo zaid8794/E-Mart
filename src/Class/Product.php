@@ -43,7 +43,6 @@ if ($_POST['form_type'] == 'save') {
                 'product_price' => $product_price,
                 'product_description' => $product_description,
                 'product_image' => $crud_obj->upload_image($product_image),
-                'is_active' => "Enable",
                 'product_slug' => $crud_obj->slugify($product_name),
             ];
             $exec =  $crud_obj->insert('product', $data);
@@ -105,7 +104,6 @@ if ($_POST['form_type'] == 'update') {
             'product_price' => $product_price,
             'product_description' => $product_description,
             'product_image' => $product_image,
-            'is_active' => "Enable",
             'product_slug' => $crud_obj->slugify($product_name),
         ];
         $exec =  $crud_obj->update('product', $data, 'product_id = "' . trim($_POST['product_id']) . '"');
@@ -163,23 +161,44 @@ if ($_POST['form_type'] == 'product_search') {
         foreach ($exec as $value) {
             $html .= '    <li class="product">';
             $html .= '        <div class="product-holder">';
-            $html .= '            <a href="product_detail.php?product_id=' . $value['product_id'] . '"><img src="admin/uploads/products/' . $value['product_image'] . '" style="max-width : 150px ; " width="" alt=""></a>';
+            $html .= '            <a href="product_detail.php?product_slug=' . $value['product_slug'] . '"><img src="admin/uploads/products/' . $value['product_image'] . '" style="max-width : 150px ; " width="" alt=""></a>';
             $html .= '            <ul class="product__action">';
             $html .= '                <li><a class="add_to_cart" data-productid=' . $value['product_id'] . ' onmouseover=this.style.color="#fff" onmouseout=this.style.color="#5F5D5D"><i class="far fa-shopping-basket"></i></a></li>';
-            $html .= '                <li><a href="#!"><i class="far fa-heart"></i></a></li>';
             $html .= '            </ul>';
             $html .= '        </div>';
             $html .= '        <div class="product-info mt-4">';
-            $html .= '            <h2 class="product__title"><a href="product_detail.php?product_id=' . $value['product_id'] . '">' . $value['product_name'] . '</a></h2>';
+            $html .= '            <h2 class="product__title"><a href="product_detail.php?product_slug=' . $value['product_slug'] . '">' . $value['product_name'] . '</a></h2>';
             $html .= '            <h4 class="product__price"><span class="new">₹ ' . $value['product_price'] . ' </span><span class="old">₹ ' . ($value['product_price'] + 1000) . '</span></h4>';
             $html .= '            <p class="product-description">' . $value['product_description'] . '</p>';
             $html .= '        </div>';
             $html .= '    </li>';
         }
-        $html .= '<script>$(".add_to_cart").click(function() {
-            var product_id = $(this).data("productid");
-            alert(product_id);
-        });</script>';
+        $html .= "<script>
+                $('.add_to_cart').click(function(e) {
+                    e.preventDefault();
+                    var product_id = $(this).data('productid');
+                    $.ajax({
+                        url: 'src/Class/Cart.php',
+                        type: 'POST',
+                        data: {
+                            product_id: product_id,
+                            form_type: 'add_to_cart',
+                        },
+                        dataType: 'json',
+                        success: function(res) {
+                            if (res.msg_error == 'login_not_set') {
+                                window.location.href = 'register.php';
+                            } else if (res.status == 1) {
+                                $('#snackbar').text(res.success_msg).addClass('show');
+                                setTimeout(function() {
+                                    $('#snackbar').removeClass('show');
+                                }, 3000);
+                            } else {
+                            }
+                        }
+                    });
+                });
+                </script>";
         $data['search_text'] = isset($_POST['search']) && $_POST['search'] != '' ? 'You search for : "' . $product_search . '"' : '';
         $data['data'] = $html;
         $data['status'] = 1;
@@ -209,24 +228,44 @@ if ($_POST['form_type'] == 'product_price_range') {
         foreach ($exec as $value) {
             $html .= '    <li class="product">';
             $html .= '        <div class="product-holder">';
-            $html .= '            <a href="product_detail.php?product_id=' . $value['product_id'] . '"><img src="admin/uploads/products/' . $value['product_image'] . '" style="max-width : 150px ; " width="" alt=""></a>';
+            $html .= '            <a href="product_detail.php?product_slug=' . $value['product_slug'] . '"><img src="admin/uploads/products/' . $value['product_image'] . '" style="max-width : 150px ; " width="" alt=""></a>';
             $html .= '            <ul class="product__action">';
             $html .= '                <li><a class="add_to_cart" data-productid=' . $value['product_id'] . ' onmouseover=this.style.color="#fff" onmouseout=this.style.color="#5F5D5D"><i class="far fa-shopping-basket"></i></a></li>';
-            $html .= '                <li><a href="#!"><i class="far fa-heart"></i></a></li>';
             $html .= '            </ul>';
             $html .= '        </div>';
             $html .= '        <div class="product-info mt-4">';
-            $html .= '            <h2 class="product__title"><a href="product_detail.php?product_id=' . $value['product_id'] . '">' . $value['product_name'] . '</a></h2>';
+            $html .= '            <h2 class="product__title"><a href="product_detail.php?product_slug=' . $value['product_slug'] . '">' . $value['product_name'] . '</a></h2>';
             $html .= '            <h4 class="product__price"><span class="new">₹ ' . $value['product_price'] . ' </span><span class="old">₹ ' . ($value['product_price'] + 1000) . '</span></h4>';
             $html .= '            <p class="product-description">' . $value['product_description'] . '</p>';
             $html .= '        </div>';
             $html .= '    </li>';
         }
-        $html .= '<script>
-                    $(".add_to_cart").click(function() {
-                        var product_id = $(this).data("productid");
+        $html .= "<script>
+                $('.add_to_cart').click(function(e) {
+                    e.preventDefault();
+                    var product_id = $(this).data('productid');
+                    $.ajax({
+                        url: 'src/Class/Cart.php',
+                        type: 'POST',
+                        data: {
+                            product_id: product_id,
+                            form_type: 'add_to_cart',
+                        },
+                        dataType: 'json',
+                        success: function(res) {
+                            if (res.msg_error == 'login_not_set') {
+                                window.location.href = 'register.php';
+                            } else if (res.status == 1) {
+                                $('#snackbar').text(res.success_msg).addClass('show');
+                                setTimeout(function() {
+                                    $('#snackbar').removeClass('show');
+                                }, 3000);
+                            } else {
+                            }
+                        }
                     });
-                </script>';
+                });
+                </script>";
         $data['data'] = $html;
         $data['status'] = 1;
     } else {
@@ -250,23 +289,44 @@ if ($_POST['form_type'] == 'product_fetch_by_brand') {
         foreach ($exec as $value) {
             $html .= '    <li class="product">';
             $html .= '        <div class="product-holder">';
-            $html .= '            <a href="product_detail.php?product_id=' . $value['product_id'] . '"><img src="admin/uploads/products/' . $value['product_image'] . '" style="max-width : 150px ; " width="" alt=""></a>';
+            $html .= '            <a href="product_detail.php?product_id=' . $value['product_slug'] . '"><img src="admin/uploads/products/' . $value['product_image'] . '" style="max-width : 150px ; " width="" alt=""></a>';
             $html .= '            <ul class="product__action">';
             $html .= '                <li><a class="add_to_cart" data-productid="' . $value['product_id'] . '" onmouseover=this.style.color="#fff" onmouseout=this.style.color="#5F5D5D"><i class="far fa-shopping-basket"></i></a></li>';
-            $html .= '                <li><a href="#!"><i class="far fa-heart"></i></a></li>';
             $html .= '            </ul>';
             $html .= '        </div>';
             $html .= '        <div class="product-info mt-4">';
-            $html .= '            <h2 class="product__title"><a href="product_detail.php?product_id=' . $value['product_id'] . '">' . $value['product_name'] . '</a></h2>';
+            $html .= '            <h2 class="product__title"><a href="product_detail.php?product_slug=' . $value['product_slug'] . '">' . $value['product_name'] . '</a></h2>';
             $html .= '            <h4 class="product__price"><span class="new">₹ ' . $value['product_price'] . ' </span><span class="old">₹ ' . ($value['product_price'] + 1000) . '</span></h4>';
             $html .= '            <p class="product-description">' . $value['product_description'] . '</p>';
             $html .= '        </div>';
             $html .= '    </li>';
         }
-        $html .= '<script>$(".add_to_cart").click(function() {
-            var product_id = $(this).data("productid");
-            alert(product_id);
-        });</script>';
+        $html .= "<script>
+                $('.add_to_cart').click(function(e) {
+                    e.preventDefault();
+                    var product_id = $(this).data('productid');
+                    $.ajax({
+                        url: 'src/Class/Cart.php',
+                        type: 'POST',
+                        data: {
+                            product_id: product_id,
+                            form_type: 'add_to_cart',
+                        },
+                        dataType: 'json',
+                        success: function(res) {
+                            if (res.msg_error == 'login_not_set') {
+                                window.location.href = 'register.php';
+                            } else if (res.status == 1) {
+                                $('#snackbar').text(res.success_msg).addClass('show');
+                                setTimeout(function() {
+                                    $('#snackbar').removeClass('show');
+                                }, 3000);
+                            } else {
+                            }
+                        }
+                    });
+                });
+                </script>";
         if (isset($brands)) {
             $selected_brand = array();
             $brand_select = $crud_obj->getData('brand', 'distinct(brand_name)', "brand_id IN ($brands)");

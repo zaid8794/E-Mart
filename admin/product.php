@@ -106,7 +106,6 @@ $crud_obj = new Crud;
                                             <th>Product Description</th>
                                             <th>Brand Name</th>
                                             <th>Category Name</th>
-                                            <th>Is Active</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -122,10 +121,9 @@ $crud_obj = new Crud;
                                                     <td><img src="uploads/products/<?= $value['product_image']; ?>" height="" width="100" alt=""></td>
                                                     <td><?= $value['product_name'] ?></td>
                                                     <td><?= $value['product_price'] ?></td>
-                                                    <td><?= $value['product_description'] ?></td>
+                                                    <td style="width: 40%;"><?= $value['product_description'] ?></td>
                                                     <td><?= $value['brand_name'] ?></td>
                                                     <td><?= $value['category_name'] ?></td>
-                                                    <td><?= $value['is_active'] ?></td>
                                                     <td>
                                                         <button class="btn btn-warning waves-effect btn-circle waves-light mb-2 edit" type="button" data-id="<?= $value['product_id'] ?>" data-catid="<?= $value['category_id'] ?>" data-brandid="<?= $value['brand_id'] ?>" data-brandname="<?= $value['brand_name'] ?>"><i class="fa fa-pencil-square-o"></i></button>
                                                         <button class="btn btn-danger waves-effect btn-circle waves-light mb-2 delete" type="button" data-id="<?= $value['product_id'] ?>"><i class="fa fa-trash"></i></button>

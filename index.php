@@ -6,21 +6,21 @@ require_once "components/header.php";
 <div class="banner pt-10">
     <div class="container mxw_1360">
         <div class="banner__wrapper d-flex">
-            <div class="category-nav">
+            <!-- <div class="category-nav">
                 <ul class="category-nav__list list-unstyled" style="height: 100%;">
                     <li><a href="shop.php"><img src="#" class="fas fa-arrow-right" alt="">All Products</a></li>
                     <?php
-                    $row = $crud_obj->getData('category', '*');
-                    if ($row) {
-                        foreach ($row as $value) {
+                    // $row = $crud_obj->getData('category', '*');
+                    // if ($row) {
+                    //     foreach ($row as $value) {
                     ?>
-                            <li><a href="shop.php?category=<?= $value['category_id'] ?>"><img src="#" class="fas fa-arrow-right" alt=""><?= $value['category_name'] ?></a></li>
+                            <li><a href="shop.php?category=<?//= $value['category_id'] ?>"><img src="#" class="fas fa-arrow-right" alt=""><?//= $value['category_name'] ?></a></li>
                     <?php
-                        }
-                    }
+                    //     }
+                    // }
                     ?>
                 </ul>
-            </div>
+            </div> -->
             <div class="banner__main banner__height ul_li bg_img" data-background="assets/img/bg/bg_19.jpg">
                 <div class="hero-banner__content">
                     <span class="subtitle">100% organic Food</span>

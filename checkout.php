@@ -1,8 +1,8 @@
 <?php
-$title = "Contact Us";
+$title = "Checkout";
 require_once "components/header.php";
 if (!isset($_SESSION['user'])) {
-    echo "<script>window.location='index.php';</script>";
+    echo "<script>window.location='register.php';</script>";
 }
 ?>
 <!-- breadcrumb start -->
@@ -11,7 +11,7 @@ if (!isset($_SESSION['user'])) {
         <div class="radios-breadcrumb breadcrumbs">
             <ul class="list-unstyled d-flex align-items-center">
                 <li class="radiosbcrumb-item radiosbcrumb-begin">
-                    <a href="index.php"><span>Home</span></a>
+                    <a href="index.html"><span>Home</span></a>
                 </li>
                 <li class="radiosbcrumb-item radiosbcrumb-end">
                     <span>Checkout</span>
@@ -28,59 +28,104 @@ if (!isset($_SESSION['user'])) {
         <div class="row">
             <div class="col col-xs-12">
                 <div class="woocommerce">
-                    <form name="checkout" method="post" class="checkout woocommerce-checkout" action="http://localhost/wp/?page_id=6" enctype="multipart/form-data">
-                        <div class="col2-set" id="customer_details">
-                            <div class="coll-1">
+                    <div class="checkout woocommerce-checkout">
+                        <div class="col2-set">
+
+                            <div class="coll-2">
                                 <div class="woocommerce-billing-fields">
-                                    <h3>Billing Details</h3>
-                                    <p class="form-row form-row form-row-first validate-required" id="billing_first_name_field">
-                                        <label for="billing_first_name" class="">First Name <abbr class="required" title="required">*</abbr></label>
-                                        <input type="text" class="input-text " name="billing_first_name" id="billing_first_name" placeholder="" autocomplete="given-name" value="" />
-                                    </p>
-                                    <p class="form-row form-row form-row-last validate-required" id="billing_last_name_field">
-                                        <label for="billing_last_name" class="">Last Name <abbr class="required" title="required">*</abbr></label>
-                                        <input type="text" class="input-text " name="billing_last_name" id="billing_last_name" placeholder="" autocomplete="family-name" value="" />
-                                    </p>
                                     <div class="clear"></div>
-                                    <p class="form-row form-row form-row-wide" id="billing_company_field">
-                                        <label for="billing_company" class="">Company Name</label>
-                                        <input type="text" class="input-text " name="billing_company" id="billing_company" placeholder="" autocomplete="organization" value="" />
-                                    </p>
-                                    <p class="form-row form-row form-row-first validate-required validate-email" id="billing_email_field">
-                                        <label for="billing_email" class="">Email Address <abbr class="required" title="required">*</abbr></label>
-                                        <input type="email" class="input-text " name="billing_email" id="billing_email" placeholder="" autocomplete="email" value="" />
-                                    </p>
-                                    <p class="form-row form-row form-row-last validate-required validate-phone" id="billing_phone_field">
-                                        <label for="billing_phone" class="">Phone <abbr class="required" title="required">*</abbr></label>
-                                        <input type="tel" class="input-text " name="billing_phone" id="billing_phone" placeholder="" autocomplete="tel" value="" />
-                                    </p>
-                                    <div class="clear"></div>
-                                    <p class="form-row form-row form-row-wide address-field update_totals_on_change validate-required" id="billing_country_field">
-                                        <label for="billing_country" class="">Country <abbr class="required" title="required">*</abbr></label>
-                                        <select name="billing_country" id="billing_country" autocomplete="country" class="country_to_state country_select ">
-                                            <option value="">Select a country&hellip;</option>
-                                            <option value="AX" selected='selected'>&#197;land Islands</option>
-                                        </select>
-                                        <noscript>
-                                            <input type="submit" name="woocommerce_checkout_update_totals" value="Update country" />
-                                        </noscript>
-                                    </p>
-                                    <p class="form-row form-row form-row-wide address-field validate-required" id="billing_address_1_field">
-                                        <label for="billing_address_1" class="">Address <abbr class="required" title="required">*</abbr></label>
-                                        <input type="text" class="input-text " name="billing_address_1" id="billing_address_1" placeholder="Street address" autocomplete="address-line1" value="" />
-                                    </p>
-                                    <p class="form-row form-row form-row-wide address-field" id="billing_address_2_field">
-                                        <input type="text" class="input-text " name="billing_address_2" id="billing_address_2" placeholder="Apartment, suite, unit etc. (optional)" autocomplete="address-line2" value="" />
-                                    </p>
-                                    <p class="form-row form-row address-field validate-postcode validate-required form-row-first  woocommerce-invalid-required-field" id="billing_city_field">
-                                        <label for="billing_city" class="">Town / City <abbr class="required" title="required">*</abbr></label>
-                                        <input type="text" class="input-text " name="billing_city" id="billing_city" placeholder="" autocomplete="address-level2" value="" />
-                                    </p>
-                                    <p class="form-row form-row form-row-last address-field validate-required validate-postcode" id="billing_postcode_field">
-                                        <label for="billing_postcode" class="">Postcode / ZIP <abbr class="required" title="required">*</abbr></label>
-                                        <input type="text" class="input-text " name="billing_postcode8" id="billing_postcode" placeholder="" autocomplete="postal-code" value="" />
-                                    </p>
-                                    <div class="clear"></div>
+                                    <h3>Saved Address</h3>
+                                    <div class="row">
+                                        <?php
+                                        $address_fetch = $crud_obj->getData('address', '*', 'user_id = "' . $_SESSION['user']['id'] . '"');
+                                        if ($address_fetch > 0) {
+                                            foreach ($address_fetch as $address) {
+                                        ?>
+                                                <div class="col-lg-6" id="address_<?= $address['address_id'] ?>">
+                                                    <div class="card shadow selected_address p-4 ms-3 mb-4" id="selected_address_<?= $address['address_id'] ?>">
+                                                        <div class="fw-bold mb-1">
+                                                            <input type="radio" data-addid="<?= $address['address_id'] ?>" name="address_id" style="height: 15px; width: 20px; accent-color: #ff8717;" value="<?= $address['address_id'] ?>" <?= count($address_fetch) == 1 ? 'checked' : '' ?>>
+                                                            <button type="button" data-addressid="<?= $address['address_id'] ?>" class="btn btn-danger btn-sm float-end remove_address"><i class="fas fa-trash"></i></button>
+                                                        </div>
+                                                        <div class="fw-bold mb-1">
+                                                            Name : <span class="fw-normal"><?= $address['address_full_name'] ?></span>
+                                                        </div>
+                                                        <div class="fw-bold mb-1">
+                                                            Email : <span class="fw-normal"><?= $address['address_email'] ?></span>
+                                                        </div>
+                                                        <div class="fw-bold mb-1">
+                                                            Address : <span class="fw-normal"><?= $address['full_address'] . ', ' . $address['city'] . ', ' . $address['state'] . ' - ' . $address['pincode'] . ', ' . $address['country'] ?></span>
+                                                        </div>
+                                                        <div class="fw-bold mb-1">
+                                                            Mobile : <span class="fw-normal"><?= $address['address_mobile'] ?></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                        <?php
+                                            }
+                                        }
+                                        ?>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="coll-1">
+                                <div class="woocommerce-shipping-fields">
+                                    <h3 id="ship-to-different-address">
+                                        <label for="ship-to-different-address-checkbox" class="checkbox">+ Add New Address +</label>
+                                        <input id="ship-to-different-address-checkbox" class="input-checkbox" type="checkbox" name="ship_to_different_address" value="1" />
+                                    </h3>
+                                    <form method="post" id="save_address_form">
+                                        <div class="shipping_address mb-5">
+                                            <div class="form-row form-row form-row-last validate-required">
+                                                <label for="shipping_first_name">Name <abbr class="required" title="required">*</abbr></label>
+                                                <input type="text" class="input-text" name="address_full_name" placeholder="" />
+                                            </div>
+                                            <div class="clear"></div>
+                                            <div class="form-row form-row form-row-last validate-required">
+                                                <label for="shipping_first_name">Email <abbr class="required" title="required">*</abbr></label>
+                                                <input type="text" class="input-text" name="address_email" placeholder="" />
+                                            </div>
+                                            <div class="form-row form-row form-row-last validate-required">
+                                                <label for="shipping_last_name">Mobile <abbr class="required" title="required">*</abbr></label>
+                                                <input type="text" class="input-text" name="address_mobile" placeholder="" />
+                                            </div>
+                                            <div class="form-row form-row form-row-last validate-required">
+                                                <label for="shipping_first_name">Address <abbr class="required" title="required">*</abbr></label>
+                                                <input type="text" class="input-text" name="address1" placeholder="Apartment, suite, unit etc." />
+                                                <input type="text" class="input-text mt-3" name="address2" placeholder="Street address" />
+                                            </div>
+                                            <div class="form-row form-row form-row-last validate-required">
+                                                <label for="shipping_first_name">Town / City <abbr class="required" title="required">*</abbr></label>
+                                                <input type="text" class="input-text" name="city" placeholder="" />
+                                            </div>
+                                            <div class="form-row form-row form-row-last validate-required">
+                                                <label for="shipping_first_name">State <abbr class="required" title="required">*</abbr></label>
+                                                <input type="text" class="input-text" name="state" placeholder="" />
+                                            </div>
+                                            <div class="form-row form-row form-row-last validate-required">
+                                                <label for="shipping_last_name">Pincode / Zip <abbr class="required" title="required">*</abbr></label>
+                                                <input type="text" class="input-text" name="pincode" placeholder="" />
+                                            </div>
+                                            <div class="form-row form-row form-row-last validate-required">
+                                                <label for="shipping_last_name">Country <abbr class="required" title="required">*</abbr></label>
+                                                <input type="text" class="input-text" name="country" value="India" readonly />
+                                            </div>
+                                            <div class="form-row form-row form-row-last validate-required mt-3">
+                                                <input type="hidden" name="form_type" value="save_address">
+                                                <button type="submit" class="thm-btn thm-btn__2 no-icon br-0">
+                                                    <span class="btn-wrap">
+                                                        <span>Save Address</span>
+                                                        <span>Save Address</span>
+                                                    </span>
+                                                </button>
+                                            </div>
+                                            <div class="clear"></div>
+                                            <div class="form-row form-row form-row-last validate-required">
+                                                <span class="text-danger" id="error_msg"></span>
+                                            </div>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -101,6 +146,7 @@ if (!isset($_SESSION['user'])) {
                                     if ($cart_fetch > 0) {
                                         foreach ($cart_fetch as $cart) {
                                             $subtotal += $cart['product_price'] * $cart['qty'];
+                                            $shipping = $subtotal >= 500 ? 0 : 50;
                                     ?>
                                             <tr class="cart_single">
                                                 <td class="product-name">
@@ -109,8 +155,15 @@ if (!isset($_SESSION['user'])) {
                                                     <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">₹</span><?= ($cart['product_price'] * $cart['qty']) ?></span>
                                                 </td>
                                             </tr>
-                                    <?php
+                                        <?php
                                         }
+                                    } else {
+                                        $shipping = 0;
+                                        ?>
+                                        <tr class="cart_single">
+                                            <td class="product-name">Cart is empty</td>
+                                        </tr>
+                                    <?php
                                     }
                                     ?>
                                 </tbody>
@@ -123,61 +176,54 @@ if (!isset($_SESSION['user'])) {
                                     <tr class="shipping">
                                         <th>Shipping</th>
                                         <td data-title="Shipping">
-
-                                            <?= $subtotal >= 500 ? 'Free Shipping' : '₹' . $shipping = 50 ?>
+                                            <?= '₹' . $shipping ?>
                                         </td>
                                     </tr>
                                     <tr class="order-total">
                                         <th>Total</th>
-                                        <td><strong><span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">₹</span><?= ($subtotal + $shipping) ?></span></strong> </td>
+                                        <td><span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">₹</span><?= ($subtotal + $shipping) ?></span></td>
                                     </tr>
                                 </tfoot>
                             </table>
                             <div id="payment" class="woocommerce-checkout-payment">
-                                <ul class="wc_payment_methods payment_methods methods">
-                                    <li class="wc_payment_method payment_method_cheque">
-                                        <input id="payment_method_cheque" type="radio" class="input-radio" name="payment_method" value="cheque" checked='checked' data-order_button_text="" />
-                                        <!--grop add span for radio button style-->
-                                        <span class='grop-woo-radio-style'></span>
-                                        <!--custom change-->
-                                        <label for="payment_method_cheque">
-                                            Check Payments </label>
-                                        <div class="payment_box payment_method_cheque">
-                                            <p>Please send a check to Store Name, Store Street, Store Town, Store State / County, Store Postcode.</p>
-                                        </div>
-                                    </li>
-                                    <li class="wc_payment_method payment_method_paypal">
-                                        <input id="payment_method_paypal" type="radio" class="input-radio" name="payment_method" value="paypal" data-order_button_text="Proceed to PayPal" />
-                                        <!--grop add span for radio button style-->
-                                        <span class='grop-woo-radio-style'></span>
-                                        <!--custom change-->
-                                        <label for="payment_method_paypal">
-                                            PayPal <img src="assets/img/icon/paypal.png" alt="PayPal Acceptance Mark" /><a href="#!" class="about_paypal" title="What is PayPal?">What is PayPal?</a> </label>
-                                        <div class="payment_box payment_method_paypal" style="display:none;">
-                                            <p>Pay via PayPal; you can pay with your credit card if you don&#8217;t have a PayPal account.</p>
-                                        </div>
-                                    </li>
-                                </ul>
-                                <div class="form-row place-order mt-20">
-                                    <noscript>
-                                        Since your browser does not support JavaScript, or it is disabled, please ensure you click the <em>Update Totals</em> button before placing your order. You may be charged more than the amount stated above if you fail to do so.
-                                        <br />
-                                        <input type="submit" class="thm-btn alt" name="woocommerce_checkout_update_totals" value="Update totals" />
-                                    </noscript>
-
-                                    <button class="thm-btn thm-btn__2 no-icon br-0">
-                                        <span class="btn-wrap">
-                                            <span>Place order</span>
-                                            <span>Place order</span>
-                                        </span>
-                                    </button>
-
-                                    <input type="hidden" id="_wpnonce5" name="_wpnonce" value="783c1934b0" />
-                                    <input type="hidden" name="_wp_http_referer" value="/wp/?page_id=6" />
-                                </div>
+                                <form method="post" id="checkout_form">
+                                    <ul class="wc_payment_methods payment_methods methods">
+                                        <li class="wc_payment_method payment_method_cheque">
+                                            <input id="payment_method_cheque" type="radio" class="input-radio" name="payment_method" value="cod" checked='checked' />
+                                            <!--grop add span for radio button style-->
+                                            <span class='grop-woo-radio-style'></span>
+                                            <!--custom change-->
+                                            <label for="payment_method_cheque">
+                                                Cash on delivery <i class="fas fa-cod"></i></label>
+                                            <div class="payment_box payment_method_cheque">
+                                                <p>After delivery cash payment</p>
+                                            </div>
+                                        </li>
+                                        <li class="wc_payment_method payment_method_paypal">
+                                            <input id="payment_method_paypal" type="radio" class="input-radio" name="payment_method" value="upi" data-order_button_text="Proceed to PayPal" />
+                                            <!--grop add span for radio button style-->
+                                            <span class='grop-woo-radio-style'></span>
+                                            <!--custom change-->
+                                            <label for="payment_method_paypal">Upi</label>
+                                            <div class="payment_box payment_method_paypal">
+                                                <p>Pay with google pay, amazon, phonepay or any other</p>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <div class="form-row place-order mt-20">
+                                        <input type="hidden" name="add_id" id="add_id">
+                                        <input type="hidden" name="action" value="place_order">
+                                        <button type="submit" class="thm-btn thm-btn__2 no-icon br-0">
+                                            <span class="btn-wrap">
+                                                <span>Place order</span>
+                                                <span>Place order</span>
+                                            </span>
+                                        </button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -187,3 +233,84 @@ if (!isset($_SESSION['user'])) {
 <?php
 require_once "components/footer.php";
 ?>
+<script>
+    $(document).ready(function() {
+        $("#save_address_form").on('submit', function(e) {
+            e.preventDefault();
+            var fd = new FormData(this);
+            $.ajax({
+                url: 'src/Class/SaveAddress.php',
+                type: 'POST',
+                dataType: 'json',
+                processData: false,
+                contentType: false,
+                data: fd,
+                success: function(res) {
+                    if (res.status == 1) {
+                        $("#save_address_form")[0].reset();
+                        window.location.reload();
+                    } else {
+                        $("#error_msg").text(res.msg_error);
+                    }
+                }
+            });
+        });
+
+        $('.remove_address').click(function(e) {
+            var address_id = $(this).data('addressid');
+            $.ajax({
+                url: 'src/Class/SaveAddress.php',
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    address_id: address_id,
+                    form_type: 'remove_address',
+                },
+                success: function(res) {
+                    if (res.status == 1) {
+                        $("#" + res.remove).html('');
+                    } else {
+
+                    }
+                }
+            });
+        });
+
+        var checked_address_id = $('input[name="address_id"]:checked').data('addid');
+        $('#selected_address_' + checked_address_id).css('border', '2px solid #ff8717');
+
+        $('input[name="address_id"]').change(function() {
+            $('.selected_address').css('border', '0');
+            var addid = $(this).data('addid');
+            $('#selected_address_' + addid).css('border', '2px solid #ff8717');
+        });
+
+        $("#checkout_form").on('submit', function(e) {
+            e.preventDefault();
+            var address_id = $('input[name="address_id"]:checked').val();
+            if (address_id == '' || address_id == undefined || address_id == null) {
+                alert('Please select Address');
+            } else {
+                $("input[name='add_id']").val(address_id);
+                var fd = new FormData(this);
+                $.ajax({
+                    url: 'src/Class/Checkout.php',
+                    type: 'POST',
+                    dataType: 'json',
+                    contentType: false,
+                    processData: false,
+                    data: fd,
+                    success: function(res) {
+                        if (res.status == 1) {
+                            alert("Thank you for shopping");
+                            window.location.href = 'index.php';
+                        } else {
+                            alert(res.msg_error);
+                            window.location.href = 'shop.php';
+                        }
+                    }
+                });
+            }
+        });
+    });
+</script>

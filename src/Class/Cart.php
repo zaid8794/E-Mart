@@ -10,12 +10,16 @@ if (!isset($_SESSION['user'])) {
     echo json_encode($data);
 } else {
     if ($_POST['form_type'] == 'add_to_cart') {
+        // echo "<pre>";
+        // print_r($_POST);
+        // die();
         $product_id = $_POST['product_id'];
         $user_id = $_SESSION['user']['id'];
+        $qty = isset($_POST['qty']) ? $_POST['qty'] : 1;
         $cart_fetch = $crud_obj->getData('cart', '*', "product_id = $product_id AND user_id = $user_id");
         if ($cart_fetch > 0) {
             $old_qty = $cart_fetch[0]['qty'];
-            $new_qty = $old_qty + 1;
+            $new_qty = $old_qty + $qty;
             $data = [
                 'qty' => $new_qty,
             ];
@@ -30,7 +34,7 @@ if (!isset($_SESSION['user'])) {
             $data = [
                 'user_id' => $_SESSION['user']['id'],
                 'product_id' => $product_id,
-                'qty' => 1
+                'qty' => $qty,
             ];
             $sql = $crud_obj->insert('cart', $data);
             if ($sql == 1) {
@@ -42,6 +46,7 @@ if (!isset($_SESSION['user'])) {
         }
         echo json_encode($data);
     }
+
     if ($_POST['form_type'] == 'remove_sidebar_cart') {
         $cart_id = $_POST['cart_id'];
         $remove_cart = $crud_obj->delete('cart', 'cart_id = "' . $cart_id . '"');

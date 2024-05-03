@@ -65,6 +65,7 @@ if (!isset($_SESSION['admin'])) {
                             <li id="brand"><a href="brand.php"><i class='fa fa-bold'></i><span>Brands</span></a></li>
                             <li id="product"><a href="product.php"><i class='fa fa-th'></i><span>Products</span></a></li>
                             <li id="user"><a href="user.php"><i class='fa fa-users'></i><span>Users</span></a></li>
+                            <li id="order"><a href="orders.php"><i class='fa fa-pie-chart'></i><span>Orders</span></a></li>
                             <li id="contactus"><a href="contactus.php"><i class="fa fa-envelope"></i><span>Messages</span></a></li>
                         </ul>
                     </nav>
@@ -89,13 +90,6 @@ if (!isset($_SESSION['admin'])) {
                             <i class='bx bx-grid-alt'></i>
                         </div>
                     </div>
-                    <!-- Left Side Nav -->
-                    <ul class="left-side-navbar d-flex align-items-center">
-                        <li class="hide-phone app-search">
-                            <input type="text" class="form-control" placeholder="Search...">
-                            <span class="bx bx-search-alt"></span>
-                        </li>
-                    </ul>
                 </div>
                 <div class="right-side-navbar d-flex align-items-center justify-content-end">
                     <!-- Mobile Trigger -->

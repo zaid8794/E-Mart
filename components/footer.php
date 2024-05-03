@@ -193,6 +193,33 @@
 <script src="assets/js/main.js"></script>
 <script>
     $(document).ready(function() {
+        $(".add_to_cart").click(function(e) {
+            e.preventDefault();
+            var product_id = $(this).data('productid');
+            $.ajax({
+                url: "src/Class/Cart.php",
+                type: "POST",
+                data: {
+                    product_id: product_id,
+                    form_type: 'add_to_cart',
+                },
+                dataType: 'json',
+                success: function(res) {
+                    if (res.msg_error == 'login_not_set') {
+                        window.location.href = 'register.php';
+                    } else if (res.status == 1) {
+                        $("#snackbar").text(res.success_msg).addClass('show');
+                        setTimeout(function() {
+                            $("#snackbar").removeClass('show');
+                        }, 3000);
+                    } else {
+
+                    }
+                }
+            })
+        });
+
+
         $(".remove_sidebar_cart_btn").on("click", function() {
             var cart_id = $(this).data("cartid");
             $.ajax({
