@@ -161,9 +161,9 @@ if ($_POST['form_type'] == 'product_search') {
         foreach ($exec as $value) {
             $html .= '    <li class="product">';
             $html .= '        <div class="product-holder">';
-            $html .= '            <a href="product_detail.php?product_slug=' . $value['product_slug'] . '"><img src="admin/uploads/products/' . $value['product_image'] . '" style="max-width : 150px ; " width="" alt=""></a>';
+            $html .= '            <a href="product_detail.php?product_slug=' . $value['product_slug'] . '"><img src="admin/uploads/products/' . $value['product_image'] . '" style="max-width : 170px ; " width="" alt=""></a>';
             $html .= '            <ul class="product__action">';
-            $html .= '                <li><a class="add_to_cart" data-productid=' . $value['product_id'] . ' onmouseover=this.style.color="#fff" onmouseout=this.style.color="#5F5D5D"><i class="far fa-shopping-basket"></i></a></li>';
+            $html .= '                <li style="cursor: pointer;"><a class="add_to_cart" data-productid=' . $value['product_id'] . ' onmouseover=this.style.color="#fff" onmouseout=this.style.color="#5F5D5D"><i class="far fa-shopping-basket"></i></a></li>';
             $html .= '            </ul>';
             $html .= '        </div>';
             $html .= '        <div class="product-info mt-4">';
@@ -228,9 +228,9 @@ if ($_POST['form_type'] == 'product_price_range') {
         foreach ($exec as $value) {
             $html .= '    <li class="product">';
             $html .= '        <div class="product-holder">';
-            $html .= '            <a href="product_detail.php?product_slug=' . $value['product_slug'] . '"><img src="admin/uploads/products/' . $value['product_image'] . '" style="max-width : 150px ; " width="" alt=""></a>';
+            $html .= '            <a href="product_detail.php?product_slug=' . $value['product_slug'] . '"><img src="admin/uploads/products/' . $value['product_image'] . '" style="max-width : 170px ; " width="" alt=""></a>';
             $html .= '            <ul class="product__action">';
-            $html .= '                <li><a class="add_to_cart" data-productid=' . $value['product_id'] . ' onmouseover=this.style.color="#fff" onmouseout=this.style.color="#5F5D5D"><i class="far fa-shopping-basket"></i></a></li>';
+            $html .= '                <li style="cursor: pointer;"><a class="add_to_cart" data-productid=' . $value['product_id'] . ' onmouseover=this.style.color="#fff" onmouseout=this.style.color="#5F5D5D"><i class="far fa-shopping-basket"></i></a></li>';
             $html .= '            </ul>';
             $html .= '        </div>';
             $html .= '        <div class="product-info mt-4">';
@@ -289,9 +289,9 @@ if ($_POST['form_type'] == 'product_fetch_by_brand') {
         foreach ($exec as $value) {
             $html .= '    <li class="product">';
             $html .= '        <div class="product-holder">';
-            $html .= '            <a href="product_detail.php?product_id=' . $value['product_slug'] . '"><img src="admin/uploads/products/' . $value['product_image'] . '" style="max-width : 150px ; " width="" alt=""></a>';
+            $html .= '            <a href="product_detail.php?product_id=' . $value['product_slug'] . '"><img src="admin/uploads/products/' . $value['product_image'] . '" style="max-width : 170px ; " width="" alt=""></a>';
             $html .= '            <ul class="product__action">';
-            $html .= '                <li><a class="add_to_cart" data-productid="' . $value['product_id'] . '" onmouseover=this.style.color="#fff" onmouseout=this.style.color="#5F5D5D"><i class="far fa-shopping-basket"></i></a></li>';
+            $html .= '                <li style="cursor: pointer;"><a class="add_to_cart" data-productid="' . $value['product_id'] . '" onmouseover=this.style.color="#fff" onmouseout=this.style.color="#5F5D5D"><i class="far fa-shopping-basket"></i></a></li>';
             $html .= '            </ul>';
             $html .= '        </div>';
             $html .= '        <div class="product-info mt-4">';

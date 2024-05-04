@@ -6,7 +6,7 @@ require_once "vendor/autoload.php";
 use App\Class\Crud;
 
 $crud_obj = new Crud;
-$no_of_records_per_page = 12;
+$no_of_records_per_page = 1;
 if (isset($_GET['category'])) {
     $category_id = $_GET['category'];
 }
@@ -107,9 +107,9 @@ $offset = ($pageno - 1) * $no_of_records_per_page;
                                 ?>
                                         <li class="product">
                                             <div class="product-holder">
-                                                <a href="product_detail.php?product_slug=<?= $value['product_slug'] ?>"><img src="admin/uploads/products/<?= $value['product_image']; ?>" style="max-width : 150px ; " width="" alt=""></a>
+                                                <a href="product_detail.php?product_slug=<?= $value['product_slug'] ?>"><img src="admin/uploads/products/<?= $value['product_image']; ?>" style="max-width : 170px ; " width="" alt=""></a>
                                                 <ul class="product__action">
-                                                    <li><a class="add_to_cart" data-productid="<?= $value['product_id'] ?>" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#5F5D5D'"><i class="far fa-shopping-basket"></i></a></li>
+                                                    <li style="cursor: pointer;"><a class="add_to_cart" data-productid="<?= $value['product_id'] ?>" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#5F5D5D'"><i class="far fa-shopping-basket"></i></a></li>
                                                 </ul>
                                             </div>
                                             <div class="product-info mt-4">
@@ -132,6 +132,7 @@ $offset = ($pageno - 1) * $no_of_records_per_page;
                                     $total_pages = $crud_obj->pagination('product', 'COUNT(*)', "category_id={$category_id}", $no_of_records_per_page);
                                 } else {
                                     $total_pages = $crud_obj->pagination('product', 'COUNT(*)', '', $no_of_records_per_page);
+                                    $category_id = '';
                                 }
                                 for ($i = 1; $i <= $total_pages; $i++) {
                                 ?>
