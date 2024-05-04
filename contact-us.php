@@ -54,7 +54,7 @@ require_once "components/header.php";
             </div>
             <div class="col-xl-3 col-lg-4 col-md-6 mt-30">
                 <div class="contact-info__item d-flex">
-                    <span class="icon"><img src="assets/img/icon/linkedin2.svg" alt=""></i></span>
+                    <span class="icon"><img src="assets/img/icon/linkedin.svg" alt=""></i></span>
                     <div class="content">
                         <h3>Connect Us</h3>
                         <a href="https://www.linkedin.com/in/zaid-vora-5333b4233">www.linkedin.com/in/zaid-vora-5333b4233</a>

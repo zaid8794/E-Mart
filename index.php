@@ -54,7 +54,7 @@ require_once "components/header.php";
 <!-- banner end -->
 
 <!-- category start -->
-<div class="category pt-35 pb-60">
+<!-- <div class="category pt-35 pb-60">
     <div class="container mxw_1360">
         <div class="category__slide">
             <a class="category__item" href="#!">
@@ -113,11 +113,11 @@ require_once "components/header.php";
             </a>
         </div>
     </div>
-</div>
+</div> -->
 <!-- category end -->
 
 <!-- banner slide start  -->
-<div class="banner-slide">
+<div class="banner-slide pt-35">
     <div class="container mxw_1360">
         <div class="banner-slide__active">
             <div class="banner-slide__single">
@@ -736,13 +736,21 @@ require_once "components/header.php";
                             </div> -->
                             <div class="col-lg-12 mt-30">
                                 <div class="offer-product ml-10">
+                                    <?php
+                                    $fetch_cat = $crud_obj->getData('category', '*', '', 'RAND()', '', '1');
+                                    if ($fetch_cat > 0) {
+                                        $category_name = $fetch_cat[0]['category_name'];
+                                        $category_id = $fetch_cat[0]['category_id'];
+                                    }
+                                    ?>
                                     <div class="product__head ul_li_between mb-10 mt-none-15">
                                         <h2 class="section-heading mt-15">
-                                            <span><span>Baby Items</span></span> / Gift Item
+
+                                            <span><?= $category_name ?></span>
                                         </h2>
-                                        <div class="countdown countdown__black ul_li mt-15" data-countdown="2024/08/28"></div>
+                                        <div class="countdown countdown__black ul_li mt-15" data-countdown="2024/05/20"></div>
                                         <div class="product__btn mt-15">
-                                            <a class="thm-btn text-capitalize" href="shop.html">
+                                            <a class="thm-btn text-capitalize" href="shop.php?category=<?= $category_id ?>">
                                                 <span class="btn-wrap">
                                                     <span>All Items</span>
                                                     <span>All Items</span>
@@ -752,112 +760,29 @@ require_once "components/header.php";
                                         </div>
                                     </div>
                                     <div class="row g-0">
-                                        <div class="col-lg-3 col-md-6">
-                                            <div class="product__item style-2">
-                                                <div class="product__img text-center pos-rel">
-                                                    <a href="shop-single.html"><img src="assets/img/product/img_132.png" alt=""></a>
-                                                    <ul class="product__action style-2 ul_li">
-                                                        <li><a href="#!"><i class="far fa-compress-alt"></i></a>
-                                                        </li>
-                                                        <li><a href="#!"><i class="far fa-shopping-basket"></i></a>
-                                                        </li>
-                                                        <li><a href="#!"><i class="far fa-heart"></i></a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                                <div class="product__content">
-                                                    <div class="product__review ul_li">
-                                                        <ul class="rating-star ul_li mr-10">
-                                                            <li><i class="fas fa-star"></i></li>
-                                                            <li><i class="fas fa-star"></i></li>
-                                                            <li><i class="fas fa-star"></i></li>
-                                                            <li><i class="far fa-star"></i></li>
-                                                            <li><i class="far fa-star"></i></li>
-                                                        </ul>
-                                                        <span>(126) Review</span>
+                                        <?php
+                                        $fetch_pro_by_cat = $crud_obj->getData('product', '*', 'category_id = "' . $category_id . '"', '', '', '4');
+                                        if ($fetch_pro_by_cat) {
+                                            foreach ($fetch_pro_by_cat as $value) {
+                                        ?>
+                                                <div class="col-lg-3 col-md-6 ">
+                                                    <div class="product__item style-2">
+                                                        <div class="product__img text-center pos-rel">
+                                                            <a href="product_detail.php?product_slug=<?= $value['product_slug'] ?>"><img src="admin/uploads/products/<?= $value['product_image'] ?>" style="max-width : 170px ;" alt=""></a>
+                                                            <ul class="product__action style-2 ul_li">
+                                                                <li style="cursor: pointer;"><a class="add_to_cart" data-productid="<?= $value['product_id'] ?>" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#5F5D5D'"><i class="far fa-shopping-basket"></i></a></li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="product__content">
+                                                            <h2 class="product__title"><a href="product_detail.php?product_slug=<?= $value['product_slug'] ?>"><?= $value['product_name'] ?></a></h2>
+                                                            <h4 class="product__price"><span class="new">₹<?= $value['product_price'] ?></span><span class="old">₹<?= ($value['product_price'] + 1000) ?></span></h4>
+                                                        </div>
                                                     </div>
-                                                    <h2 class="product__title"><a href="shop-single.html">Fire HD 10 tablet,
-                                                            10.1″, 1080p Full HD</a></h2>
-                                                    <span class="product__available">Available:
-                                                        <span>334</span></span>
-                                                    <div class="product__progress progress color-primary">
-                                                        <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                                                    </div>
-                                                    <h4 class="product__price"><span class="new">$30.52</span><span class="old">$28.52</span></h4>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-md-6">
-                                            <div class="product__item style-2">
-                                                <div class="product__img text-center pos-rel">
-                                                    <a href="shop-single.html"><img src="assets/img/product/img_133.png" alt=""></a>
-                                                    <ul class="product__action style-2 ul_li">
-                                                        <li><a href="#!"><i class="far fa-compress-alt"></i></a>
-                                                        </li>
-                                                        <li><a href="#!"><i class="far fa-shopping-basket"></i></a>
-                                                        </li>
-                                                        <li><a href="#!"><i class="far fa-heart"></i></a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                                <div class="product__content">
-                                                    <div class="product__review ul_li">
-                                                        <ul class="rating-star ul_li mr-10">
-                                                            <li><i class="fas fa-star"></i></li>
-                                                            <li><i class="fas fa-star"></i></li>
-                                                            <li><i class="fas fa-star"></i></li>
-                                                            <li><i class="far fa-star"></i></li>
-                                                            <li><i class="far fa-star"></i></li>
-                                                        </ul>
-                                                        <span>(126) Review</span>
-                                                    </div>
-                                                    <h2 class="product__title"><a href="shop-single.html">Sceptre 24″ Professional
-                                                            Thin 75Hz 1080p</a></h2>
-                                                    <span class="product__available">Available:
-                                                        <span>334</span></span>
-                                                    <div class="product__progress progress color-primary">
-                                                        <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                                                    </div>
-                                                    <h4 class="product__price"><span class="new">$30.52</span><span class="old">$28.52</span></h4>
-                                                </div>
-                                                <span class="product__badge"><span>New</span></span>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-md-6">
-                                            <div class="product__item style-2">
-                                                <div class="product__img text-center pos-rel">
-                                                    <a href="shop-single.html"><img src="assets/img/product/img_134.png" alt=""></a>
-                                                    <ul class="product__action style-2 ul_li">
-                                                        <li><a href="#!"><i class="far fa-compress-alt"></i></a>
-                                                        </li>
-                                                        <li><a href="#!"><i class="far fa-shopping-basket"></i></a>
-                                                        </li>
-                                                        <li><a href="#!"><i class="far fa-heart"></i></a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                                <div class="product__content">
-                                                    <div class="product__review ul_li">
-                                                        <ul class="rating-star ul_li mr-10">
-                                                            <li><i class="fas fa-star"></i></li>
-                                                            <li><i class="fas fa-star"></i></li>
-                                                            <li><i class="fas fa-star"></i></li>
-                                                            <li><i class="far fa-star"></i></li>
-                                                            <li><i class="far fa-star"></i></li>
-                                                        </ul>
-                                                        <span>(126) Review</span>
-                                                    </div>
-                                                    <h2 class="product__title"><a href="shop-single.html">Rokinon Xeen CF 16mm
-                                                            T2.6 Pro Cinema</a></h2>
-                                                    <span class="product__available">Available:
-                                                        <span>334</span></span>
-                                                    <div class="product__progress progress color-primary">
-                                                        <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                                                    </div>
-                                                    <h4 class="product__price"><span class="new">$30.52</span><span class="old">$28.52</span></h4>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <?php
+                                            }
+                                        }
+                                        ?>
                                     </div>
                                 </div>
                             </div>
@@ -872,7 +797,7 @@ require_once "components/header.php";
                         <div class="tx-widget__product-slide tx-arrow">
                             <div class="tx-widget__product-single">
                                 <?php
-                                $pro_fetch = $crud_obj->getData('product GROUP BY category_id', '*', '', 'product_created_on', 'DESC');
+                                $pro_fetch = $crud_obj->getData('product GROUP BY brand_id', '*', '', 'product_created_on', 'DESC', '4');
                                 if ($pro_fetch > 0) {
                                     foreach ($pro_fetch as $value) {
                                 ?>
