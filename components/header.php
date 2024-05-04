@@ -210,8 +210,8 @@ session_start();
                             </a>
                         </div>
                         <!-- <?php
-                        // if (basename($_SERVER['REQUEST_URI']) == 'index.php' || basename($_SERVER['REQUEST_URI']) == '') {
-                        ?>
+                                // if (basename($_SERVER['REQUEST_URI']) == 'index.php' || basename($_SERVER['REQUEST_URI']) == '') {
+                                ?>
                             <div class="header__category">
                                 <a class="header__category-nav" style="cursor: pointer;">
                                     <img class="bar" src="assets/img/icon/bar.svg" alt="">
@@ -222,30 +222,30 @@ session_start();
                         <?php
                         // } else {
                         ?> -->
-                            <div class="header__category pos-rel">
-                                <div class="vertical-menu">
-                                    <button class="header__category-nav">
-                                        <img class="bar" src="assets/img/icon/bar.svg" alt="">
-                                        Browse Catetory
-                                        <i class="fas fa-chevron-down"></i>
-                                    </button>
-                                    <div class="vertical-menu-list category-nav">
-                                        <ul class="category-nav__list list-unstyled">
-                                            <!-- <li><a href="shop.php"><img src="#" class="fas fa-arrow-right" alt="">All Products</a></li> -->
-                                            <?php
-                                            $row = $crud_obj->getData('category', '*');
-                                            if ($row) {
-                                                foreach ($row as $value) {
-                                            ?>
-                                                    <li><a href="shop.php?category=<?= $value['category_id'] ?>"><img src="#" class="fas fa-arrow-right" alt=""><?= $value['category_name'] ?></a></li>
-                                            <?php
-                                                }
+                        <div class="header__category pos-rel">
+                            <div class="vertical-menu">
+                                <button class="header__category-nav">
+                                    <img class="bar" src="assets/img/icon/bar.svg" alt="">
+                                    Browse Catetory
+                                    <i class="fas fa-chevron-down"></i>
+                                </button>
+                                <div class="vertical-menu-list category-nav">
+                                    <ul class="category-nav__list list-unstyled">
+                                        <!-- <li><a href="shop.php"><img src="#" class="fas fa-arrow-right" alt="">All Products</a></li> -->
+                                        <?php
+                                        $row = $crud_obj->getData('category', '*');
+                                        if ($row) {
+                                            foreach ($row as $value) {
+                                        ?>
+                                                <li><a href="shop.php?category=<?= $value['category_id'] ?>"><img src="#" class="fas fa-arrow-right" alt=""><?= $value['category_name'] ?></a></li>
+                                        <?php
                                             }
-                                            ?>
-                                        </ul>
-                                    </div>
+                                        }
+                                        ?>
+                                    </ul>
                                 </div>
                             </div>
+                        </div>
                         <?php
                         // }
                         ?>
@@ -266,7 +266,7 @@ session_start();
                                     <?php
                                     if (isset($_SESSION['user'])) {
                                     ?>
-                                        <li><a href="my-orders.php">Orders</a></li>
+                                        <li><a href="my-orders.php">My Orders</a></li>
                                     <?php
                                     }
                                     ?>
@@ -413,6 +413,13 @@ session_start();
                     <li><a href="cart.php">Cart</a></li>
                     <li><a href="about-us.php">About Us</a></li>
                     <li><a href="contact-us.php">Contact Us</a></li>
+                    <?php
+                    if (isset($_SESSION['user'])) {
+                    ?>
+                        <li><a href="my-orders.php">My Orders</a></li>
+                    <?php
+                    }
+                    ?>
                 </ul>
             </nav>
             <!-- side-mobile-menu end -->
