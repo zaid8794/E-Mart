@@ -66,9 +66,6 @@ if ($_POST['action'] == 'order_details') {
     $fetch_order = $crud_obj->getData('order_master LEFT JOIN address ON (order_master.address_id = address.address_id) LEFT JOIN product ON (order_master.product_id = product.product_id)', '*', 'order_number = "' . $order_number . '"');
     $html = '';
     if ($fetch_order > 0) {
-        // echo "<pre>";
-        // print_r($fetch_order);
-        // die();
         if ($fetch_order[0]['status'] == 'pending') {
             $color = 'warning';
         } elseif ($fetch_order[0]['status'] == 'in transit') {
@@ -104,7 +101,7 @@ if ($_POST['action'] == 'order_details') {
             $html .= "                            <td>";
             $html .= "                                <div class='d-flex mb-2'>";
             $html .= "                                    <div class='flex-shrink-0'>";
-            $html .= "                                        <img src='../../admin/uploads/products/" . $order['product_image'] . "' alt='' width='50' class='img-fluid'>";
+            $html .= "                                        <img src='../../admin/uploads/products/" . $order['product_image'] . "' alt='' width='100px' class='img-fluid'>";
             $html .= "                                    </div>";
             $html .= "                                    <div class='flex-lg-grow-1 ms-3'>";
             $html .= "                                        <h6 class='small mb-0'><a href='#' class='text-reset'>" . $order['product_name'] . "</h6>";
@@ -168,3 +165,47 @@ if ($_POST['action'] == 'order_details') {
     }
     echo json_encode($data);
 }
+
+if ($_POST['action'] == 'cancel_order') {
+    // echo '<pre>';
+    // print_r($_POST);
+    // die();
+    $order_number = $_POST['order_number'];
+    if (!empty($order_number)) {
+        $data = [
+            'status' => 'cancelled',
+        ];
+        $exec = $crud_obj->update('order_master', $data, 'order_number = "' . $order_number . '"');
+        if ($exec == 1) {
+            $data['status'] = 1;
+            $data['success_msg'] = 'Order successfully cancelled';
+        } else {
+            $data['status'] = 0;
+            $data['msg_error'] = 'Something went wrong';
+        }
+    }
+    echo json_encode($data);
+}
+if ($_POST['action'] == 'return_order') {
+    // echo '<pre>';
+    // print_r($_POST);
+    // die();
+    $status = '';
+    $order_number = $_POST['order_number'];
+    if (!empty($order_number)) {
+        $data = [
+            'status' => 'returned',
+        ];
+        $exec = $crud_obj->update('order_master', $data, 'order_number = "' . $order_number . '"');
+        if ($exec == 1) {
+            $data['status'] = 1;
+            $data['success_msg'] = 'Order successfully returned';
+        } else {
+            $data['status'] = 0;
+            $data['msg_error'] = 'Something went wrong';
+        }
+    }
+    echo json_encode($data);
+}
+
+

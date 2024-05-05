@@ -142,8 +142,6 @@ $offset = ($pageno - 1) * $no_of_records_per_page;
                                 <li class="<?= $pageno >= $total_pages ? 'disabled' : '' ?>"><a href="<?= $pageno >= $total_pages ? '#' : "?category=" . $category_id . "&pageno=" . ($pageno + 1) ?>"><i class="far fa-angle-double-right"></i></a></li>
                             </ul>
                         </div>
-
-
                     </div>
                     <div class="shop-sidebar">
                         <div class="widget">

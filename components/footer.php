@@ -239,6 +239,63 @@
                 }
             });
         });
+
+        $(".cancel_order").click(function(){
+            var order_number = $(this).data('orderno');
+            $.ajax({
+                url: '../src/Class/Checkout.php',
+                type: "POST",
+                dataType: "json",
+                data: {
+                    order_number: order_number,
+                    action: 'cancel_order',
+                },
+                success: function(res){
+                    if (res.status == 1) {
+                        alert(res.success_msg);
+                        window.location.reload();
+                    } else {
+                        alert(res.msg_error);
+                    }
+                }
+            })
+        });
+
+        $(".return_order").click(function(){
+            var order_number = $(this).data('orderno');
+            $.ajax({
+                url: '../src/Class/Checkout.php',
+                type: "POST",
+                dataType: "json",
+                data: {
+                    order_number: order_number,
+                    action: 'return_order',
+                },
+                success: function(res){
+                    if (res.status == 1) {
+                        alert(res.success_msg);
+                        window.location.reload();
+                    } else {
+                        alert(res.msg_error);
+                    }
+                }
+            })
+        });
+
+        // $(".download_order").click(function(){
+        //     var order_number = $(this).data('orderno');
+        //     $.ajax({
+        //         url: '../src/Class/Checkout.php',
+        //         type: "POST",
+        //         data: {
+        //             order_number: order_number,
+        //             action: 'download_order',
+        //         },
+        //         success: function(res){
+                    
+        //         }
+        //     })
+        // });
     });
 </script>
 </body>

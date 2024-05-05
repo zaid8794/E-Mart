@@ -37,10 +37,10 @@ $crud_obj = new Crud;
                                         ?>
                                                 <tr>
                                                     <th scope="row">
-                                                        <button type="button" class="btn btn-sm btn-secondary btn-icon rounded-pill">
+                                                        <a class="btn btn-sm btn-secondary btn-icon rounded-pill" target="_blank" href="../src/Class/Invoice.php?order_number=<?= $value['order_number'] ?>">
                                                             <span class="btn-inner--icon"><i class="fa fa-download"></i></span>
                                                             <span class="btn-inner--text">Invoice</span>
-                                                        </button>
+                                                        </a>
                                                     </th>
                                                     <td class="order">
                                                         <span class="font-14 mb-0"><?= $value['created_on'] ?></span>
@@ -90,7 +90,7 @@ $crud_obj = new Crud;
                                                                     </span>
                                                                 </button>
                                                             <?php
-                                                            } elseif ($value['status'] == 'cancelled') {
+                                                            } elseif ($value['status'] == 'cancelled' || $value['status'] == 'returned') {
                                                             ?>
                                                                 <button type="button" class="btn btn-rounded btn-danger">
                                                                     <span class="btn-inner--text">
@@ -100,19 +100,24 @@ $crud_obj = new Crud;
                                                             <?php
                                                             }
                                                             ?>
-
-                                                            <select id="change_status_select_<?= $value['order_number'] ?>" name="change_status_select" data-selectid="<?= $value['order_number'] ?>" class="d-none p-2">
-                                                                <option value="pending">Pending</option>
-                                                                <option value="in transit">In Transit</option>
-                                                                <option value="delivered">Delivered</option>
-                                                                <option value="cancelled">Cancelled</option>
-                                                            </select>
-                                                            <!-- Actions -->
-                                                            <div class="actions ml-3">
-                                                                <button class="btn btn-sm btn-info waves-effect btn-circle waves-light mr-2" onclick="$('#change_status_select_<?= $value['order_number'] ?>').toggle().removeClass('d-none')" data-bs-toggle="tooltip" title="change status" data-original-title="Edit">
-                                                                    <i class="fa fa-pencil"></i>
-                                                                </button>
-                                                            </div>
+                                                            <?php
+                                                            if ($value['status'] != 'cancelled' && $value['status'] != 'returned') {
+                                                            ?>
+                                                                <select id="change_status_select_<?= $value['order_number'] ?>" name="change_status_select" data-selectid="<?= $value['order_number'] ?>" class="d-none p-2">
+                                                                    <option value="pending">Pending</option>
+                                                                    <option value="in transit">In Transit</option>
+                                                                    <option value="delivered">Delivered</option>
+                                                                    <option value="cancelled">Cancelled</option>
+                                                                </select>
+                                                                <!-- Actions -->
+                                                                <div class="actions ml-3">
+                                                                    <button class="btn btn-sm btn-info waves-effect btn-circle waves-light mr-2" onclick="$('#change_status_select_<?= $value['order_number'] ?>').toggle().removeClass('d-none')" data-bs-toggle="tooltip" title="change status" data-original-title="Edit">
+                                                                        <i class="fa fa-pencil"></i>
+                                                                    </button>
+                                                                </div>
+                                                            <?php
+                                                            }
+                                                            ?>
                                                         </div>
                                                     </td>
                                                     <td>
@@ -146,7 +151,7 @@ $crud_obj = new Crud;
                 </button>
             </div>
             <div class="modal-body">
-                
+
             </div>
         </div>
     </div>
@@ -191,7 +196,7 @@ require_once "includes/footer.php";
                 success: function(res) {
                     if (res.status == 1) {
                         $('#fetch_order_modal').modal('show');
-                        $('.modal-body').html(res.fetch_order_html);            
+                        $('.modal-body').html(res.fetch_order_html);
                     } else {
 
                     }
