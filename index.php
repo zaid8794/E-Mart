@@ -13,7 +13,7 @@ require_once "components/header.php";
                     <p class="content">Sumptuous, filling, and temptingly healthy.</p>
                     <h4 class="price">From <span>$99.00</span></h4>
                     <div class="banner__btn mt-30">
-                        <a class="thm-btn" href="shop.html">
+                        <a class="thm-btn" href="shop.php">
                             <span class="btn-wrap">
                                 <span>Shop Now</span>
                                 <span>Shop Now</span>

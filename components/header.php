@@ -20,7 +20,7 @@ session_start();
 
     <title><?= !empty($title) || $title != '' ? $title : "Project Name"  ?></title>
 
-    <link rel="shortcut icon" href="assets/img/favicon.png" type="images/x-icon" />
+    <link rel="shortcut icon" href="assets/img/logo/favicon2.png" type="images/x-icon" />
 
     <!-- css include -->
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
@@ -152,8 +152,8 @@ session_start();
             <div class="container mxw_1360">
                 <div class="header__middle ul_li_between">
                     <div class="header__logo">
-                        <a href="index.html">
-                            <img src="assets/img/logo/logo.svg" alt="">
+                        <a href="index.php">
+                            <img src="assets/img/logo/logo.png" alt="">
                         </a>
                     </div>
                     <!-- <div class="header-date">
@@ -206,7 +206,7 @@ session_start();
                     <div class="header__main ul_li">
                         <div class="header__logo">
                             <a href="index.php">
-                                <img src="assets/img/logo/logo.svg" alt="">
+                                <img src="assets/img/logo/logo.png" alt="">
                             </a>
                         </div>
                         <!-- <?php

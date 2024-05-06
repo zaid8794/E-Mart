@@ -69,8 +69,7 @@ if ($fetch_order > 0) {
         <table width="100%">
             <tr>
                 <td width="50%">
-                    <span style="font-weight: bold; font-size: 14pt;">Project</span><br />
-                    123 Anystreet<br />
+                    <span style="font-weight: bold; font-size: 14pt;">E Mart</span><br />
                     Junagadh<br />
                     Gujarat - 362001<br />
                     <span style="font-family:dejavusanscondensed;">

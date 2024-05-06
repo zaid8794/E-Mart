@@ -75,7 +75,7 @@
             <div class="row mt-none-40">
                 <div class="footer__widget col-lg-3 col-md-6 mt-40">
                     <div class="footer__logo mb-20">
-                        <a href="index.html"><img src="assets/img/logo/logo-2.svg" alt=""></a>
+                        <a href="index.php"><img src="assets/img/logo/logo-2.png" width="200px"  alt=""></a>
                     </div>
                     <p>Corporate clients and leisure travelers has
                         been relying on Groundlink for dependable

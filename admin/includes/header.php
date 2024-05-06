@@ -13,7 +13,7 @@ if (!isset($_SESSION['admin'])) {
     <!-- Required meta tags -->
     <title>Admin</title>
     <!-- Favicon -->
-    <link rel="icon" href="img/core-img/favicon.png">
+    <link rel="icon" href="img/logo/favicon2.png">
     <!-- These plugins only need for the run this page -->
     <link rel="stylesheet" href="css/default-assets/datatables.bootstrap4.css">
     <link rel="stylesheet" href="css/default-assets/responsive.bootstrap4.css">
@@ -50,7 +50,10 @@ if (!isset($_SESSION['admin'])) {
         <div class="flapt-sidemenu-wrapper">
             <!-- Desktop Logo -->
             <div class="flapt-logo">
-                <a href="index.html"><img class="desktop-logo" src="img/core-img/logo.png" alt="Desktop Logo"> <img class="small-logo" src="img/core-img/small-logo.png" alt="Mobile Logo"></a>
+                <a href="index.php">
+                    <img class="desktop-logo" src="img/logo/logo-2.png" alt="Desktop Logo">
+                    <img class="small-logo" src="img/logo/favicon2.png" alt="Mobile Logo">
+                </a>
             </div>
             <!-- Side Nav -->
             <div class="flapt-sidenav" id="flaptSideNav">
@@ -79,7 +82,7 @@ if (!isset($_SESSION['admin'])) {
                 <div class="left-side-content-area d-flex align-items-center">
                     <!-- Mobile Logo -->
                     <div class="mobile-logo">
-                        <a href="index.html"><img src="img/core-img/small-logo.png" alt="Mobile Logo"></a>
+                        <a href="index.php"><img src="img/logo/favicon.png" alt="Mobile Logo"></a>
                     </div>
                     <!-- Triggers -->
                     <div class="flapt-triggers">

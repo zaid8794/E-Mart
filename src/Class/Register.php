@@ -121,7 +121,7 @@ if ($_POST['form_type'] == 'forget_password') {
                     $mail->Port = 587;
                     $mail->Username = "zaidvora9@gmail.com";
                     $mail->Password = 'baem gfur ldyl xtub';
-                    $mail->setFrom('from@example.com', 'Project Name');
+                    $mail->setFrom('zaidvora9@gmail.com', 'E Mart');
                     $mail->addAddress($user_select[0]['email']);
                     $mail->isHTML(true);
                     $mail->Subject = "Forget Password for " . $user_select[0]['email'] . " Account";
