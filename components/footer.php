@@ -281,21 +281,6 @@
                 }
             })
         });
-
-        // $(".download_order").click(function(){
-        //     var order_number = $(this).data('orderno');
-        //     $.ajax({
-        //         url: '../src/Class/Checkout.php',
-        //         type: "POST",
-        //         data: {
-        //             order_number: order_number,
-        //             action: 'download_order',
-        //         },
-        //         success: function(res){
-                    
-        //         }
-        //     })
-        // });
     });
 </script>
 </body>

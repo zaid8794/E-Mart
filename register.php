@@ -90,7 +90,7 @@ if (isset($_SESSION['user'])) {
                         </div>
                         <span class="text-danger" id="login_error_msg"></span>
                         <div class="account__input-field">
-                            <a href="" class="form-check-label">Forgot password?</a>
+                            <a href="forget-password.php" class="form-check-label">Forgot password?</a>
                         </div>
                         <div class="account__btn">
                             <button type="submit" class="thm-btn thm-btn__2">

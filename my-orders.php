@@ -33,7 +33,6 @@ if (!isset($_SESSION['user'])) {
                     $subtotal = 0;
                     $order_fetch = $crud_obj->getData('order_master LEFT JOIN address ON (order_master.address_id = address.address_id)', '*', "order_master.user_id = '" . $_SESSION['user']['id'] . "' GROUP BY order_master.order_number", 'created_on', 'DESC');
                     if ($order_fetch > 0) {
-
                         $total_orders = count($order_fetch);
                         echo "<div class='pb-4'><h4>Total Orders : " . $total_orders . "</h4></div>";
                         foreach ($order_fetch as $value) {
@@ -110,8 +109,8 @@ if (!isset($_SESSION['user'])) {
                                                 <?php
                                                 if ($value['status'] != 'cancelled' && $value['status'] != 'returned') {
                                                 ?>
-                                                    <button class="btn btn-danger cancel_order shadow-none" data-orderno="<?= $order_number ?>">Cancel Item</button>
-                                                    <button class="btn btn-warning return_order shadow-none" data-orderno="<?= $order_number ?>">Return Item</button>
+                                                    <button class="btn btn-danger cancel_order shadow-none" data-orderno="<?= $value['order_number'] ?>">Cancel Item</button>
+                                                    <button class="btn btn-warning return_order shadow-none" data-orderno="<?= $value['order_number'] ?>">Return Item</button>
                                                     <a class="btn btn-info download_order shadow-none" target="_blank" href="src/Class/Invoice.php?order_number=<?= $value['order_number'] ?>"><i class="fas fa-download"></i>&nbsp;Invoice</a>
                                                 <?php
                                                 }
