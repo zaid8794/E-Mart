@@ -6,7 +6,7 @@
             <footer class="footer-area d-sm-flex justify-content-center align-items-center justify-content-between">
                 <!-- Copywrite Text -->
                 <div class="copywrite-text">
-                    <p>Created by @<a href="#">Theme-life</a></p>
+                    <p>Created by @<a href="#">E Mart</a></p>
                 </div>
                 <div class="fotter-icon text-center">
                     <a href="#" class="action-item mr-2" data-bs-toggle="tooltip" title="Facebook">

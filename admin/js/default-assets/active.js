@@ -284,22 +284,6 @@
         });
     }
 
-    //:: Magnific-popup Video Active Code
-    if ($.fn.magnificPopup) {
-        $('#videobtn').magnificPopup({
-            type: 'iframe'
-        });
-        $('.gallery_img').magnificPopup({
-            type: 'image',
-            gallery: {
-                enabled: true
-            },
-            removalDelay: 400,
-            mainClass: 'mfp-fade',
-            preloader: true
-        });
-    }
-
     // :: Gallery Active Code
     if ($.fn.imagesLoaded) {
         $('.reen-portfolio').imagesLoaded(function () {

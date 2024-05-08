@@ -56,101 +56,52 @@
 
 <!-- footer start -->
 <footer class="footer footer__style-three black-bg pt-75">
-    <!-- <div class="newslater">
-        <div class="container mxw_1360">
-            <div class="newslater__wrap ul_li">
-                <div class="newslater__content">
-                    <h2 class="title">NEWSLETTER SIGN UP!</h2>
-                    <p>For information Consult with our expert members</p>
-                </div>
-                <form class="newslater__form" action="#!">
-                    <input placeholder="Enter your Email" type="text">
-                    <button>Subscribe</button>
-                </form>
-            </div>
-        </div>
-    </div> -->
     <div class="container mxw_1360">
         <div class="footer__main pt-70 pb-90">
             <div class="row mt-none-40">
-                <div class="footer__widget col-lg-3 col-md-6 mt-40">
+                <div class="footer__widget col-lg-4 col-md-4 mt-40">
                     <div class="footer__logo mb-20">
-                        <a href="index.php"><img src="assets/img/logo/logo-2.png" width="200px"  alt=""></a>
+                        <a href="index.php"><img src="assets/img/logo/logo-2.png" width="200px" alt=""></a>
                     </div>
-                    <p>Corporate clients and leisure travelers has
-                        been relying on Groundlink for dependable
-                        safe, and professional chauffeured car end
-                        service in major cities across World.</p>
-                    <div class="apps-img mt-15 ul_li">
-                        <div class="app mt-15">
-                            <a href="#!"><img src="assets/img/icon/google_play.png" alt=""></a>
-                        </div>
-                        <div class="app mt-15">
-                            <a href="#!"><img src="assets/img/icon/app_store.png" alt=""></a>
-                        </div>
-                    </div>
+                    <p>Welcome to E Mart, your ultimate destination for cutting-edge electronic gadgets and devices. At E Mart, we're passionate about technology and dedicated to bringing you the latest innovations in electronics.</p>
                 </div>
-                <div class="footer__widget col-lg-3 col-md-6 mt-40">
+                <div class="footer__widget col-lg-4 col-md-4 mt-40">
                     <h2 class="title">Find It Fast</h2>
-                    <ul class="quick-links">
-                        <li><a href="#!">Laptops & Computers</a></li>
-                        <li><a href="#!">Cameras & Photography</a></li>
-                        <li><a href="#!">Smart Phones & Tablets</a></li>
-                        <li><a href="#!">Video Games & Consoles</a></li>
-                        <li><a href="#!">TV & Audio</a></li>
-                        <li><a href="#!">Gadgets</a></li>
-                        <li><a href="#!">Waterproof Headphones</a></li>
-                    </ul>
+                    <?php
+                    $category_fetch = $crud_obj->getData('category', '*', '', '', '', '6');
+                    if ($category_fetch > 0) {
+                    ?>
+                        <ul class="quick-links">
+                            <?php
+                            foreach ($category_fetch as $category) {
+                            ?>
+                                <li><a href="shop.php?category=<?= $category['category_id'] ?>"><?= $category['category_name'] ?></a></li>
+                            <?php
+                            }
+                            ?>
+                        </ul>
+                    <?php
+                    }
+                    ?>
                 </div>
 
-                <div class="footer__widget col-lg-3 col-md-6 mt-40">
+                <div class="footer__widget col-lg-4 col-md-4 mt-40">
                     <h2 class="title">Quick Links</h2>
                     <ul class="quick-links">
-                        <li><a href="#!">Your Account</a></li>
-                        <li><a href="#!">Returns & Exchanges</a></li>
-                        <li><a href="#!">Return Center</a></li>
-                        <li><a href="#!">Purchase Hisotry</a></li>
-                        <li><a href="#!">App Download</a></li>
-                        <li><a href="#!">Latest News Blog</a></li>
-                        <li><a href="#!">Shipping & Delivery</a></li>
-                    </ul>
-                </div>
-                <div class="footer__widget col-lg-3 col-md-6 mt-40">
-                    <h2 class="title">Recent Posts</h2>
-                    <ul class="footer__post">
-                        <li class="footer__post-item tx-post ul_li">
-                            <div class="post-thumb">
-                                <a href="#!"><img src="assets/img/news/img_04.jpg" alt=""></a>
-                                <span class="post-number">01</span>
-                            </div>
-                            <div class="post-content">
-                                <span class="post-date"><i class="far fa-calendar-alt"></i>23 April 2021</span>
-                                <h3 class="post-title border-effect-2"><a href="news-single.html">With billion
-                                        players .</a></h3>
-                            </div>
-                        </li>
-                        <li class="footer__post-item tx-post ul_li">
-                            <div class="post-thumb">
-                                <a href="#!"><img src="assets/img/news/img_05.jpg" alt=""></a>
-                                <span class="post-number">02</span>
-                            </div>
-                            <div class="post-content">
-                                <span class="post-date"><i class="far fa-calendar-alt"></i>23 April 2021</span>
-                                <h3 class="post-title border-effect-2"><a href="news-single.html">With billion
-                                        players .</a></h3>
-                            </div>
-                        </li>
-                        <li class="footer__post-item tx-post ul_li">
-                            <div class="post-thumb">
-                                <a href="#!"><img src="assets/img/news/img_06.jpg" alt=""></a>
-                                <span class="post-number">03</span>
-                            </div>
-                            <div class="post-content">
-                                <span class="post-date"><i class="far fa-calendar-alt"></i>23 April 2021</span>
-                                <h3 class="post-title border-effect-2"><a href="news-single.html">With billion
-                                        players .</a></h3>
-                            </div>
-                        </li>
+                    <li><a href=".php">Shop</a></li>
+                        <li><a href="about-us.php">About Us</a></li>
+                        <li><a href="contact-us.php">Contact Us</a></li>
+                        <?php
+                        if (isset($_SESSION['user'])) {
+                        ?>
+                            <li><a href="my-orders.php">My Orders</a></li>
+                        <?php
+                        } else {
+                        ?>
+                            <li><a href="register.php">My Orders</a></li>
+                        <?php
+                        }
+                        ?>
                     </ul>
                 </div>
             </div>
@@ -182,7 +133,6 @@
 <script src="assets/js/slick.js"></script>
 <script src="assets/js/backToTop.js"></script>
 <script src="assets/js/uikit.min.js"></script>
-<script src="assets/js/resize-sensor.min.js"></script>
 <script src="assets/js/theia-sticky-sidebar.min.js"></script>
 <script src="assets/js/wow.min.js"></script>
 <script src="assets/js/jqueryui.js"></script>
@@ -240,7 +190,7 @@
             });
         });
 
-        $(".cancel_order").click(function(){
+        $(".cancel_order").click(function() {
             var order_number = $(this).data('orderno');
             $.ajax({
                 url: '../src/Class/Checkout.php',
@@ -250,7 +200,7 @@
                     order_number: order_number,
                     action: 'cancel_order',
                 },
-                success: function(res){
+                success: function(res) {
                     if (res.status == 1) {
                         alert(res.success_msg);
                         window.location.reload();
@@ -261,7 +211,7 @@
             })
         });
 
-        $(".return_order").click(function(){
+        $(".return_order").click(function() {
             var order_number = $(this).data('orderno');
             $.ajax({
                 url: '../src/Class/Checkout.php',
@@ -271,7 +221,7 @@
                     order_number: order_number,
                     action: 'return_order',
                 },
-                success: function(res){
+                success: function(res) {
                     if (res.status == 1) {
                         alert(res.success_msg);
                         window.location.reload();

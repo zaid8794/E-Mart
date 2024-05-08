@@ -19,18 +19,21 @@ $crud_obj = new Crud;
                                 <div class="col">
                                     <!-- Title -->
                                     <h6 class="text-uppercase font-14">
-                                        Budget
+                                        Users
                                     </h6>
 
                                     <!-- Heading -->
                                     <span class="font-24 text-dark mb-0">
-                                        $2500
+                                        <?php
+                                        $fetch_user = $crud_obj->getData('register', '*', 'u_type = "user"');
+                                        echo count($fetch_user);
+                                        ?>
                                     </span>
                                 </div>
                                 <div class="col-auto">
                                     <!-- Icon -->
                                     <div class="icon">
-                                        <img src="img/bg-img/icon-8.png" alt="">
+                                        <img src="img/bg-img/user.png" alt="">
                                     </div>
                                 </div>
                             </div>
@@ -46,17 +49,20 @@ $crud_obj = new Crud;
                                 <div class="col">
                                     <!-- Title -->
                                     <h6 class="font-14 text-uppercase">
-                                        Total Hours
+                                        Products
                                     </h6>
                                     <!-- Heading -->
                                     <span class="font-24 text-dark mb-0">
-                                        663.5
+                                        <?php
+                                        $fetch_product = $crud_obj->getData('product', '*');
+                                        echo count($fetch_product);
+                                        ?>
                                     </span>
                                 </div>
                                 <div class="col-auto">
                                     <!-- Icon -->
                                     <div class="icon">
-                                        <img src="img/bg-img/icon-9.png" alt="">
+                                        <img src="img/bg-img/product.png" alt="">
                                     </div>
                                 </div>
                             </div>
@@ -72,28 +78,28 @@ $crud_obj = new Crud;
                                 <div class="col">
                                     <!-- Title -->
                                     <h6 class="font-14 text-uppercase">
-                                        Progress
+                                        Orders
                                     </h6>
                                     <div class="row align-items-center no-gutters">
                                         <div class="col-auto">
                                             <!-- Heading -->
-                                            <span class="font-24 text-dark mr-2">
-                                                84.5%
+                                            <span class="font-24 text-dark mb-0">
+                                                <?php
+                                                $fetch_order = $crud_obj->getData('order_master', '*');
+                                                $subtotal = 0;
+                                                foreach ($fetch_order as $order) {
+                                                    $subtotal += ($order['qty'] * $order['product_price']);
+                                                }
+                                                echo "₹" . $subtotal;
+                                                ?>
                                             </span>
-                                        </div>
-                                        <div class="col">
-                                            <!-- Progress -->
-                                            <div class="progress h-5">
-                                                <div class="progress-bar bg-primary" role="progressbar" style="width: 85%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="col-auto">
                                     <!-- Icon -->
                                     <div class="icon">
-                                        <img src="img/bg-img/icon-10.png" alt="">
+                                        <img src="img/bg-img/rupee.png" alt="">
                                     </div>
                                 </div>
                             </div>
@@ -109,17 +115,20 @@ $crud_obj = new Crud;
                                 <div class="col">
                                     <!-- Title -->
                                     <h6 class="font-14 text-uppercase">
-                                        Cost/Unit
+                                        Enquiry
                                     </h6>
                                     <!-- Heading -->
-                                    <span class="font-24 text-dark">
-                                        $7.50
+                                    <span class="font-24 text-dark mb-0">
+                                        <?php
+                                        $fetch_enquiry = $crud_obj->getData('contactus', '*');
+                                        echo count($fetch_enquiry);
+                                        ?>
                                     </span>
                                 </div>
                                 <div class="col-auto">
                                     <!-- Icon -->
                                     <div class="icon">
-                                        <img src="img/bg-img/icon-11.png" alt="">
+                                        <img src="img/bg-img/message.png" alt="">
                                     </div>
                                 </div>
                             </div>

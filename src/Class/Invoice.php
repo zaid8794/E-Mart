@@ -69,7 +69,7 @@ if ($fetch_order > 0) {
         <table width="100%">
             <tr>
                 <td width="50%">
-                    <span style="font-weight: bold; font-size: 14pt;">E Mart</span><br />
+                    <img src="../../assets/img/logo/logo.png" width="150" /><br /><br />
                     Junagadh<br />
                     Gujarat - 362001<br />
                     <span style="font-family:dejavusanscondensed;">
