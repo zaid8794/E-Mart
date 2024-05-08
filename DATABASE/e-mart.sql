@@ -3,11 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
-<<<<<<< Updated upstream
--- Generation Time: May 09, 2024 at 12:34 AM
-=======
--- Generation Time: May 09, 2024 at 12:31 AM
->>>>>>> Stashed changes
+-- Generation Time: May 09, 2024 at 12:50 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
