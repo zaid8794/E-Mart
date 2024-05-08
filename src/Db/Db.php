@@ -9,7 +9,7 @@ class Db
     private $host = 'localhost';
     private $username = 'root';
     private $password = '';
-    private $database = 'emart';
+    private $database = 'e-mart';
 
     protected function connect()
     {
