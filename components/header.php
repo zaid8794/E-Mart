@@ -156,24 +156,7 @@ session_start();
                             <img src="assets/img/logo/logo.png" alt="">
                         </a>
                     </div>
-                    <!-- <div class="header-date">
-                        <i class="far fa-calendar-alt"></i>Friday - Jul 27, 2020
-                    </div> -->
                     <form class="header__search-box" action="#">
-                        <!-- <div class="select-box">
-                            <select id="category" name="category">
-                                <option value="">All Categories</option>
-                                <option value="4">Summer collections</option>
-                                <option value="5">Breakfast & Dairy</option>
-                                <option value="6">Beverage & Drinks</option>
-                                <option value="7">Cocolate Box</option>
-                                <option value="8">Dried Food Corner</option>
-                                <option value="9">Frozen Foods</option>
-                                <option value="10">Baby Food Corner</option>
-                                <option value="11">Milk & Juices</option>
-                                <option value="12">Organic & Snacks</option>
-                            </select>
-                        </div> -->
                         <input type="text" name="search" id="search" placeholder="Search For Products" required />
                         <button type="submit"><i class="far fa-search"></i></button>
                     </form>
@@ -209,19 +192,6 @@ session_start();
                                 <img src="assets/img/logo/logo.png" alt="">
                             </a>
                         </div>
-                        <!-- <?php
-                                // if (basename($_SERVER['REQUEST_URI']) == 'index.php' || basename($_SERVER['REQUEST_URI']) == '') {
-                                ?>
-                            <div class="header__category">
-                                <a class="header__category-nav" style="cursor: pointer;">
-                                    <img class="bar" src="assets/img/icon/bar.svg" alt="">
-                                    Browse Categories
-                                    <i class="fas fa-chevron-down"></i>
-                                </a>
-                            </div>
-                        <?php
-                        // } else {
-                        ?> -->
                         <div class="header__category pos-rel">
                             <div class="vertical-menu">
                                 <button class="header__category-nav">
@@ -231,7 +201,6 @@ session_start();
                                 </button>
                                 <div class="vertical-menu-list category-nav">
                                     <ul class="category-nav__list list-unstyled">
-                                        <!-- <li><a href="shop.php"><img src="#" class="fas fa-arrow-right" alt="">All Products</a></li> -->
                                         <?php
                                         $row = $crud_obj->getData('category', '*');
                                         if ($row) {
@@ -246,9 +215,6 @@ session_start();
                                 </div>
                             </div>
                         </div>
-                        <?php
-                        // }
-                        ?>
                         <div class="hamburger_menu d-lg-none">
                             <a href="javascript:void(0);" class="">
                                 <div class="icon bar">
@@ -274,27 +240,6 @@ session_start();
                             </nav>
                         </div>
                         <div class="header__main-right ul_li">
-                            <!-- <div class="header__icons ul_li mr-15">
-                                <div class="icon">
-                                    <a href="#!"><img src="assets/img/icon/user.svg" alt=""></a>
-                                </div>
-                                <div class="icon wishlist-icon">
-                                    <a href="#!">
-                                        <img src="assets/img/icon/heart.svg" alt="">
-                                        <span class="count">0</span>
-                                    </a>
-                                </div>
-                                <div class="icon">
-                                    <a href="#!">
-                                        <img src="assets/img/icon/bookmark.svg" alt="">
-                                        <span class="count">0</span>
-                                    </a>
-                                </div>
-                                <div class="cart_btn icon">
-                                    <img src="assets/img/icon/shopping_bag.svg" alt="">
-                                    <span class="count">0</span>
-                                </div>
-                            </div> -->
                             <div class="login-sign-btn">
                                 <?php
                                 if (isset($_SESSION['user'])) {
@@ -348,7 +293,7 @@ session_start();
                         ?>
                             <div class="cart_item">
                                 <div class="item_image">
-                                    <img src="../admin/uploads/products/<?= $cart['product_image'] ?>" alt="image_not_found">
+                                    <img src="admin/uploads/products/<?= $cart['product_image'] ?>" alt="image_not_found">
                                 </div>
                                 <div class="item_content">
                                     <h4 class="item_title">

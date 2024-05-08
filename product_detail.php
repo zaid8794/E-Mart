@@ -33,60 +33,20 @@ require_once "components/header.php";
 <section class="shop-single-section pb-70">
     <div class="container">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-5">
                 <div class="product-single-wrap mb-30">
-                    <div class="product_details_img ">
+                    <div class="product_details_img">
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                                 <div class="pl_thumb">
                                     <img src="admin/uploads/products/<?= $product_detail[0]['product_image'] ?>" alt="">
                                 </div>
                             </div>
-                            <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                                <div class="pl_thumb">
-                                    <img src="assets/img/product/img_179.png" alt="">
-                                </div>
-                            </div>
-                            <div class="tab-pane" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-                                <div class="pl_thumb">
-                                    <img src="assets/img/product/img_180.png" alt="">
-                                </div>
-                            </div>
-                            <div class="tab-pane" id="profile2" role="tabpanel" aria-labelledby="profile-tab3">
-                                <div class="pl_thumb">
-                                    <img src="assets/img/product/img_181.png" alt="">
-                                </div>
-                            </div>
                         </div>
-                    </div>
-                    <div class="shop_thumb_tab">
-                        <ul class="nav" id="myTab2" role="tablist">
-                            <li class="nav-item">
-                                <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">
-                                    <img src="assets/img/product/img_178.png" alt="">
-                                </button>
-                            </li>
-                            <li class="nav-item">
-                                <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">
-                                    <img src="assets/img/product/img_179.png" alt="">
-                                </button>
-                            </li>
-                            <li class="nav-item">
-                                <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">
-                                    <img src="assets/img/product/img_180.png" alt="">
-                                </button>
-                            </li>
-                            <li class="nav-item">
-                                <button class="nav-link" id="profile-tab3" data-bs-toggle="tab" data-bs-target="#profile2" type="button" role="tab" aria-controls="profile2" aria-selected="false">
-                                    <img src="assets/img/product/img_181.png" alt="">
-                                </button>
-                            </li>
-                        </ul>
                     </div>
                 </div>
             </div>
-
-            <div class="col-md-6 product-details-col">
+            <div class="col-md-7 product-details-col">
                 <div class="product-details">
                     <h2><?= $product_detail[0]['product_name'] ?></h2>
                     <div class="price">

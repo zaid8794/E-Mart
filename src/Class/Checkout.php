@@ -89,7 +89,7 @@ if ($_POST['action'] == 'order_details') {
         $html .= "                        <span class='badge rounded-pill bg-$color'>" . $fetch_order[0]['status'] . "</span>";
         $html .= "                    </div>";
         $html .= "                    <div class='d-flex'>";
-        $html .= "                        <button class='btn btn-link p-0 me-3 d-none d-lg-block btn-icon-text'><i class='bi bi-download'></i> <span class='text'>Invoice</span></button>";
+        $html .= "                        <a href='../src/Class/Invoice.php?order_number=$order_number' target='_blank' class='btn btn-link p-0 me-3 d-none d-lg-block btn-icon-text'><i class='bi bi-download'></i> <span class='text'>Invoice</span></a>";
         $html .= "                    </div>";
         $html .= "                </div>";
         $html .= "                <table class='table table-borderless'>";
