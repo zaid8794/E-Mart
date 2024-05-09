@@ -162,6 +162,7 @@
                         setTimeout(function() {
                             $("#snackbar").removeClass('show');
                         }, 3000);
+                        window.location.reload();
                     } else {
 
                     }
