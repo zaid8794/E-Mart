@@ -8,10 +8,8 @@ require_once "components/header.php";
         <div class="banner__wrapper d-flex">
             <div class="banner__main banner__height ul_li bg_img" data-background="assets/img/bg/bg_19.jpg">
                 <div class="hero-banner__content">
-                    <span class="subtitle">100% organic Food</span>
-                    <h2 class="title text-uppercase">100% Fresh Grocery <br> Combo Pack</h2>
-                    <p class="content">Sumptuous, filling, and temptingly healthy.</p>
-                    <h4 class="price">From <span>$99.00</span></h4>
+                    <span class="subtitle">₹1000 OFF</span>
+                    <h2 class="title text-uppercase">ON ALL PRODUCT</h2>
                     <div class="banner__btn mt-30">
                         <a class="thm-btn" href="shop.php">
                             <span class="btn-wrap">
@@ -23,12 +21,7 @@ require_once "components/header.php";
                     </div>
                 </div>
                 <div class="banner__img">
-                    <img src="assets/img/product/img_121.png" alt="">
-                </div>
-                <div class="banner__ofer-box">
-                    <img src="assets/img/icon/offer_bg.png" alt="">
-                    <span class="offer-text"><span class="discount">30<span>%</span></span> <br>
-                        <span>OFF</span></span>
+                    <img src="assets/img/banner/banner1.png" alt="">
                 </div>
             </div>
         </div>
