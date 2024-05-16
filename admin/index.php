@@ -121,7 +121,7 @@ $crud_obj = new Crud;
                                     <span class="font-24 text-dark mb-0">
                                         <?php
                                         $fetch_enquiry = $crud_obj->getData('contactus', '*');
-                                        echo count($fetch_enquiry);
+                                        echo $fetch_enquiry > 0 ? count($fetch_enquiry) : 0;
                                         ?>
                                     </span>
                                 </div>

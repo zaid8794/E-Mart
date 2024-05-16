@@ -146,9 +146,6 @@ if ($_POST['form_type'] == 'forget_password') {
 }
 
 if ($_POST['form_type'] == 'change_password') {
-    // echo "<pre>";
-    // print_r($_POST);
-    // die();
     $user_id = $_SESSION['user']['id'];
     $old_password = trim($_POST['old_password']);
     $new_password = trim($_POST['new_password']);

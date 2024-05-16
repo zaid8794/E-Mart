@@ -127,7 +127,7 @@ require_once "components/header.php";
             <div class="col-lg-3">
                 <div class="tx-sidebar">
                     <div class="tx-widget widget__product">
-                        <h2 class="section-heading mb-20 fs-18"><span>Leatest Item</span></h2>
+                        <h2 class="section-heading mb-20 fs-18"><span>Latest Item</span></h2>
                         <div class="tx-widget__product-slide tx-arrow">
                             <div class="tx-widget__product-single">
                                 <?php
@@ -166,7 +166,7 @@ require_once "components/header.php";
                     <h2 class="product-category__title">Choose Catagory</h2>
                     <ul class="list-unstyled">
                         <?php
-                        $row = $crud_obj->getData('category', '*');
+                        $row = $crud_obj->getData('category', '*','','RAND()','','4');
                         if ($row) {
                             foreach ($row as $value) {
                         ?>

@@ -95,6 +95,7 @@
                         if (isset($_SESSION['user'])) {
                         ?>
                             <li><a href="my-orders.php">My Orders</a></li>
+                            <li><a href="change-password.php">Change Password</a></li>
                         <?php
                         } else {
                         ?>
@@ -108,7 +109,7 @@
         </div>
         <div class="footer__bottom ul_li_center">
             <div class="footer__copyright mt-15">
-                &copy; 2024 <a href="#!">Project</a> . All Rights Reserved.
+                &copy; 2024 <a href="index.php">E - Mart</a> . All Rights Reserved.
             </div>
             <div class="footer__social mt-15">
                 <a href="#!"><i class="fab fa-facebook-f"></i></a>
@@ -194,7 +195,7 @@
         $(".cancel_order").click(function() {
             var order_number = $(this).data('orderno');
             $.ajax({
-                url: '../src/Class/Checkout.php',
+                url: 'src/Class/Checkout.php',
                 type: "POST",
                 dataType: "json",
                 data: {
@@ -215,7 +216,7 @@
         $(".return_order").click(function() {
             var order_number = $(this).data('orderno');
             $.ajax({
-                url: '../src/Class/Checkout.php',
+                url: 'src/Class/Checkout.php',
                 type: "POST",
                 dataType: "json",
                 data: {

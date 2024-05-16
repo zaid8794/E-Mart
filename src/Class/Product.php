@@ -169,7 +169,7 @@ if ($_POST['form_type'] == 'product_search') {
             $html .= '        <div class="product-info mt-4">';
             $html .= '            <h2 class="product__title"><a href="product_detail.php?product_slug=' . $value['product_slug'] . '">' . $value['product_name'] . '</a></h2>';
             $html .= '            <h4 class="product__price"><span class="new">₹ ' . $value['product_price'] . ' </span><span class="old">₹ ' . ($value['product_price'] + 1000) . '</span></h4>';
-            $html .= '            <p class="product-description">' . $value['product_description'] . '</p>';
+            $html .= '            <p class="product-description" style="overflow: hidden; -webkit-line-clamp: 1; -webkit-box-orient: vertical; display: -webkit-box;">' . $value['product_description'] . '</p>';
             $html .= '        </div>';
             $html .= '    </li>';
         }
@@ -236,7 +236,7 @@ if ($_POST['form_type'] == 'product_price_range') {
             $html .= '        <div class="product-info mt-4">';
             $html .= '            <h2 class="product__title"><a href="product_detail.php?product_slug=' . $value['product_slug'] . '">' . $value['product_name'] . '</a></h2>';
             $html .= '            <h4 class="product__price"><span class="new">₹ ' . $value['product_price'] . ' </span><span class="old">₹ ' . ($value['product_price'] + 1000) . '</span></h4>';
-            $html .= '            <p class="product-description">' . $value['product_description'] . '</p>';
+            $html .= '            <p class="product-description" style="overflow: hidden; -webkit-line-clamp: 1; -webkit-box-orient: vertical; display: -webkit-box;">' . $value['product_description'] . '</p>';
             $html .= '        </div>';
             $html .= '    </li>';
         }
@@ -297,7 +297,7 @@ if ($_POST['form_type'] == 'product_fetch_by_brand') {
             $html .= '        <div class="product-info mt-4">';
             $html .= '            <h2 class="product__title"><a href="product_detail.php?product_slug=' . $value['product_slug'] . '">' . $value['product_name'] . '</a></h2>';
             $html .= '            <h4 class="product__price"><span class="new">₹ ' . $value['product_price'] . ' </span><span class="old">₹ ' . ($value['product_price'] + 1000) . '</span></h4>';
-            $html .= '            <p class="product-description">' . $value['product_description'] . '</p>';
+            $html .= '            <p class="product-description" style="overflow: hidden; -webkit-line-clamp: 1; -webkit-box-orient: vertical; display: -webkit-box;">' . $value['product_description'] . '</p>';
             $html .= '        </div>';
             $html .= '    </li>';
         }

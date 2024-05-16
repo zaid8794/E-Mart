@@ -53,7 +53,7 @@ if (!isset($_SESSION['user'])) {
                                     <div class="text-center align-items-center justify-content-between d-flex">
                                         <div>
                                             <p class="fw-bold">Order</p>
-                                            <span><?= $value['order_number'] ?></span>
+                                            <span>#<?= $value['order_number'] ?></span>
                                         </div>
                                         <div>
                                             <p class="fw-bold">Order Placed On</p>
@@ -122,6 +122,8 @@ if (!isset($_SESSION['user'])) {
                             </div>
                     <?php
                         }
+                    }else {
+                        echo '<div class="text-center display-6">No Orders</div>';
                     }
                     ?>
                 </div>

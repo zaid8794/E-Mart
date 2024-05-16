@@ -66,7 +66,7 @@ if (!isset($_SESSION['user'])) {
                                             </td>
                                             <td class="product-quantity" data-title="Quantity">
                                                 <div class="quantity">
-                                                    <input type="number" step="1" min="0" name="cart[c9f0f895fb98ab9159f51fd0297e236d][qty]" value="<?= $cart['qty'] ?>" title="Qty" class="product-count input-text qty text product-count form-control" />
+                                                    <input type="number" step="1" min="0" name="cart[c9f0f895fb98ab9159f51fd0297e236d][qty]" value="<?= $cart['qty'] ?>" title="Qty" class="shadow-none form-control" readonly/>
                                                 </div>
                                             </td>
                                             <td class="product-subtotal" data-title="Total">
@@ -88,14 +88,6 @@ if (!isset($_SESSION['user'])) {
 
                             </tbody>
                         </table>
-                        <div class="wc-proceed-to-checkout">
-                            <button type="submit" class="checkout-button thm-btn thm-btn__2 no-icon br-0 alt wc-forward">
-                                <span class="btn-wrap">
-                                    <span>Update Cart</span>
-                                    <span>Update Cart</span>
-                                </span>
-                            </button>
-                        </div>
                     </form>
                     <div class="cart-collaterals">
                         <div class="cart_totals calculated_shipping">

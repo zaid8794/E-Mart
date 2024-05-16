@@ -115,6 +115,7 @@ $offset = ($pageno - 1) * $no_of_records_per_page;
                                             <div class="product-info mt-4">
                                                 <h2 class="product__title"><a href="product_detail.php?product_slug=<?= $value['product_slug'] ?>"><?= $value['product_name']; ?></a></h2>
                                                 <h4 class="product__price"><span class="new">₹<?= $value['product_price'] ?></span><span class="old">₹<?= $value['product_price'] + 1000; ?></span></h4>
+                                                <p class="product-description" style="overflow: hidden; -webkit-line-clamp: 1; -webkit-box-orient: vertical; display: -webkit-box;"><?= $value['product_description'] ?></p>
                                             </div>
                                         </li>
                                 <?php
@@ -352,6 +353,6 @@ require_once "components/footer.php";
             });
         });
 
-        
+
     });
 </script>

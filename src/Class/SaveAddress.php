@@ -48,9 +48,9 @@ if ($_POST['form_type'] == 'save_address') {
     } else {
         $data = [
             'user_id' => $_SESSION['user']['id'],
-            'address_full_name' => $full_name,
-            'address_email' => $email,
-            'address_mobile' => $mobile,
+            'address_full_name' => $address_full_name,
+            'address_email' => $address_email,
+            'address_mobile' => $address_mobile,
             'full_address' => $fulladdress,
             'city' => $city,
             'state' => $state,
