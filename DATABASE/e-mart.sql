@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 15, 2024 at 08:52 PM
+-- Generation Time: May 16, 2024 at 11:07 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -40,14 +40,6 @@ CREATE TABLE `address` (
   `country` varchar(50) NOT NULL,
   `address_created_on` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `address`
---
-
-INSERT INTO `address` (`address_id`, `user_id`, `address_full_name`, `address_email`, `address_mobile`, `full_address`, `city`, `state`, `pincode`, `country`, `address_created_on`) VALUES
-(12, 2, 'Sohil', 'zaidvora9@gmail.com', '9033594669', '302, Rangoonwala Palace, Sunni borwad, Bhatia Dharmshala Road', 'Junagadh', 'Gujarat', '362001', 'India', '2024-05-02 18:27:47'),
-(13, 3, 'Sohil', 'sohil@gmail.com', '7383063130', 'Basera Apartment, New Ghanchivada', 'Junagadh', 'Gujarat', '362001', 'India', '2024-05-03 15:22:04');
 
 -- --------------------------------------------------------
 
@@ -116,7 +108,7 @@ INSERT INTO `category` (`category_id`, `category_name`, `category_created_on`) V
 (6, 'Mobile', '2024-04-24 17:40:18'),
 (8, 'TV', '2024-04-24 17:19:26'),
 (9, 'Refrigerator', '2024-04-27 18:46:03'),
-(10, 'Washing Machine', '2024-05-15 17:54:51'),
+(10, 'WashingMachine', '2024-05-16 04:00:21'),
 (11, 'Laptop', '2024-05-15 17:54:59'),
 (12, 'Ac', '2024-05-15 17:55:12');
 
@@ -134,15 +126,6 @@ CREATE TABLE `contactus` (
   `contact_subject` varchar(255) NOT NULL,
   `contact_message` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `contactus`
---
-
-INSERT INTO `contactus` (`contact_id`, `contact_name`, `contact_email`, `contact_mobile`, `contact_subject`, `contact_message`) VALUES
-(1, 'SOHIL', 'SOHILVORA2000@GMAIL.COM', '07383063130', 'asdasa', 'kjhsdkjhf'),
-(2, 'SOHIL', 'SOHILVORA2000@GMAIL.COM', '7383063130', 'I want some more Products', 'kdhkdfjghdfjkg'),
-(3, 'SOHIL', 'SOHILVORA2000@GMAIL.COM', '7383063130', 'I want some more Products', 'skdhfksjdhf');
 
 -- --------------------------------------------------------
 
@@ -164,24 +147,6 @@ CREATE TABLE `order_master` (
   `created_on` varchar(50) NOT NULL,
   `updated_on` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `order_master`
---
-
-INSERT INTO `order_master` (`order_id`, `order_number`, `user_id`, `address_id`, `product_id`, `qty`, `product_price`, `total`, `payment_method`, `status`, `created_on`, `updated_on`) VALUES
-(1, '95786', 2, 6, 19, 1, '37999', '37999', 'upi', 'cancelled', '', '2024-05-06 07:00:25'),
-(2, '95786', 2, 6, 20, 1, '41999', '41999', 'upi', 'cancelled', '', '2024-05-06 07:00:25'),
-(3, '81945', 2, 11, 18, 1, '77990', '77990', 'cod', 'cancelled', '', '2024-05-06 07:03:51'),
-(4, '81945', 2, 11, 19, 2, '37999', '75998', 'cod', 'cancelled', '', '2024-05-06 07:03:51'),
-(5, '11215', 2, 12, 16, 1, '45999', '45999', 'upi', 'returned', '', '2024-05-06 07:04:01'),
-(6, '11215', 2, 12, 15, 9, '499', '4491', 'upi', 'returned', '', '2024-05-06 07:04:01'),
-(7, '11215', 2, 12, 17, 2, '139999', '279998', 'upi', 'returned', '', '2024-05-06 07:04:01'),
-(8, '11215', 2, 12, 21, 1, '42999', '42999', 'upi', 'returned', '', '2024-05-06 07:04:01'),
-(9, '11215', 2, 12, 18, 1, '77990', '77990', 'upi', 'returned', '', '2024-05-06 07:04:01'),
-(10, '11215', 2, 12, 23, 1, '31990', '31990', 'upi', 'returned', '', '2024-05-06 07:04:01'),
-(11, 'ORD030520242052', 3, 13, 15, 1, '499', '499', 'cod', 'returned', '', '2024-05-05 17:39:59'),
-(12, 'ORD040520240126453', 3, 13, 24, 1, '23990', '23990', 'cod', 'cancelled', '04-05-2024 01:26:45', '2024-05-05 17:26:55');
 
 -- --------------------------------------------------------
 
@@ -249,7 +214,7 @@ CREATE TABLE `register` (
 
 INSERT INTO `register` (`user_id`, `username`, `email`, `password`, `mobile`, `gender`, `u_type`, `registered_on`) VALUES
 (1, 'admin', 'admin@gmail.com', 'admin123', '9033594669', 'male', 'admin', '2024-04-29 16:43:14'),
-(2, 'Zaid', 'zaidvora9@gmail.com', '1234', '9033594669', 'male', 'user', '2024-05-06 10:56:24'),
+(2, 'Zaid', 'zaidvora9@gmail.com', '123', '9033594669', 'male', 'user', '2024-05-16 05:25:30'),
 (3, 'Sohil', 'sohilvora2000@gmail.com', '123', '7383063130', 'male', 'user', '2024-05-11 19:33:00');
 
 --
@@ -312,7 +277,7 @@ ALTER TABLE `register`
 -- AUTO_INCREMENT for table `address`
 --
 ALTER TABLE `address`
-  MODIFY `address_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `address_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `brand`
@@ -324,25 +289,25 @@ ALTER TABLE `brand`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `contactus`
 --
 ALTER TABLE `contactus`
-  MODIFY `contact_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `contact_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `order_master`
 --
 ALTER TABLE `order_master`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `product`
